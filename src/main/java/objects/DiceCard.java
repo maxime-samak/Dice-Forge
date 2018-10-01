@@ -5,24 +5,16 @@ public class DiceCard {
     private int value;
     private Resource resource;
 
-    public DiceCard(Resource resource, int value) {
+    public DiceCard(int value, Resource resource) {
         this.resource = resource;
         this.value = value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }
-
-    public void setResource(Resource resource) {
-        this.resource = resource;
     }
 
     public int getValue() {
         return value;
     }
 
-    public Resource getResource() {
-        return resource;
+    public String getResource() {
+        return resource.resourceName();
     }
 }

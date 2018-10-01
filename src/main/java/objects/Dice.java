@@ -1,5 +1,7 @@
 package objects;
 
+import static objects.Resource.*;
+
 public class Dice {
 
     private DiceCard F1;
@@ -12,35 +14,47 @@ public class Dice {
     public Dice() {}
 
     public void solarDiceInit() {
-        F1.setResource(Resource.solar);
-        F2.setResource(Resource.gold);
-        F3.setResource(Resource.gold);
-        F4.setResource(Resource.gold);
-        F5.setResource(Resource.gold);
-        F6.setResource(Resource.gold);
 
-        F1.setValue(1);
-        F2.setValue(1);
-        F3.setValue(1);
-        F4.setValue(1);
-        F5.setValue(1);
-        F6.setValue(1);
+        F1 = new DiceCard(1, SOLAR);
+        F2 = new DiceCard(1, GOLD);
+        F3 = new DiceCard(1, GOLD);
+        F4 = new DiceCard(1, GOLD);
+        F5 = new DiceCard(1, GOLD);
+        F6 = new DiceCard(1, GOLD);
+
     }
 
     public void lunarDiceInit() {
-        F1.setResource(Resource.lunar);
-        F2.setResource(Resource.victory);
-        F3.setResource(Resource.gold);
-        F4.setResource(Resource.gold);
-        F5.setResource(Resource.gold);
-        F6.setResource(Resource.gold);
-
-        F1.setValue(1);
-        F2.setValue(2);
-        F3.setValue(1);
-        F4.setValue(1);
-        F5.setValue(1);
-        F6.setValue(1);
+        F1 = new DiceCard(1, LUNAR);
+        F2 = new DiceCard(2, VICTORY);
+        F3 = new DiceCard(1, GOLD);
+        F4 = new DiceCard(1, GOLD);
+        F5 = new DiceCard(1, GOLD);
+        F6 = new DiceCard(1, GOLD);
     }
 
+    public void showFace(int i) {
+        switch(i){
+            case 1:
+                System.out.println(F1.getValue() + " " + F1.getResource());
+                break;
+            case 2:
+                System.out.println(F2.getValue() + " " + F2.getResource());
+                break;
+            case 3:
+                System.out.println(F3.getValue() + " " + F3.getResource());
+                break;
+            case 4:
+                System.out.println(F4.getValue() + " " + F4.getResource());
+                break;
+            case 5:
+                System.out.println(F5.getValue() + " " + F5.getResource());
+                break;
+            case 6:
+                System.out.println(F6.getValue() + " " + F6.getResource());
+                break;
+            default:
+                System.out.println(">>>Problème<<<");
+        }
+    }
 }
