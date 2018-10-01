@@ -10,13 +10,6 @@ public class DiceCard {
         this.value = value;
     }
 
-    private enum stone {
-        gold,
-        moon,
-        solar,
-        victory;
-    }
-
     public void setValue(int value) {
         this.value = value;
     }
