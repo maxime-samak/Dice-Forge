@@ -18,6 +18,6 @@ public enum Resource {
         String resourceName() { return "VICTORY"; }
     };
 
-abstract String resourceName();
+    abstract String resourceName();
 
 }

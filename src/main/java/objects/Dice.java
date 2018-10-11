@@ -21,7 +21,6 @@ public class Dice {
         F4 = new DiceCard(1, GOLD);
         F5 = new DiceCard(1, GOLD);
         F6 = new DiceCard(1, GOLD);
-
     }
 
     public void lunarDiceInit() {
