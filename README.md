@@ -7,9 +7,9 @@ Groupe DFG
 * Alexandre Denos
 * Maxime Samak
 
-## Milestones
+## [Milestones](https://github.com/SamakM/Dice-Forge/milestones?direction=asc&sort=due_date&state=open)
 
-### Livraison 1
+### [Livraison 1](https://github.com/SamakM/Dice-Forge/milestone/1)
 #### Objectif de livraison
 - [ ] Gestion de début et de fin de parties.
 - [ ] Ajout des Dés sans faces permutables.
@@ -20,7 +20,7 @@ Groupe DFG
 #### Date prévu
 *26/10/2018*
 
-### Livraison 2
+### [Livraison 2](https://github.com/SamakM/Dice-Forge/milestone/2)
 #### Objectif de livraison
 - [ ] Interchangeabilité des faces d'un dé.
 - [ ] Ajout d'un second bot au jeu.
@@ -33,7 +33,7 @@ Groupe DFG
 #### Date prévu
 *9/11/2018*
 
-### Livraison 3
+### [Livraison 3](https://github.com/SamakM/Dice-Forge/milestone/3)
 #### Objectif de livraison
 - [ ] Ajout des cartes qui réalise une action en plus jusqu'à la fin et pour un seul tour.
 - [ ] Ajout des faces de dé ayant un effet "complexe".
@@ -43,7 +43,7 @@ Groupe DFG
 #### Date prévu
 *16/11/2018*
 
-### Livraison 4
+### [Livraison 4](https://github.com/SamakM/Dice-Forge/milestone/4)
 #### Objectif de livraison
 - [ ] Finalisation des dés(ajout des deux dernières face de dé apporté par les effets de carte).
 - [ ] Ajout de tous les effets de carte(gain de point, changement de face de dé).
@@ -54,7 +54,7 @@ Groupe DFG
 #### Date prévu
 *23/11/2018*
 
-### Livraison 5
+### [Livraison 5](https://github.com/SamakM/Dice-Forge/milestone/5)
 #### Objectif de livraison
 - [ ] Le bot joue le meilleure coup possible.
 - [ ] Les deux bots appliquent des "stratégies" différentes.
@@ -64,7 +64,7 @@ Groupe DFG
 #### Date prévu
 *30/11/2018*
 
-### Livraison 6
+### [Livraison 6](https://github.com/SamakM/Dice-Forge/milestone/6)
 #### Objectif de livraison
 - [ ] Correction d'éventuels bugs.
 - [ ] Optimisation du code.
@@ -75,6 +75,7 @@ Groupe DFG
 
 ## Note
 
+* [Lien rapide vers le Kanban](https://github.com/SamakM/Dice-Forge/projects/2)
 * Un nouveau diagramme UML est produit à chaque livraison.
 * Les nouveaux tests correspondent toujours aux derniers éléments implémentés dans le jeu.
 
