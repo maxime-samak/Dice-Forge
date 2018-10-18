@@ -13,8 +13,8 @@ Groupe DFG
 #### Objectif de livraison
 - [ ] Gestion de début et de fin de parties.
 - [ ] Ajout des Dés sans faces permutables.
-- [ ] Ajout d'un bot capable de lancer deux dés (stratégie basique).
-- [ ] Ajout d'un compteur de points comptabilisant les jets du bot.
+- [ ] Ajout d'un joueur(bot) capable de lancer deux dés (stratégie basique).
+- [ ] Ajout d'un compteur de points qui actualise le score.
 - [ ] Ajout des tests associés aux tâches précédentes.
 
 #### Date prévu
@@ -23,7 +23,7 @@ Groupe DFG
 ### [Livraison 2](https://github.com/SamakM/Dice-Forge/milestone/2)
 #### Objectif de livraison
 - [ ] Interchangeabilité des faces d'un dé.
-- [ ] Ajout d'un second bot au jeu.
+- [ ] Ajout d'un second joueur(bot) au jeu.
 - [ ] Affinage de la stratégie d'un bot(choix des faces).
 - [ ] Gestion du déroulement des tours de jeu, sélection du gagnant.
 - [ ] Ajout d'achat de cartes (les cartes n'ont aucun effet elles représentent simplement un gain de points).
@@ -56,7 +56,7 @@ Groupe DFG
 
 ### [Livraison 5](https://github.com/SamakM/Dice-Forge/milestone/5)
 #### Objectif de livraison
-- [ ] Le bot joue le meilleure coup possible.
+- [ ] Le bot joue le meilleur coup possible.
 - [ ] Les deux bots appliquent des "stratégies" différentes.
 - [ ] Ajout de nouveaux tests.
 - [ ] Optimisation et améliorations du code.
