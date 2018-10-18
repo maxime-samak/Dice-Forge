@@ -11,7 +11,18 @@ public class Dice {
     private DiceCard F5;
     private DiceCard F6;
 
-    public Dice() {}
+    public Dice(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                solarDiceInit();
+                break;
+            case 2:
+                lunarDiceInit();
+                break;
+        }
+    }
 
     public void solarDiceInit() {
 
