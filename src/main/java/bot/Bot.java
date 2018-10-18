@@ -1,5 +1,6 @@
 package bot;
 
+import engine.DiceRoll;
 import objects.Dice;
 
 public abstract class Bot implements InterfaceBot {
@@ -15,11 +16,7 @@ public abstract class Bot implements InterfaceBot {
 
     public void rollDices()
     {
-        double d1 = Math.random()*6;
-        double d2 = Math.random()*6;
-
-        this.dice1.showFace((int)d1);
-        this.dice2.showFace((int)d2);
+        DiceRoll.roll(dice1,dice2);
     }
 
 }

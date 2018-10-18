@@ -13,7 +13,29 @@ public class Dice {
 
     public Dice(){}
 
-    protected void solarDiceInit() {
+
+    public DiceCard getFi(int i)
+    {
+        switch (i)
+        {
+            case 1:
+                return F1;
+            case 2:
+                return F2;
+            case 3:
+                return F3;
+            case 4:
+                return F4;
+            case 5:
+                return F5;
+            case 6:
+                return F6;
+            default:
+                return null;
+        }
+    }
+
+    public void solarDiceInit() {
 
         F1 = new DiceCard(1, SOLAR);
         F2 = new DiceCard(1, GOLD);
@@ -23,7 +45,7 @@ public class Dice {
         F6 = new DiceCard(1, GOLD);
     }
 
-    protected void lunarDiceInit() {
+    public void lunarDiceInit() {
         F1 = new DiceCard(1, LUNAR);
         F2 = new DiceCard(2, VICTORY);
         F3 = new DiceCard(1, GOLD);
