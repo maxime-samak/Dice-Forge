@@ -1,10 +1,12 @@
-package objects;
+package bot;
+
+import objects.Dice;
 
 public class SimpleBot extends Bot {
 
-    public SimpleBot()
+    public SimpleBot(Dice d1, Dice d2)
     {
-        this.initBot();
+        super(d1,d2);
     }
 
     public void SimpleStrat()

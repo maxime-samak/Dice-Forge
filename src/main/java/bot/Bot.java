@@ -1,14 +1,16 @@
-package objects;
+package bot;
 
-public abstract class Bot implements InterfaceBot{
+import objects.Dice;
+
+public abstract class Bot implements InterfaceBot {
 
     private Dice dice1;
     private Dice dice2;
 
-    public void initBot()
+    public Bot(Dice d1,Dice d2)
     {
-        this.dice1 = new Dice(1);
-        this.dice2 = new Dice(2);
+        this.dice1=d1;
+        this.dice2=d2;
     }
 
     public void rollDices()

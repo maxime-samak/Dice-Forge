@@ -1,8 +1,7 @@
-package objects;
+package bot;
 
 public interface InterfaceBot {
 
-    void initBot();
     void rollDices();
 
 }

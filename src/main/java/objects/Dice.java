@@ -11,20 +11,9 @@ public class Dice {
     private DiceCard F5;
     private DiceCard F6;
 
-    public Dice(int i)
-    {
-        switch (i)
-        {
-            case 1:
-                solarDiceInit();
-                break;
-            case 2:
-                lunarDiceInit();
-                break;
-        }
-    }
+    public Dice(){}
 
-    public void solarDiceInit() {
+    protected void solarDiceInit() {
 
         F1 = new DiceCard(1, SOLAR);
         F2 = new DiceCard(1, GOLD);
@@ -34,7 +23,7 @@ public class Dice {
         F6 = new DiceCard(1, GOLD);
     }
 
-    public void lunarDiceInit() {
+    protected void lunarDiceInit() {
         F1 = new DiceCard(1, LUNAR);
         F2 = new DiceCard(2, VICTORY);
         F3 = new DiceCard(1, GOLD);
