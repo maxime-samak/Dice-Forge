@@ -21,3 +21,8 @@
 
 .idea
 *.iml
+**/.gradle
+**/local.properties
+
+# pour les mac...
+**/.DS_Store
