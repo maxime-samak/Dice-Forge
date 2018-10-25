@@ -46,6 +46,7 @@
                             <!-- ici, c'est dans src/main/apidocs -->
                             <outputDirectory>${basedir}/src/main/</outputDirectory>
                             <reportOutputDirectory>${basedir}/src/main/javadoc</reportOutputDirectory>
+                            <destDir>${basedir}/src/main/javadoc</destDir>
                         </configuration>
 
                     </execution>
