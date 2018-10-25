@@ -1,6 +1,7 @@
 package engine;
 
 import bot.BotScore;
+import objects.Resource;
 
 public class ScoreCounter {
 
@@ -14,15 +15,15 @@ public class ScoreCounter {
         int d2Value = Integer.parseInt(d2Token[0]);
         String d2Resource = d2Token[1];
 
-        if(d1Token.equals(d1Resource)) {
+        if(d1Resource.equals(Resource.SOLAR.resourceName())) {
             botscore.addSolar(d1Value);
         }
         else { botscore.addGold(d1Value);}
 
-        if(d2Token.equals(d2Resource)) {
-            botscore.addSolar(d2Value);
+        if(d2Resource.equals(Resource.LUNAR.resourceName())) {
+            botscore.addLunar(d2Value);
         }
-        else if(d2Token.equals(d2Resource)) {
+        else if(d2Resource.equals(Resource.VICTORY.resourceName())) {
             botscore.addVictory(d2Value);
         }
         else { botscore.addGold(d2Value);}

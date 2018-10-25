@@ -15,9 +15,14 @@ public abstract class AbstractBot implements Bot {
         this.botscore = new BotScore();
     }
 
-    public void rollDices()
+    public BotScore getBotscore()
     {
-        DiceRoll.roll(dice1,dice2);
+        return botscore;
+    }
+
+    public String rollDices()
+    {
+        return DiceRoll.roll(dice1,dice2);
     }
 
 }

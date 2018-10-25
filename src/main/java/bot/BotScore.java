@@ -54,6 +54,11 @@ public class BotScore {
         this.victory += victory;
     }
 
+    public String getInfos()
+    {
+        return "Gold : "+this.getGold()+", Solar : "+this.getSolar()+", Lunar : "+this.getLunar()+", Victory : "+getVictory();
+    }
+
     /** Ready for v2 + v3
 
     public void removeGold(int gold) {
