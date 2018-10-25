@@ -2,7 +2,7 @@ package bot;
 
 public interface Bot {
 
-    void rollDices();
+    String rollDices();
 
 }
 

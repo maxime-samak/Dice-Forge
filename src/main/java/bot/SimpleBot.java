@@ -9,9 +9,9 @@ public class SimpleBot extends AbstractBot {
         super(d1,d2);
     }
 
-    public void SimpleStrat()
+    public String SimpleStrat()
     {
-        this.rollDices();
+       return this.rollDices();
     }
 
 }
