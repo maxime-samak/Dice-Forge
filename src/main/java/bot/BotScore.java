@@ -1,6 +1,7 @@
 package bot;
 
 public class BotScore {
+
     private int gold = 0;
     private int solar = 0;
     private int lunar = 0;
@@ -8,7 +9,6 @@ public class BotScore {
     private int extended = 0; //on prévoit que le nb max de ressource puisse être etendu (v3).
 
     public BotScore() {}
-
 
     public int getGold() {
         return gold;
@@ -54,6 +54,8 @@ public class BotScore {
         this.victory += victory;
     }
 
+    /** Ready for v2 + v3
+
     public void removeGold(int gold) {
         gold = Math.abs(gold);
         if(this.gold - gold <= 0) {
@@ -64,7 +66,7 @@ public class BotScore {
         }
     }
 
-    public void removeSolar(int solar) {
+     public void removeSolar(int solar) {
         solar = Math.abs(solar);
         if(this.solar - solar <= 0) {
             this.solar = 0;
@@ -82,5 +84,5 @@ public class BotScore {
         else{
             this.lunar -= lunar;
         }
-    }
+    }**/
 }
