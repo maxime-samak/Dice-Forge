@@ -11,11 +11,11 @@ Groupe DFG
 
 ### [Livraison 1](https://github.com/SamakM/Dice-Forge/milestone/1)
 #### Objectif de livraison
-- [ ] Gestion de début et de fin de parties.
-- [ ] Ajout des Dés sans faces permutables.
-- [ ] Ajout d'un joueur(bot) capable de lancer deux dés (stratégie basique).
-- [ ] Ajout d'un compteur de points qui actualise le score.
-- [ ] Ajout des tests associés aux tâches précédentes.
+- [x] Gestion de début et de fin de parties.
+- [x] Ajout des Dés sans faces permutables.
+- [x] Ajout d'un joueur(bot) capable de lancer deux dés (stratégie basique).
+- [x] Ajout d'un compteur de points qui actualise le score.
+- [x] Ajout des tests associés aux tâches précédentes.
 
 #### Date prévu
 *26/10/2018*
@@ -67,8 +67,10 @@ Groupe DFG
 ### [Livraison 6](https://github.com/SamakM/Dice-Forge/milestone/6)
 #### Objectif de livraison
 - [ ] Correction d'éventuels bugs.
-- [ ] Optimisation du code.
+- [ ] Il possible de sélectionner la stratégie qu'applique un bot donné.
+- [ ] Ajout d'une nouvelle stratégie de jeu pour les bots.
 - [ ] Finalisation de la documentation.
+- [ ] Ajout des ilots et des pions.
 
 #### Date prévu
 *07/12/2018*
