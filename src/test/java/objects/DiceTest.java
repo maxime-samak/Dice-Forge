@@ -8,9 +8,9 @@ public class DiceTest {
     @Test
     public void DiceTest() {
 
-        Dice d1=new Dice();
+        Dice d1 = new Dice();
         d1.solarDiceInit();
-        Dice d2=new Dice();
+        Dice d2 = new Dice();
         d2.lunarDiceInit();
 
         Assert.assertEquals(d1.getFi(1).getResource(),Resource.SOLAR.resourceName());

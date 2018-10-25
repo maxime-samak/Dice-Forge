@@ -17,4 +17,12 @@ public class DiceCard {
     public String getResource() {
         return resource.resourceName();
     }
+
+    public boolean equals(DiceCard card) {
+        if(this.value == card.getValue() && this.resource.resourceName().equals(card.getResource())) {
+            return true;
+        }
+        else { return false; }
+
+    }
 }

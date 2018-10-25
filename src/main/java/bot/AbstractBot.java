@@ -9,8 +9,7 @@ public abstract class AbstractBot implements Bot {
     private Dice dice2;
 
 
-    public AbstractBot(Dice d1, Dice d2)
-    {
+    public AbstractBot(Dice d1, Dice d2) {
         this.dice1=d1;
         this.dice2=d2;
     }
