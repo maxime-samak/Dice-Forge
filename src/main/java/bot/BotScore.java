@@ -51,6 +51,7 @@ public class BotScore {
     }
 
     public void addVictory(int victory) {
+        victory = Math.abs(victory);
         this.victory += victory;
     }
 
