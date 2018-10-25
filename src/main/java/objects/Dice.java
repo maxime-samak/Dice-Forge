@@ -77,4 +77,9 @@ public class Dice {
                 System.out.println(">>>Problème<<<");
         }
     }
+
+    public String toString(){
+        return F1 + "\n" + F2 + "\n" + F3 + "\n" + F4 + "\n" + F5 + "\n" + F6 + "\n";
+    }
+
 }

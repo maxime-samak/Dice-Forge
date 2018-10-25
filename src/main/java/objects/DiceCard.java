@@ -25,4 +25,8 @@ public class DiceCard {
         else { return false; }
 
     }
+
+    public String toString(){
+        return value + " " + resource.resourceName();
+    }
 }
