@@ -6,14 +6,12 @@ import org.junit.Test;
 public class DiceTest {
 
     @Test
-    public void DiceTest()
-    {
+    public void DiceTest() {
 
         Dice d1=new Dice();
         d1.solarDiceInit();
         Dice d2=new Dice();
         d2.lunarDiceInit();
-
 
         Assert.assertEquals(d1.getFi(1).getResource(),Resource.SOLAR.resourceName());
         Assert.assertEquals(d1.getFi(2).getResource(),Resource.GOLD.resourceName());
@@ -42,7 +40,5 @@ public class DiceTest {
         Assert.assertEquals(d2.getFi(4).getValue(),1);
         Assert.assertEquals(d2.getFi(5).getValue(),1);
         Assert.assertEquals(d2.getFi(6).getValue(),1);
-
     }
-
 }

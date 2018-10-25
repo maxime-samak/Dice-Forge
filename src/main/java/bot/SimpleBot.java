@@ -2,7 +2,7 @@ package bot;
 
 import objects.Dice;
 
-public class SimpleBot extends Bot {
+public class SimpleBot extends AbstractBot {
 
     public SimpleBot(Dice d1, Dice d2)
     {

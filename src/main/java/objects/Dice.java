@@ -13,7 +13,6 @@ public class Dice {
 
     public Dice(){}
 
-
     public DiceCard getFi(int i)
     {
         switch (i)
