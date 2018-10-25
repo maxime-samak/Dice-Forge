@@ -15,10 +15,13 @@ public class DiceRollTest {
         d2.lunarDiceInit();
         String roll = roll(d1,d2);
         final String[] token = roll.split("%");
-        Assert.assertTrue("Roll Control",(token[0].equals("#1@SOLAR"))||(token[0].equals("#1@GOLD")));
-        Assert.assertTrue("Roll Control",
-                (token[1].equals("#1@LUNAR#"))||
-                        (token[1].equals("#1@GOLD#"))||
-                        (token[1].equals("#2@VICTORY#")));
+
+
+        Assert.assertTrue("Roll Control pt1",(token[0].equals("1@SOLAR"))||(token[0].equals("1@GOLD")));
+        Assert.assertTrue("Roll Control pt2",
+                (token[1].equals("1@LUNAR"))||
+                        (token[1].equals("1@GOLD"))||
+                        (token[1].equals("2@VICTORY")));
+
     }
 }
