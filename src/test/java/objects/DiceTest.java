@@ -13,32 +13,32 @@ public class DiceTest {
         Dice d2 = new Dice();
         d2.lunarDiceInit();
 
-        Assert.assertEquals(Resource.SOLAR.resourceName(),d1.getFi(1).getResource());
-        Assert.assertEquals(Resource.GOLD.resourceName(),d1.getFi(2).getResource());
-        Assert.assertEquals(Resource.GOLD.resourceName(),d1.getFi(3).getResource());
-        Assert.assertEquals(Resource.GOLD.resourceName(),d1.getFi(4).getResource());
-        Assert.assertEquals(Resource.GOLD.resourceName(),d1.getFi(5).getResource());
-        Assert.assertEquals(Resource.GOLD.resourceName(),d1.getFi(6).getResource());
+        Assert.assertEquals(Resource.SOLAR,d1.getFi(1).getResource().get(0));
+        Assert.assertEquals(Resource.GOLD,d1.getFi(2).getResource().get(0));
+        Assert.assertEquals(Resource.GOLD,d1.getFi(3).getResource().get(0));
+        Assert.assertEquals(Resource.GOLD,d1.getFi(4).getResource().get(0));
+        Assert.assertEquals(Resource.GOLD,d1.getFi(5).getResource().get(0));
+        Assert.assertEquals(Resource.GOLD,d1.getFi(6).getResource().get(0));
 
-        Assert.assertEquals(1,d1.getFi(1).getValue());
-        Assert.assertEquals(1,d1.getFi(2).getValue());
-        Assert.assertEquals(1,d1.getFi(3).getValue());
-        Assert.assertEquals(1,d1.getFi(4).getValue());
-        Assert.assertEquals(1,d1.getFi(5).getValue());
-        Assert.assertEquals(1,d1.getFi(6).getValue());
+        Assert.assertEquals(1,d1.getFi(1).getValue(d1.getFi(1).getResource().get(0)));
+        Assert.assertEquals(1,d1.getFi(2).getValue(d1.getFi(2).getResource().get(0)));
+        Assert.assertEquals(1,d1.getFi(3).getValue(d1.getFi(3).getResource().get(0)));
+        Assert.assertEquals(1,d1.getFi(4).getValue(d1.getFi(4).getResource().get(0)));
+        Assert.assertEquals(1,d1.getFi(5).getValue(d1.getFi(5).getResource().get(0)));
+        Assert.assertEquals(1,d1.getFi(6).getValue(d1.getFi(6).getResource().get(0)));
 
-        Assert.assertEquals(Resource.LUNAR.resourceName(),d2.getFi(1).getResource());
-        Assert.assertEquals(Resource.VICTORY.resourceName(),d2.getFi(2).getResource());
-        Assert.assertEquals(Resource.GOLD.resourceName(),d2.getFi(3).getResource());
-        Assert.assertEquals(Resource.GOLD.resourceName(),d2.getFi(4).getResource());
-        Assert.assertEquals(Resource.GOLD.resourceName(),d2.getFi(5).getResource());
-        Assert.assertEquals(Resource.GOLD.resourceName(),d2.getFi(6).getResource());
+        Assert.assertEquals(Resource.LUNAR,d2.getFi(1).getResource().get(0));
+        Assert.assertEquals(Resource.VICTORY,d2.getFi(2).getResource().get(0));
+        Assert.assertEquals(Resource.GOLD,d2.getFi(3).getResource().get(0));
+        Assert.assertEquals(Resource.GOLD,d2.getFi(4).getResource().get(0));
+        Assert.assertEquals(Resource.GOLD,d2.getFi(5).getResource().get(0));
+        Assert.assertEquals(Resource.GOLD,d2.getFi(6).getResource().get(0));
 
-        Assert.assertEquals(1,d2.getFi(1).getValue());
-        Assert.assertEquals(2,d2.getFi(2).getValue());
-        Assert.assertEquals(1,d2.getFi(3).getValue());
-        Assert.assertEquals(1,d2.getFi(4).getValue());
-        Assert.assertEquals(1,d2.getFi(5).getValue());
-        Assert.assertEquals(1,d2.getFi(6).getValue());
+        Assert.assertEquals(1,d2.getFi(1).getValue(d2.getFi(1).getResource().get(0)));
+        Assert.assertEquals(2,d2.getFi(2).getValue(d2.getFi(2).getResource().get(0)));
+        Assert.assertEquals(1,d2.getFi(3).getValue(d2.getFi(3).getResource().get(0)));
+        Assert.assertEquals(1,d2.getFi(4).getValue(d2.getFi(4).getResource().get(0)));
+        Assert.assertEquals(1,d2.getFi(5).getValue(d2.getFi(5).getResource().get(0)));
+        Assert.assertEquals(1,d2.getFi(6).getValue(d2.getFi(6).getResource().get(0)));
     }
 }

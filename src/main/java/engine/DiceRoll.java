@@ -11,9 +11,19 @@ public class DiceRoll {
         d1.showFace(rollD1); // print
         d2.showFace(rollD2); // print
 
-        String output = d1.getFi(rollD1).getValue() + "@" + d1.getFi(rollD1).getResource()
+        /* String output = d1.getFi(rollD1).getValue() + "@" + d1.getFi(rollD1).getResource()
                 + "%" +d2.getFi(rollD2).getValue() + "@" + d2.getFi(rollD2).getResource();
-        //output = x@nom%y@nom
+        //output = x@nom%y@nom */
+
+        String output = "";
+        for(int j = 0; j < d1.getFi(rollD1).getResource().size(); j++) {
+           output += d1.getFi(rollD1).getValue(d1.getFi(rollD1).getResource().get(j)) + "@" + d1.getFi(rollD1).getResource().get(j);
+        }
+        output += "%";
+        for(int j = 0; j < d2.getFi(rollD1).getResource().size(); j++) {
+            output += d2.getFi(rollD2).getValue(d2.getFi(rollD2).getResource().get(j)) + "@" + d2.getFi(rollD2).getResource().get(j);
+        }
         return output;
+
     }
 }

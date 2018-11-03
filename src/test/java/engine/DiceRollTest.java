@@ -14,6 +14,7 @@ public class DiceRollTest {
         Dice d2 = new Dice();
         d2.lunarDiceInit();
         String roll = roll(d1,d2);
+        System.out.println(roll);
         final String[] token = roll.split("%");
 
 

@@ -55,6 +55,16 @@ public class BotScore {
         this.victory += victory;
     }
 
+    public void removeGold(int gold) {
+        gold = Math.abs(gold);
+        if(this.gold - gold <= 0) {
+            this.gold = 0;
+        }
+        else{
+            this.gold -= gold;
+        }
+    }
+
     public String getInfos()
     {
         return "Gold : "+this.getGold()+", Solar : "+this.getSolar()+", Lunar : "+this.getLunar()+", Victory : "+getVictory();
