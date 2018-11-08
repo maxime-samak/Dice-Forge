@@ -2,17 +2,20 @@ import bot.AbstractBot;
 import bot.SimpleBot;
 import engine.ScoreCounter;
 import objects.Dice;
+import objects.Sanctuary;
 
 public class Game {
 
     private final int nbPlayers;
     private final SimpleBot[] botarray;
     private final int nbTurn;
+    private final Sanctuary sanctuary;
 
     public Game(int nbPlayers) {
 
         this.nbPlayers = nbPlayers;
         botarray = new SimpleBot[nbPlayers];
+        this.sanctuary=new Sanctuary(nbPlayers);
 
         if(nbPlayers == 3) {this.nbTurn = 10;}
         else {this.nbTurn = 9;}
@@ -32,10 +35,10 @@ public class Game {
             System.out.println("Tour de : " + botarray[i].getBotID());
             for (int j = 0; j < nbPlayers; j++){
                 System.out.println("Lancer de dés " + botarray[j].getBotID() + " :");
-                String lancer = botarray[j].SimpleStrat();
+                String lancer = botarray[j].rollDices();
                 ScoreCounter.updateScore(botarray[j].getBotscore(),lancer);
             }
-            botarray[i].play();
+            botarray[i].play(sanctuary);
         }
     }
 
