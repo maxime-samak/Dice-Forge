@@ -32,7 +32,6 @@ public class SimpleBot extends AbstractBot {
 
     public boolean shopForDiceCards(Sanctuary sanctuary)
     {
-
         int goldAvailable = this.getBotscore().getGold();
         /*if(goldAvailable >= 12)
             if(shopPoolI(12,sanctuary))
