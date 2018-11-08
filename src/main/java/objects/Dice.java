@@ -1,7 +1,5 @@
 package objects;
 
-import java.util.HashMap;
-
 import static objects.Resource.*;
 
 public class Dice {
@@ -15,10 +13,8 @@ public class Dice {
 
     public Dice(){}
 
-    public DiceCard getFi(int i)
-    {
-        switch (i)
-        {
+    public DiceCard getFi(int i) {
+        switch (i) {
             case 1:
                 return F1;
             case 2:
@@ -37,77 +33,49 @@ public class Dice {
     }
 
     public void solarDiceInit() {
-        HashMap<Resource,Integer> gold = new HashMap();
-        HashMap<Resource,Integer> solar = new HashMap();
-        gold.put(Resource.GOLD,1);
-        solar.put(Resource.SOLAR,1);
-
-        F1 = new DiceCard(solar,"");
-        F2 = new DiceCard(gold,"");
-        F3 = new DiceCard(gold,"");
-        F4 = new DiceCard(gold,"");
-        F5 = new DiceCard(gold,"");
-        F6 = new DiceCard(gold,"");
+        F1 = new DiceCard(1, SOLAR);
+        F2 = new DiceCard(1, GOLD);
+        F3 = new DiceCard(1, GOLD);
+        F4 = new DiceCard(1, GOLD);
+        F5 = new DiceCard(1, GOLD);
+        F6 = new DiceCard(1, GOLD);
     }
 
     public void lunarDiceInit() {
-        HashMap<Resource,Integer> gold = new HashMap();
-        HashMap<Resource,Integer> lunar = new HashMap();
-        HashMap<Resource,Integer> victory = new HashMap();
-        gold.put(Resource.GOLD,1);
-        lunar.put(Resource.LUNAR,1);
-        victory.put(Resource.VICTORY,2);
-
-        F1 = new DiceCard(lunar,"");
-        F2 = new DiceCard(victory,"");
-        F3 = new DiceCard(gold,"");
-        F4 = new DiceCard(gold,"");
-        F5 = new DiceCard(gold,"");
-        F6 = new DiceCard(gold,"");
+        F1 = new DiceCard(1, LUNAR);
+        F2 = new DiceCard(2, VICTORY);
+        F3 = new DiceCard(1, GOLD);
+        F4 = new DiceCard(1, GOLD);
+        F5 = new DiceCard(1, GOLD);
+        F6 = new DiceCard(1, GOLD);
     }
 
     public void showFace(int i) {
         switch(i){
             case 1:
-                for(int j = 0; j < F1.getResource().size(); j++) {
-                    System.out.println(F1.getValue(F1.getResource().get(j)) + " " + F1.getResource().get(j));
-                }
+                System.out.println(F1.getValue() + " " + F1.getResource());
                 break;
             case 2:
-                for(int j = 0; j < F2.getResource().size(); j++) {
-                    System.out.println(F2.getValue(F2.getResource().get(j)) + " " + F2.getResource().get(j));
-                }
+                System.out.println(F2.getValue() + " " + F2.getResource());
                 break;
             case 3:
-                for(int j = 0; j < F3.getResource().size(); j++) {
-                    System.out.println(F3.getValue(F3.getResource().get(j)) + " " + F3.getResource().get(j));
-                }
+                System.out.println(F3.getValue() + " " + F3.getResource());
                 break;
             case 4:
-                for(int j = 0; j < F4.getResource().size(); j++) {
-                    System.out.println(F4.getValue(F4.getResource().get(j)) + " " + F4.getResource().get(j));
-                }
+                System.out.println(F4.getValue() + " " + F4.getResource());
                 break;
             case 5:
-                for(int j = 0; j < F5.getResource().size(); j++) {
-                    System.out.println(F5.getValue(F5.getResource().get(j)) + " " + F5.getResource().get(j));
-                }
+                System.out.println(F5.getValue() + " " + F5.getResource());
                 break;
             case 6:
-                for(int j = 0; j < F6.getResource().size(); j++) {
-                    System.out.println(F6.getValue(F6.getResource().get(j)) + " " + F6.getResource().get(j));
-                }
+                System.out.println(F6.getValue() + " " + F6.getResource());
                 break;
             default:
                 System.out.println(">>>Problème<<<");
         }
     }
 
-    public void setface(DiceCard dc) {
-        F3 = dc;
-    }
     public String toString(){
         return F1 + "\n" + F2 + "\n" + F3 + "\n" + F4 + "\n" + F5 + "\n" + F6 + "\n";
     }
-
 }

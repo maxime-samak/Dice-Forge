@@ -1,27 +1,21 @@
 package bot;
 
+import engine.BotScore;
 import engine.DiceRoll;
 import objects.Dice;
-import objects.DiceCard;
-import objects.Sanctuaire;
 
 public abstract class AbstractBot implements Bot {
-    private Sanctuaire sanctuaire;
-    private String name;
-    private Dice dice1;
-    private Dice dice2;
-    private BotScore botscore;
 
-    public AbstractBot(Dice d1, Dice d2,String name) {
-        this.sanctuaire = new Sanctuaire();
+    private final String botID;
+    private final Dice dice1;
+    private final Dice dice2;
+    private final BotScore botscore;
+
+    public AbstractBot(Dice d1, Dice d2, String botID) {
+        this.botID = botID;
         this.dice1=d1;
         this.dice2=d2;
         this.botscore = new BotScore();
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public BotScore getBotscore()
@@ -29,18 +23,13 @@ public abstract class AbstractBot implements Bot {
         return botscore;
     }
 
+    public String getBotID() { return botID; }
+
     public String rollDices()
     {
         return DiceRoll.roll(dice1,dice2);
     }
 
-    public void play() {
-
-
-
-    }
-
-
-
+    public void play(){}
 
 }

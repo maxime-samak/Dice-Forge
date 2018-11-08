@@ -1,7 +1,6 @@
 package objects;
 
 public enum Resource {
-
     GOLD{
         @Override
        public String resourceName() { return "GOLD"; }

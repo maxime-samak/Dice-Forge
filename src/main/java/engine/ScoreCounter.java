@@ -1,6 +1,5 @@
 package engine;
 
-import bot.BotScore;
 import objects.Resource;
 
 public class ScoreCounter {

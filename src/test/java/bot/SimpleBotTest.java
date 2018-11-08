@@ -13,7 +13,7 @@ public class SimpleBotTest {
         Dice d2 = new Dice();
         d2.lunarDiceInit();
 
-        SimpleBot bot1=new SimpleBot(d1,d2,"bot1");
+        SimpleBot bot1 = new SimpleBot(d1,d2,"bot1");
         Assert.assertNotNull(bot1);
 
     }

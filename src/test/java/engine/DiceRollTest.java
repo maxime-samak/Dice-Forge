@@ -18,7 +18,9 @@ public class DiceRollTest {
         final String[] token = roll.split("%");
 
 
-        Assert.assertTrue("Roll Control pt1",(token[0].equals("1@SOLAR"))||(token[0].equals("1@GOLD")));
+        Assert.assertTrue("Roll Control pt1",
+                (token[0].equals("1@SOLAR"))||
+                        (token[0].equals("1@GOLD")));
         Assert.assertTrue("Roll Control pt2",
                 (token[1].equals("1@LUNAR"))||
                         (token[1].equals("1@GOLD"))||

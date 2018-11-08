@@ -1,4 +1,4 @@
-package bot;
+package engine;
 
 public class BotScore {
 
@@ -26,7 +26,7 @@ public class BotScore {
         return victory;
     }
 
-    public void addGold(int gold) {
+    protected void addGold(int gold) {
         gold = Math.abs(gold);
         if(this.gold + gold >= 12 + (4 * extended)) {
             this.gold = 12 + (4 * extended);
@@ -34,7 +34,7 @@ public class BotScore {
         else {this.gold += gold;}
     }
 
-    public void addSolar(int solar) {
+    protected void addSolar(int solar) {
         solar = Math.abs(solar);
         if(this.solar + solar >= 6 + (2 * extended)) {
             this.solar = 6 + (2 * extended);
@@ -42,7 +42,7 @@ public class BotScore {
         else {this.solar += solar;}
     }
 
-    public void addLunar(int lunar) {
+    protected void addLunar(int lunar) {
         lunar = Math.abs(lunar);
         if(this.lunar + lunar >= 6 + (2 * extended)) {
             this.lunar = 6 + (2 * extended);
@@ -50,39 +50,16 @@ public class BotScore {
         else {this.lunar += lunar;}
     }
 
-    public void addVictory(int victory) {
+    protected void addVictory(int victory) {
         victory = Math.abs(victory);
         this.victory += victory;
     }
 
-    public void removeGold(int gold) {
-        gold = Math.abs(gold);
-        if(this.gold - gold <= 0) {
-            this.gold = 0;
-        }
-        else{
-            this.gold -= gold;
-        }
-    }
-
-    public String getInfos()
-    {
+    public String getInfos() {
         return "Gold : "+this.getGold()+", Solar : "+this.getSolar()+", Lunar : "+this.getLunar()+", Victory : "+getVictory();
     }
 
-    /** Ready for v2 + v3
-
-    public void removeGold(int gold) {
-        gold = Math.abs(gold);
-        if(this.gold - gold <= 0) {
-            this.gold = 0;
-        }
-        else{
-            this.gold -= gold;
-        }
-    }
-
-     public void removeSolar(int solar) {
+    protected void removeSolar(int solar) {
         solar = Math.abs(solar);
         if(this.solar - solar <= 0) {
             this.solar = 0;
@@ -92,7 +69,7 @@ public class BotScore {
         }
     }
 
-    public void removeLunar(int lunar) {
+    protected void removeLunar(int lunar) {
         lunar = Math.abs(lunar);
         if(this.lunar - lunar <= 0) {
             this.lunar = 0;
@@ -100,5 +77,5 @@ public class BotScore {
         else{
             this.lunar -= lunar;
         }
-    }**/
+    }
 }

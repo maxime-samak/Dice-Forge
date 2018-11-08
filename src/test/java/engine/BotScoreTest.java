@@ -1,4 +1,4 @@
-package bot;
+package engine;
 
 import org.junit.Assert;
 import org.junit.Test;

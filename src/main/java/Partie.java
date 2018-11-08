@@ -1,6 +1,3 @@
-import bot.SimpleBot;
-import engine.ScoreCounter;
-import objects.Dice;
 
 public class Partie {
     //initialisation de la partie
@@ -9,6 +6,5 @@ public class Partie {
         System.out.println("Début de la partie :");
         game.begin();
         System.out.println("Fin de la partie");
-
     }
 }
