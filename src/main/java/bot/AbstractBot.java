@@ -26,6 +26,14 @@ public abstract class AbstractBot implements Bot {
 
     public String getBotID() { return botID; }
 
+    public Dice getDice1() {
+        return dice1;
+    }
+
+    public Dice getDice2() {
+        return dice2;
+    }
+
     public String rollDices()
     {
         return DiceRoll.roll(dice1,dice2);

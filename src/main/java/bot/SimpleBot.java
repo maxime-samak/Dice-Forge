@@ -30,47 +30,88 @@ public class SimpleBot extends AbstractBot {
         return this.rollDices();
     }
 
-    public void shopForDiceCards(Sanctuary sanctuary)
+    public boolean shopForDiceCards(Sanctuary sanctuary)
     {
 
         int goldAvailable = this.getBotscore().getGold();
-        DiceCard c=null;
-        //Check pool 12 a implementer en v3
-        // if(goldAvailable>=12)
-        //Check de la pool 8
+        /*if(goldAvailable >= 12)
+            if(shopPoolI(12,sanctuary))
+                return true;*/
         if(goldAvailable >= 8)
         {
-            //TODO VERIFIER LISTE DES FACES DISPONIBLES ET ACHETER FACE SI VALEUR SUPERIEUR A RESSOURCE OU SI VICTOIRE DISPONIBLE A PRIX ACHETABLE
-            ArrayList<DiceCard> buyable8 = sanctuary.getPoolAvailables(8);
-            for(int cpt=0;cpt<buyable8.size();cpt++)
-            {
-                DiceCard buy = buyable8.get(buyable8.size()-cpt);
-                for(int dice=1;dice<3;dice++)
-                {
-                    for(int face=0;face<6;face++)
-                    {
-                        DiceCard fd1 = this.getFace(dice, face);
-                        if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue() || (fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() < buy.getValue()))) {
-                            c = fd1;
-                            break;
-                        } else {
-                            c = null;
-                        }
-                    }
-                    if(c!=null)
-                        break;
-                }
-                if(buyCard(buy,c))
-                    break;
-            }
-            if(c!=null)
-            {
-
-            }
+            if (shopPoolI(8, sanctuary))
+                return true;
         }
+        if(goldAvailable >= 6)
+        {
+            if(shopPoolI(6,sanctuary))
+                return true;
+        }
+        /*if(goldAvailable >= 5)
+        {
+            if(shopPoolI(5,sanctuary))
+                return true;
+        }
+        if(goldAvailable >= 4)
+        {
+            if(shopPoolI(4,sanctuary))
+                return true;
+         }*/
+        if(goldAvailable >= 3)
+        {
+            if(shopPoolI(3,sanctuary))
+                return true;
+        }
+        if(goldAvailable >= 2)
+        {
+            if(shopPoolI(2,sanctuary))
+                return true;
+        }
+        return false;
+
 
     }
 
-    public boolean buyCard(DiceCard b, DiceCard c){return true;}
+    public boolean shopPoolI(int i,Sanctuary sanctuary)
+    {
+        //TODO VERIFIER LISTE DES FACES DISPONIBLES ET ACHETER FACE SI VALEUR SUPERIEUR A RESSOURCE OU SI VICTOIRE DISPONIBLE A PRIX ACHETABLE
+        ArrayList<DiceCard> buyable = sanctuary.getPoolAvailables(i);
+
+        Dice d=null;
+        int f=0;
+        for (int cpt = 0; cpt < buyable.size(); cpt++)
+        {
+            DiceCard buy = buyable.get(buyable.size() - cpt);
+            for (int dice = 1; dice < 3; dice++)
+            {
+                for (int face = 0; face < 6; face++)
+                {
+                    DiceCard fd1 = this.getFace(dice, face);
+                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue() || (fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() < buy.getValue())))
+                    {
+                        if(dice==1)
+                        {
+                            d = getDice1();
+                            f=face;
+                            break;
+                        }
+                        if(dice==2)
+                        {
+                            d = getDice1();
+                            f=face;
+                            break;
+                        }
+                    }
+                }
+                if (d != null)
+                    break;
+            }
+            if (buyCard(sanctuary,i,buy,d,f))
+                return true;
+        }
+        return false;
+    }
+
+    public boolean buyCard(Sanctuary s,int i,DiceCard b, Dice d,int f){return true;}
 
 }
