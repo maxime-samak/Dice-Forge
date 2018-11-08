@@ -18,29 +18,22 @@ public class Sanctuary {
 
     public void initPool() {
 
-        //4x 1 Lunar + 4x 3 Gold
-        DiceCard[] pool2 = new DiceCard[8];
+        DiceCard[] pool2 = new DiceCard[8]; //1lunar and 3gold
 
-        //4x 1solar + 4x 4gold
-        DiceCard[] pool3 = new DiceCard[8];
+        DiceCard[] pool3 = new DiceCard[8]; //1solar and 4 gold
 
-        //1x 6Gold + 1x 1Victory1Solaire + 1x 2Gold1Lunaire + 1x 1Gold1Lunaire1Solaire
-        DiceCard[] pool4 = new DiceCard[4];
+        DiceCard[] pool4 = new DiceCard[4]; //choix
 
-        //choix
-        DiceCard[] pool5 = new DiceCard[4];
+        DiceCard[] pool5 = new DiceCard[4]; //choix
 
-        //2lunar
-        DiceCard[] pool6 = new DiceCard[4];
+        DiceCard[] pool6 = new DiceCard[4]; //2lunar
 
-        //3solar and 3 victory
-        DiceCard[] pool8 = new DiceCard[8];
+        DiceCard[] pool8 = new DiceCard[8]; //3solar and 3 victory
 
-        //choix
-        DiceCard[] pool12 = new DiceCard[4];
+        DiceCard[] pool12 = new DiceCard[4]; //choix
 
 
-        // **** pool 2 ****
+        // pool2
         for(int i = 0; i < 4; i++) {
             pool2[i] = new DiceCard(2, Resource.LUNAR);
         }
@@ -48,8 +41,7 @@ public class Sanctuary {
             pool2[i] = new DiceCard(3, Resource.GOLD);
         }
         pools.put(2,pool2);
-
-        // **** pool 3 ****
+        //pool3
         for(int i = 0; i < 4; i++) {
             pool3[i] = new DiceCard(1, Resource.SOLAR);
         }
@@ -58,17 +50,17 @@ public class Sanctuary {
         }
         pools.put(3,pool3);
 
-        //pool4 => v3
+        //pool4 à faire pour v3
 
-        //pool5 => v3
+        //pool5 à faire pour v3
 
-        // **** pool 6 ****
+        //pool6
         for(int i = 0; i < 4; i++) {
             pool6[i] = new DiceCard(2, Resource.LUNAR);
         }
         pools.put(6,pool6);
 
-        // **** pool 8 ****
+        //pool8
         for(int i = 0; i < 4; i++) {
             pool8[i] = new DiceCard(3, Resource.SOLAR);
         }
@@ -77,7 +69,7 @@ public class Sanctuary {
         }
         pools.put(8,pool8);
 
-        //pool12 => v3
+        //pool12 à faire pour v3
     }
 
     public DiceCard getDiceCardFromPool(int i) {
@@ -101,6 +93,16 @@ public class Sanctuary {
         }
 
         return buyables;
+    }
+
+    public void removeCard(int pool, DiceCard cardToRemove) {
+
+        for(int i = 0; i < pools.get(pool).length; i++) {
+            if(pools.get(pool)[i].equals(cardToRemove)) {
+                pools.get(pool)[i] = null;
+                break;
+            }
+        }
     }
 
 }

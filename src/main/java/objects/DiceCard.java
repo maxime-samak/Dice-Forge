@@ -23,7 +23,6 @@ public class DiceCard {
             return true;
         }
         else { return false; }
-
     }
 
     public String toString(){

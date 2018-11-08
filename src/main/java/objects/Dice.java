@@ -78,4 +78,22 @@ public class Dice {
     public String toString(){
         return F1 + "\n" + F2 + "\n" + F3 + "\n" + F4 + "\n" + F5 + "\n" + F6 + "\n";
     }
+
+    protected void setDiceCard(int i, DiceCard card) {
+        switch (i) {
+            case 1:
+                F1 = card;
+            case 2:
+                F2 = card;
+            case 3:
+                F3 = card;
+            case 4:
+                F4 = card;
+            case 5:
+                F5 = card;
+            case 6:
+                F6 = card;
+            default:
+        }
+    }
 }
