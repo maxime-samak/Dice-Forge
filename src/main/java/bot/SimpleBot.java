@@ -1,9 +1,6 @@
 package bot;
 
-import objects.Dice;
-import objects.DiceCard;
-import objects.Resource;
-import objects.Sanctuary;
+import objects.*;
 
 import java.util.ArrayList;
 
@@ -79,12 +76,14 @@ public class SimpleBot extends AbstractBot {
         int f=0;
         for (int cpt = 0; cpt < buyable.size(); cpt++)
         {
-            DiceCard buy = buyable.get(buyable.size() - cpt);
+
+            DiceCard buy = buyable.get(cpt);
+
             for (int dice = 1; dice < 3; dice++)
             {
-                for (int face = 0; face < 6; face++)
+                for (int face = 1; face <= 6; face++)
                 {
-                    DiceCard fd1 = this.getFace(dice, face);
+                    DiceCard fd1 = this.getDice1().getFi(face);
                     if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue() || (fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() < buy.getValue())))
                     {
                         if(dice==1)
@@ -95,7 +94,7 @@ public class SimpleBot extends AbstractBot {
                         }
                         if(dice==2)
                         {
-                            d = getDice1();
+                            d = getDice2();
                             f=face;
                             break;
                         }
@@ -104,12 +103,13 @@ public class SimpleBot extends AbstractBot {
                 if (d != null)
                     break;
             }
-            if (buyCard(sanctuary,i,buy,d,f))
-                return true;
+            if(d != null)
+            {
+                if (BuyCard.setCard(sanctuary,i,buy,d,f)){
+                    return true;}
+            }
         }
         return false;
     }
-
-    public boolean buyCard(Sanctuary s,int i,DiceCard b, Dice d,int f){return true;}
 
 }

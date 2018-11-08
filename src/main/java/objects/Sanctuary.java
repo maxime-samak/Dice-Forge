@@ -98,7 +98,8 @@ public class Sanctuary {
     public void removeCard(int pool, DiceCard cardToRemove) {
 
         for(int i = 0; i < pools.get(pool).length; i++) {
-            if(pools.get(pool)[i].equals(cardToRemove)) {
+            System.out.println(pools.get(pool)[i]);
+            if(pools.get(pool)[i]!=null && pools.get(pool)[i].equals(cardToRemove)) {
                 pools.get(pool)[i] = null;
                 break;
             }
