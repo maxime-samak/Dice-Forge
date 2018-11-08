@@ -20,14 +20,13 @@ public class SimpleBot extends AbstractBot {
 
     //Première stratégie de bot, le bot achète une seule face de dès si il peut et si il en trouve une meilleure que celles qu'il podssède
     // puis achète une seule carte
-    public String SimpleStrat2(Sanctuary sanctuary)
+    public void play(Sanctuary sanctuary)
     {
         this.shopForDiceCards(sanctuary);
         int lunarAvailable = this.getBotscore().getLunar();
         int solarAvailable = this.getBotscore().getSolar();
         //Echanger face acheter avec soit face equivalente plus faible, soit (pour face victoire) gold le plus faible
         //TODO VERIFIER LISTE DES CARTES DISPONIBLE ET ACHETER CARTE ACHETABLE AVEC LE PLUS DE POINTS DE VICTOIRE
-        return this.rollDices();
     }
 
     public boolean shopForDiceCards(Sanctuary sanctuary)
