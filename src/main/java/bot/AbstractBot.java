@@ -3,6 +3,7 @@ package bot;
 import engine.BotScore;
 import engine.DiceRoll;
 import objects.Dice;
+import objects.DiceCard;
 
 public abstract class AbstractBot implements Bot {
 
@@ -28,6 +29,13 @@ public abstract class AbstractBot implements Bot {
     public String rollDices()
     {
         return DiceRoll.roll(dice1,dice2);
+    }
+
+    public DiceCard getFace(int dice,int face)
+    {
+        if (dice==1)
+            return dice1.getFi(face);
+        return dice2.getFi(face);
     }
 
     public void play(){}
