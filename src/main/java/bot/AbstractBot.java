@@ -13,8 +13,8 @@ public abstract class AbstractBot implements Bot {
 
     public AbstractBot(Dice d1, Dice d2, String botID) {
         this.botID = botID;
-        this.dice1=d1;
-        this.dice2=d2;
+        this.dice1 = d1;
+        this.dice2 = d2;
         this.botscore = new BotScore();
     }
 

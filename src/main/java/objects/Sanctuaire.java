@@ -1,8 +1,5 @@
 package objects;
 
-import objects.DiceCard;
-import objects.Resource;
-
 import java.util.HashMap;
 
 public class Sanctuaire {
