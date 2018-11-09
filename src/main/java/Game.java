@@ -37,8 +37,15 @@ public class Game {
                 System.out.println("Lancer de dés " + botarray[j].getBotID() + " :");
                 String lancer = botarray[j].rollDices();
                 ScoreCounter.updateScore(botarray[j].getBotscore(),lancer);
+                System.out.println(botarray[j].getBotscore().getInfos());
             }
+            System.out.println("DES DU BOT AVANT");
+            System.out.println(botarray[i].getDice1().toString());
+            System.out.println(botarray[i].getDice2().toString());
             botarray[i].play(sanctuary);
+            System.out.println("DES DU BOT APRES");
+            System.out.println(botarray[i].getDice1().toString());
+            System.out.println(botarray[i].getDice2().toString());
         }
     }
 

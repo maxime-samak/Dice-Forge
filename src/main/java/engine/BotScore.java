@@ -34,6 +34,15 @@ public class BotScore {
         else {this.gold += gold;}
     }
 
+    protected void removeGold(int gold)
+    {
+        gold = Math.abs(gold);
+        if(this.gold - gold < 0)
+            this.gold=0;
+        else
+            this.gold=this.gold-gold;
+    }
+
     protected void addSolar(int solar) {
         solar = Math.abs(solar);
         if(this.solar + solar >= 6 + (2 * extended)) {

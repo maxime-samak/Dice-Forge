@@ -35,7 +35,7 @@ public class Sanctuary {
 
         // pool2
         for(int i = 0; i < 4; i++) {
-            pool2[i] = new DiceCard(2, Resource.LUNAR);
+            pool2[i] = new DiceCard(1, Resource.LUNAR);
         }
         for(int i = 4; i < 8; i++) {
             pool2[i] = new DiceCard(3, Resource.GOLD);
@@ -72,10 +72,8 @@ public class Sanctuary {
         //pool12 à faire pour v3
     }
 
-    public DiceCard getDiceCardFromPool(int i) {
-        DiceCard dc = pools.get(i)[0];
-        pools.get(i)[0] = null;
-        return dc;
+    public HashMap<Integer, DiceCard[]> getpools() {
+        return this.pools;
     }
 
     public ArrayList<DiceCard> getPoolAvailables(int i)
@@ -98,7 +96,6 @@ public class Sanctuary {
     public void removeCard(int pool, DiceCard cardToRemove) {
 
         for(int i = 0; i < pools.get(pool).length; i++) {
-            System.out.println(pools.get(pool)[i]);
             if(pools.get(pool)[i]!=null && pools.get(pool)[i].equals(cardToRemove)) {
                 pools.get(pool)[i] = null;
                 break;

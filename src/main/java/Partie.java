@@ -1,3 +1,4 @@
+import objects.Sanctuary;
 
 public class Partie {
     //initialisation de la partie

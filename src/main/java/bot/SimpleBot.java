@@ -34,13 +34,13 @@ public class SimpleBot extends AbstractBot {
                 return true;*/
         if(goldAvailable >= 8)
         {
-            if (shopPoolI(8, sanctuary))
-                return true;
+            if (shopPoolI(8, sanctuary)==true) {
+                return true;}
         }
         if(goldAvailable >= 6)
         {
-            if(shopPoolI(6,sanctuary))
-                return true;
+            if(shopPoolI(6,sanctuary)==true){
+                return true;}
         }
         /*if(goldAvailable >= 5)
         {
@@ -54,13 +54,13 @@ public class SimpleBot extends AbstractBot {
          }*/
         if(goldAvailable >= 3)
         {
-            if(shopPoolI(3,sanctuary))
-                return true;
+            if(shopPoolI(3,sanctuary)==true){
+                return true;}
         }
         if(goldAvailable >= 2)
         {
-            if(shopPoolI(2,sanctuary))
-                return true;
+            if(shopPoolI(2,sanctuary)==true){
+                return true;}
         }
         return false;
 
@@ -83,29 +83,33 @@ public class SimpleBot extends AbstractBot {
             {
                 for (int face = 1; face <= 6; face++)
                 {
-                    DiceCard fd1 = this.getDice1().getFi(face);
-                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue() || (fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() < buy.getValue())))
+                    DiceCard fd1 = null;
+                    if(dice==1){ fd1 = this.getDice1().getFi(face);}
+                    else{fd1 = this.getDice2().getFi(face);}
+                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()) || (fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() < buy.getValue()))
                     {
+
                         if(dice==1)
                         {
-                            d = getDice1();
+                            d = this.getDice1();
                             f=face;
                             break;
                         }
                         if(dice==2)
                         {
-                            d = getDice2();
+                            d = this.getDice2();
                             f=face;
                             break;
                         }
                     }
                 }
-                if (d != null)
+                if (d != null) {
                     break;
+                }
             }
             if(d != null)
             {
-                if (BuyCard.setCard(sanctuary,i,buy,d,f)){
+                if (BuyDiceCard.setCard(sanctuary,i,buy,d,f,this.getBotscore())==true){
                     return true;}
             }
         }

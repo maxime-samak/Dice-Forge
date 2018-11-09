@@ -27,4 +27,9 @@ public class ScoreCounter {
         }
         else { botscore.addGold(d2Value);}
     }
+
+    public static void deduceGold(BotScore botScore, int price)
+    {
+        botScore.removeGold(price);
+    }
 }

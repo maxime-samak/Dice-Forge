@@ -2,16 +2,16 @@ package objects;
 
 public abstract class AbstractCard implements InterfaceCard{
 
-    private final int pointGloire;
+    private final int victoryPoints;
     private String type; // A optimiser : changer surement en enum(effet immédiat, et deux autres types d'effet à durée permanente
-    private final Object[] coutCarte;
-    private final boolean carteConseiller;
+    private final Object[] priceCard;
+    private final boolean advidseCard;
 
-    public AbstractCard(int pointGloire, String type, Object[] coutCarte, boolean carteConseiller) {
-        this.pointGloire = pointGloire;
+    public AbstractCard(int victoryPoints, String type, Object[] priceCard, boolean advidseCard) {
+        this.victoryPoints = victoryPoints;
         this.type = type;
-        this.coutCarte = coutCarte;
-        this.carteConseiller = carteConseiller;
+        this.priceCard = priceCard;
+        this.advidseCard = advidseCard;
     }
 
     public abstract void effetCarte();
