@@ -72,7 +72,7 @@ public class Sanctuary {
         //pool12 à faire pour v3
     }
 
-    public HashMap<Integer, DiceCard[]> getpools() {
+    public HashMap<Integer, DiceCard[]> getPools() {
         return this.pools;
     }
 
