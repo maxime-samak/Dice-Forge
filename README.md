@@ -26,8 +26,7 @@ Groupe DFG
 - [x] Ajout d'un second joueur(bot) au jeu.
 - [x] Affinage de la stratégie d'un bot(choix des faces).
 - [x] Gestion du déroulement des tours de jeu, sélection du gagnant.
-
-~~- [ ] Ajout d'achat de cartes (les cartes n'ont aucun effet elles représentent simplement un gain de points).~~
+- [ ] ~~Ajout d'achat de cartes (les cartes n'ont aucun effet elles représentent simplement un gain de points).~~
 - [x] Ajout de nouveaux tests.
 - [x] Optimisation et améliorations du code.
 
