@@ -26,6 +26,7 @@ Groupe DFG
 - [x] Ajout d'un second joueur(bot) au jeu.
 - [x] Affinage de la stratégie d'un bot(choix des faces).
 - [x] Gestion du déroulement des tours de jeu, sélection du gagnant.
+
 ~~- [ ] Ajout d'achat de cartes (les cartes n'ont aucun effet elles représentent simplement un gain de points).~~
 - [x] Ajout de nouveaux tests.
 - [x] Optimisation et améliorations du code.
@@ -35,7 +36,7 @@ Groupe DFG
 
 ### [Livraison 3](https://github.com/SamakM/Dice-Forge/milestone/3)
 #### Objectif de livraison
-- [ } Ajout d'achat de cartes (les cartes n'ont aucun effet elles représentent simplement un gain de points).
+- [ ] Ajout d'achat de cartes (les cartes n'ont aucun effet elles représentent simplement un gain de points).
 - [ ] Ajout des cartes qui réalise une action en plus jusqu'à la fin et pour un seul tour.
 - [ ] Ajout des faces de dé ayant un effet "complexe".
 - [ ] Ajout de nouveaux tests.
