@@ -32,4 +32,10 @@ public class ScoreCounter {
     {
         botScore.removeGold(price);
     }
+
+    public static void deduceSolar(BotScore botScore, int price) { botScore.removeSolar(price);}
+
+    public static void deduceLunar(BotScore botScore, int price) { botScore.removeLunar(price);}
+
+    public static void moreVictory(BotScore botScore, int price) { botScore.addVictory(price);}
 }
