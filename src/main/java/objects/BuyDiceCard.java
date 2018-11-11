@@ -2,7 +2,6 @@ package objects;
 
 import engine.BotScore;
 import engine.ScoreCounter;
-
 import java.util.ArrayList;
 
 public class BuyDiceCard {
@@ -14,14 +13,13 @@ public class BuyDiceCard {
                 return false;
             }
         }
-        sanctuary.removeCard(pool, card);
-        dice.setDiceCard(cardToChange, card);
-        bought.add(card);
-        ScoreCounter.deduceGold(botscore,pool);
-
-
-
-        return true;
+        if(sanctuary.removeCard(pool, card)){
+            dice.setDiceCard(cardToChange, card);
+            bought.add(card);
+            ScoreCounter.deduceGold(botscore,pool);
+            return true;
+        }
+        return false;
     }
 
     public static void resetBotLog() {

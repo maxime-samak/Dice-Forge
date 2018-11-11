@@ -75,25 +75,30 @@ public class Dice {
         }
     }
 
-    public String toString(){
-        return F1 + "\n" + F2 + "\n" + F3 + "\n" + F4 + "\n" + F5 + "\n" + F6 + "\n";
-    }
-
     protected void setDiceCard(int i, DiceCard card) {
         switch (i) {
             case 1:
                 F1 = card;
+                break;
             case 2:
                 F2 = card;
+                break;
             case 3:
                 F3 = card;
+                break;
             case 4:
                 F4 = card;
+                break;
             case 5:
                 F5 = card;
+                break;
             case 6:
                 F6 = card;
+                break;
             default:
+                System.out.println("Out of range > Error");
         }
     }
+
+    public String toString(){ return F1 + "\n" + F2 + "\n" + F3 + "\n" + F4 + "\n" + F5 + "\n" + F6 + "\n"; }
 }

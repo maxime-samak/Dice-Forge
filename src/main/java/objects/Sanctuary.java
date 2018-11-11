@@ -1,8 +1,5 @@
 package objects;
 
-import objects.DiceCard;
-import objects.Resource;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -22,16 +19,15 @@ public class Sanctuary {
 
         DiceCard[] pool3 = new DiceCard[8]; //1solar and 4 gold
 
-        DiceCard[] pool4 = new DiceCard[4]; //choix
+        //DiceCard[] pool4 = new DiceCard[4]; //choix
 
-        DiceCard[] pool5 = new DiceCard[4]; //choix
+        //DiceCard[] pool5 = new DiceCard[4]; //choix
 
         DiceCard[] pool6 = new DiceCard[4]; //2lunar
 
         DiceCard[] pool8 = new DiceCard[8]; //3solar and 3 victory
 
-        DiceCard[] pool12 = new DiceCard[4]; //choix
-
+        //DiceCard[] pool12 = new DiceCard[4]; //choix
 
         // pool2
         for(int i = 0; i < 4; i++) {
@@ -41,6 +37,7 @@ public class Sanctuary {
             pool2[i] = new DiceCard(3, Resource.GOLD);
         }
         pools.put(2,pool2);
+
         //pool3
         for(int i = 0; i < 4; i++) {
             pool3[i] = new DiceCard(1, Resource.SOLAR);
@@ -72,35 +69,28 @@ public class Sanctuary {
         //pool12 à faire pour v3
     }
 
-    public HashMap<Integer, DiceCard[]> getPools() {
-        return this.pools;
-    }
 
-    public ArrayList<DiceCard> getPoolAvailables(int i)
-    {
+
+    public ArrayList<DiceCard> getPoolAvailables(int i) {
         ArrayList<DiceCard> buyables= new ArrayList<DiceCard>();
-        int b=0;
         DiceCard[] cards = pools.get(i);
-        for(int cpt=0;cpt<cards.length;cpt++)
-        {
-            if(cards[cpt]!=null)
-            {
-                buyables.add(cards[cpt]);
-                b++;
+        for(int j = 0; j < cards.length; j++) {
+            if(cards[j] != null) {
+                buyables.add(cards[j]);
             }
         }
-
         return buyables;
     }
 
-    public void removeCard(int pool, DiceCard cardToRemove) {
-
+    public boolean removeCard(int pool, DiceCard cardToRemove) {
         for(int i = 0; i < pools.get(pool).length; i++) {
-            if(pools.get(pool)[i]!=null && pools.get(pool)[i].equals(cardToRemove)) {
+            if(pools.get(pool)[i] != null && pools.get(pool)[i].equals(cardToRemove)) {
                 pools.get(pool)[i] = null;
-                break;
+                return true;
             }
         }
+        return false;
     }
 
+    public HashMap<Integer, DiceCard[]> getPools() { return this.pools; }
 }

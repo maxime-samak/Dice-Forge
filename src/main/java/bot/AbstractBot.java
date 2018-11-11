@@ -4,6 +4,7 @@ import engine.BotScore;
 import engine.DiceRoll;
 import objects.Dice;
 import objects.DiceCard;
+import objects.Sanctuary;
 
 public abstract class AbstractBot implements Bot {
 
@@ -46,6 +47,6 @@ public abstract class AbstractBot implements Bot {
         return dice2.getFi(face);
     }
 
-    public void play(){}
+    public void play(Sanctuary sanctuary){}
 
 }

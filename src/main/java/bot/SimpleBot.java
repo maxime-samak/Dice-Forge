@@ -4,44 +4,26 @@ import objects.*;
 
 import java.util.ArrayList;
 
+import static objects.BuyDiceCard.setCard;
+
 public class SimpleBot extends AbstractBot {
 
     public SimpleBot(Dice d1, Dice d2, String botID) {
         super(d1,d2, botID);
     }
 
-    public String SimpleStrat()
-    {
-        return this.rollDices();
+    public void play(Sanctuary sanctuary) {
+        this.diceShopping(sanctuary);
     }
 
-    //Première stratégie de bot, le bot achète une seule face de dès si il peut et si il en trouve une meilleure que celles qu'il podssède
-    // puis achète une seule carte
-    public void play(Sanctuary sanctuary)
-    {
-        this.shopForDiceCards(sanctuary);
-        int lunarAvailable = this.getBotscore().getLunar();
-        int solarAvailable = this.getBotscore().getSolar();
-        //Echanger face acheter avec soit face equivalente plus faible, soit (pour face victoire) gold le plus faible
-        //TODO VERIFIER LISTE DES CARTES DISPONIBLE ET ACHETER CARTE ACHETABLE AVEC LE PLUS DE POINTS DE VICTOIRE
-    }
-
-    public boolean shopForDiceCards(Sanctuary sanctuary)
-    {
-        int goldAvailable = this.getBotscore().getGold();
+    public void diceShopping(Sanctuary sanctuary) {
+        int gold = this.getBotscore().getGold();
         /*if(goldAvailable >= 12)
             if(shopPoolI(12,sanctuary))
                 return true;*/
-        if(goldAvailable >= 8)
-        {
-            if (shopPoolI(8, sanctuary)==true) {
-                return true;}
-        }
-        if(goldAvailable >= 6)
-        {
-            if(shopPoolI(6,sanctuary)==true){
-                return true;}
-        }
+        if(gold >= 8) { poolShopping(sanctuary, 8); }
+
+        else if(gold >= 6) { poolShopping(sanctuary,6); }
         /*if(goldAvailable >= 5)
         {
             if(shopPoolI(5,sanctuary))
@@ -52,53 +34,38 @@ public class SimpleBot extends AbstractBot {
             if(shopPoolI(4,sanctuary))
                 return true;
          }*/
-        if(goldAvailable >= 3)
-        {
-            if(shopPoolI(3,sanctuary)==true){
-                return true;}
-        }
-        if(goldAvailable >= 2)
-        {
-            if(shopPoolI(2,sanctuary)==true){
-                return true;}
-        }
-        return false;
+        else if(gold >= 3) { poolShopping(sanctuary, 3); }
 
+        else if(gold >= 2) { poolShopping(sanctuary, 2 ); }
 
+        else { System.out.println(this.getBotID() + "passe son tour. \n"); }
     }
 
-    public boolean shopPoolI(int i,Sanctuary sanctuary)
-    {
-        //TODO VERIFIER LISTE DES FACES DISPONIBLES ET ACHETER FACE SI VALEUR SUPERIEUR A RESSOURCE OU SI VICTOIRE DISPONIBLE A PRIX ACHETABLE
-        ArrayList<DiceCard> buyable = sanctuary.getPoolAvailables(i);
+    public boolean poolShopping(Sanctuary sanctuary, int pool) {
+        ArrayList<DiceCard> buyable = sanctuary.getPoolAvailables(pool);
 
-        Dice d=null;
-        int f=0;
-        for (int cpt = 0; cpt < buyable.size(); cpt++)
-        {
+        Dice d = null;
+        int f = 0;
+        for (int i = 0; i < buyable.size(); i++) {
 
-            DiceCard buy = buyable.get(cpt);
+            DiceCard buy = buyable.get(i);
 
-            for (int dice = 1; dice < 3; dice++)
-            {
-                for (int face = 1; face <= 6; face++)
-                {
+            for (int dice = 1; dice < 3; dice++) {
+                for (int face = 1; face <= 6; face++) {
                     DiceCard fd1 = null;
-                    if(dice==1){ fd1 = this.getDice1().getFi(face);}
+                    if(dice == 1){ fd1 = this.getDice1().getFi(face);}
                     else{fd1 = this.getDice2().getFi(face);}
-                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()) || (fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() < buy.getValue()))
-                    {
 
-                        if(dice==1)
-                        {
+                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()) || (fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() < buy.getValue())) {
+
+                        if(dice == 1) {
                             d = this.getDice1();
-                            f=face;
+                            f = face;
                             break;
                         }
-                        if(dice==2)
-                        {
+                        if(dice == 2) {
                             d = this.getDice2();
-                            f=face;
+                            f = face;
                             break;
                         }
                     }
@@ -107,13 +74,11 @@ public class SimpleBot extends AbstractBot {
                     break;
                 }
             }
-            if(d != null)
-            {
-                if (BuyDiceCard.setCard(sanctuary,i,buy,d,f,this.getBotscore())==true){
-                    return true;}
+            if(d != null) {
+                if (setCard(sanctuary,pool,buy,d,f,this.getBotscore())){
+                    return true; }
             }
         }
         return false;
     }
-
 }
