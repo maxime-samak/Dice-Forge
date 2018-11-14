@@ -24,7 +24,7 @@ public class Islands {
 
             island4[i + nbPLayers] = new NeutralCard(14, Effect.SIMPLE, 4,0);
         }
-        islands.put(45, island4);
+        islands.put(4, island4);
 
         for(int i = 0; i < nbPLayers; i++) {
             island5[i] = new NeutralCard(26, Effect.SIMPLE, 5, 5);
