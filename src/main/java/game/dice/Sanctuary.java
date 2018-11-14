@@ -68,7 +68,7 @@ public class Sanctuary {
     }
 
     public ArrayList<DiceCard> getPoolAvailables(int i) {
-        ArrayList<DiceCard> buyables= new ArrayList<DiceCard>();
+        ArrayList<DiceCard> buyables = new ArrayList<DiceCard>();
         DiceCard[] cards = pools.get(i);
         for(int j = 0; j < cards.length; j++) {
             if(cards[j] != null) {
