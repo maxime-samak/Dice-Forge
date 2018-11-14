@@ -20,9 +20,9 @@ public class SimpleBot extends AbstractBot {
         /*if(goldAvailable >= 12)
             if(shopPoolI(12,sanctuary))
                 return true;*/
-        if(gold >= 8) { poolShopping(sanctuary, 8); }
+        if(gold >= 8) { diceShopping(sanctuary, 8); }
 
-        else if(gold >= 6) { poolShopping(sanctuary,6); }
+        else if(gold >= 6) { diceShopping(sanctuary,6); }
         /*if(goldAvailable >= 5)
         {
             if(shopPoolI(5,sanctuary))
@@ -33,14 +33,14 @@ public class SimpleBot extends AbstractBot {
             if(shopPoolI(4,sanctuary))
                 return true;
          }*/
-        else if(gold >= 3) { poolShopping(sanctuary, 3); }
+        else if(gold >= 3) { diceShopping(sanctuary, 3); }
 
-        else if(gold >= 2) { poolShopping(sanctuary, 2 ); }
+        else if(gold >= 2) { diceShopping(sanctuary, 2 ); }
 
         else { System.out.println(this.getBotID() + "passe son tour. \n"); }
     }
 
-    public boolean poolShopping(Sanctuary sanctuary, int pool) {
+    public boolean diceShopping(Sanctuary sanctuary, int pool) {
         ArrayList<DiceCard> buyable = sanctuary.getPoolAvailables(pool);
 
         Dice d = null;
@@ -51,7 +51,7 @@ public class SimpleBot extends AbstractBot {
 
             for (int dice = 1; dice < 3; dice++) {
                 for (int face = 1; face <= 6; face++) {
-                    DiceCard fd1 = null;
+                    DiceCard fd1;
                     if(dice == 1){ fd1 = this.getDice1().getFi(face);}
                     else{fd1 = this.getDice2().getFi(face);}
 
