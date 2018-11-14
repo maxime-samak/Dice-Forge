@@ -1,4 +1,4 @@
-package engine;
+package game;
 
 public class BotScore {
 
@@ -38,9 +38,9 @@ public class BotScore {
     {
         gold = Math.abs(gold);
         if(this.gold - gold < 0)
-            this.gold=0;
+            this.gold = 0;
         else
-            this.gold=this.gold-gold;
+            this.gold = this.gold - gold;
     }
 
     protected void addSolar(int solar) {

@@ -1,11 +1,11 @@
-package objects;
+package game.dice;
 
 import bot.SimpleBot;
-import engine.ScoreCounter;
+import game.ScoreCounter;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class BuyDiceCardTest {
+public class BuyDiceNeutralCardTest {
 
     @Test
     public void BuyDiceCardTest()
@@ -17,11 +17,11 @@ public class BuyDiceCardTest {
         Sanctuary s=new Sanctuary(2);
         SimpleBot b = new SimpleBot(d,d2,"test");
         DiceCard dc=s.getPoolAvailables(8).get(7);
-        ScoreCounter.updateScore(b.getBotscore(),"4@GOLD%4@GOLD");
+        ScoreCounter.updateScore(b.getBotScore(),"4@GOLD%4@GOLD");
 
-        BuyDiceCard.setCard(s,8,dc,d,3,b.getBotscore());
+        BuyDiceCard.setCard(s,8,dc,d,3,b.getBotScore());
         Assert.assertEquals(dc,d.getFi(3));
-        Assert.assertEquals(0,b.getBotscore().getGold());
+        Assert.assertEquals(0,b.getBotScore().getGold());
 
     }
 }

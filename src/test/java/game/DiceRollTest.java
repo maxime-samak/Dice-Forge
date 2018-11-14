@@ -1,9 +1,9 @@
-package engine;
+package game;
 
-import objects.Dice;
+import game.dice.Dice;
 import org.junit.Assert;
 import org.junit.Test;
-import static engine.DiceRoll.roll;
+import static game.DiceRoll.roll;
 
 public class DiceRollTest {
 

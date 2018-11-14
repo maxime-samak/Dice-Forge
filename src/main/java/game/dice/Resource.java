@@ -1,4 +1,4 @@
-package objects;
+package game.dice;
 
 public enum Resource {
     GOLD{

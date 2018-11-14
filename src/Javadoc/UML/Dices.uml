@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Diagram>
   <ID>JAVA</ID>
-  <OriginalElement>engine.DiceRoll</OriginalElement>
+  <OriginalElement>game.DiceRoll</OriginalElement>
   <nodes>
-    <node x="148.55208333333331" y="1302.0">engine.DiceRoll</node>
-    <node x="148.75" y="549.0">objects.Resource</node>
+    <node x="148.55208333333331" y="1302.0">game.DiceRoll</node>
+    <node x="148.75" y="549.0">game.dice.Resource</node>
     <node x="20.0" y="105.0">java.lang.Enum</node>
-    <node x="155.05208333333331" y="955.0">objects.Dice</node>
+    <node x="155.05208333333331" y="955.0">game.dice.Dice</node>
     <node x="167.75" y="0.0">java.lang.Comparable</node>
-    <node x="80.58333333333331" y="751.0">objects.DiceCard</node>
+    <node x="80.58333333333331" y="751.0">game.dice.DiceCard</node>
     <node x="21.75" y="12.0">java.io.Serializable</node>
   </nodes>
   <notes />
   <edges>
-    <edge source="objects.DiceCard" target="objects.Resource">
+    <edge source="game.dice.DiceCard" target="game.dice.Resource">
       <point x="-61.24999999999997" y="-77.0" />
       <point x="141.83333333333334" y="726.0" />
       <point x="186.08333333333331" y="726.0" />
       <point x="-74.66666666666669" y="76.0" />
     </edge>
-    <edge source="objects.Dice" target="objects.DiceCard">
+    <edge source="game.dice.Dice" target="game.dice.DiceCard">
       <point x="25.125" y="-148.5" />
       <point x="280.6770833333333" y="930.0" />
       <point x="284.75" y="930.0" />
@@ -31,7 +31,7 @@
       <point x="84.75" y="80.0" />
       <point x="0.0" y="15.5" />
     </edge>
-    <edge source="objects.Dice" target="objects.Resource">
+    <edge source="game.dice.Dice" target="game.dice.Resource">
       <point x="75.375" y="-148.5" />
       <point x="330.9270833333333" y="930.0" />
       <point x="336.0833333333333" y="930.0" />
@@ -41,7 +41,7 @@
       <point x="80.25" y="-197.0" />
       <point x="0.0" y="27.5" />
     </edge>
-    <edge source="engine.DiceRoll" target="objects.Dice">
+    <edge source="game.DiceRoll" target="game.dice.Dice">
       <point x="0.0" y="-27.5" />
       <point x="0.0" y="148.5" />
     </edge>
@@ -52,14 +52,14 @@
       <point x="0.0" y="302.0" />
       <point x="-160.5" y="-0.0" />
     </edge>
-    <edge source="objects.Resource" target="java.lang.Enum">
+    <edge source="game.dice.Resource" target="java.lang.Enum">
       <point x="0.0" y="-76.0" />
       <point x="80.25" y="197.0" />
     </edge>
   </edges>
   <settings layout="Hierarchic Group" zoom="0.4" x="199.35714285714266" y="536.0" />
   <SelectedNodes>
-    <node>engine.DiceRoll</node>
+    <node>game.DiceRoll</node>
   </SelectedNodes>
   <Categories>
     <Category>Fields</Category>

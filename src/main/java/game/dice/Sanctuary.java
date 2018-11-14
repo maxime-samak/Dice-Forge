@@ -1,11 +1,11 @@
-package objects;
+package game.dice;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Sanctuary {
-    private HashMap<Integer, DiceCard[]> pools = new HashMap<>();
 
+    private HashMap<Integer, DiceCard[]> pools = new HashMap<>();
     private final int nbPlayers;
 
     public Sanctuary(int nbPlayers){
@@ -68,8 +68,6 @@ public class Sanctuary {
 
         //pool12 à faire pour v3
     }
-
-
 
     public ArrayList<DiceCard> getPoolAvailables(int i) {
         ArrayList<DiceCard> buyables= new ArrayList<DiceCard>();

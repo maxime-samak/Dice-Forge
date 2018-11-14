@@ -1,10 +1,9 @@
 package bot;
 
-import engine.BotScore;
-import engine.DiceRoll;
-import objects.Dice;
-import objects.DiceCard;
-import objects.Sanctuary;
+import game.BotScore;
+import game.DiceRoll;
+import game.dice.Dice;
+import game.dice.Sanctuary;
 
 public abstract class AbstractBot implements Bot {
 
@@ -20,7 +19,7 @@ public abstract class AbstractBot implements Bot {
         this.botscore = new BotScore();
     }
 
-    public BotScore getBotscore()
+    public BotScore getBotScore()
     {
         return botscore;
     }
@@ -38,13 +37,6 @@ public abstract class AbstractBot implements Bot {
     public String rollDices()
     {
         return DiceRoll.roll(dice1,dice2);
-    }
-
-    public DiceCard getFace(int dice,int face)
-    {
-        if (dice==1)
-            return dice1.getFi(face);
-        return dice2.getFi(face);
     }
 
     public void play(Sanctuary sanctuary){}

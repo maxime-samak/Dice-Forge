@@ -1,10 +1,11 @@
 package bot;
 
-import objects.*;
-
+import game.dice.Dice;
+import game.dice.DiceCard;
+import game.dice.Resource;
+import game.dice.Sanctuary;
 import java.util.ArrayList;
-
-import static objects.BuyDiceCard.setCard;
+import static game.dice.BuyDiceCard.setCard;
 
 public class SimpleBot extends AbstractBot {
 
@@ -12,12 +13,10 @@ public class SimpleBot extends AbstractBot {
         super(d1,d2, botID);
     }
 
-    public void play(Sanctuary sanctuary) {
-        this.diceShopping(sanctuary);
-    }
+    public void play(Sanctuary sanctuary) { this.diceShopping(sanctuary); }
 
     public void diceShopping(Sanctuary sanctuary) {
-        int gold = this.getBotscore().getGold();
+        int gold = this.getBotScore().getGold();
         /*if(goldAvailable >= 12)
             if(shopPoolI(12,sanctuary))
                 return true;*/
@@ -75,7 +74,7 @@ public class SimpleBot extends AbstractBot {
                 }
             }
             if(d != null) {
-                if (setCard(sanctuary,pool,buy,d,f,this.getBotscore())){
+                if (setCard(sanctuary,pool,buy,d,f,this.getBotScore())){
                     return true; }
             }
         }

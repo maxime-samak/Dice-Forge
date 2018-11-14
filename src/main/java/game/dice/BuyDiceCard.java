@@ -1,10 +1,11 @@
-package objects;
+package game.dice;
 
-import engine.BotScore;
-import engine.ScoreCounter;
+import game.BotScore;
+import game.ScoreCounter;
 import java.util.ArrayList;
 
 public class BuyDiceCard {
+
     private static ArrayList<DiceCard> bought = new ArrayList<>();
 
     public static boolean setCard(Sanctuary sanctuary, int pool, DiceCard card, Dice dice, int cardToChange, BotScore botscore) {
@@ -13,10 +14,15 @@ public class BuyDiceCard {
                 return false;
             }
         }
-        if(sanctuary.removeCard(pool, card)){
+
+        if(botscore.getGold() < pool) {
+            return false;
+        }
+
+        else if(sanctuary.removeCard(pool, card)){
             dice.setDiceCard(cardToChange, card);
             bought.add(card);
-            ScoreCounter.deduceGold(botscore,pool);
+            ScoreCounter.payGold(botscore,pool);
             return true;
         }
         return false;

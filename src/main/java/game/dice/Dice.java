@@ -1,6 +1,6 @@
-package objects;
+package game.dice;
 
-import static objects.Resource.*;
+import static game.dice.Resource.*;
 
 public class Dice {
 

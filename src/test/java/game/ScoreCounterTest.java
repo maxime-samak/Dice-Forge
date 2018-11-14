@@ -1,5 +1,7 @@
-package engine;
+package game;
 
+import game.BotScore;
+import game.ScoreCounter;
 import org.junit.Assert;
 import org.junit.Test;
 

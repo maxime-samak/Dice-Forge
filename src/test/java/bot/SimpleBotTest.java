@@ -1,6 +1,6 @@
 package bot;
 
-import objects.Dice;
+import game.dice.Dice;
 import org.junit.Assert;
 import org.junit.Test;
 

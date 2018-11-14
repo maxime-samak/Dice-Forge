@@ -1,5 +1,8 @@
-package objects;
+package game.dice;
 
+import game.dice.Dice;
+import game.dice.DiceCard;
+import game.dice.Resource;
 import org.junit.Assert;
 import org.junit.Test;
 

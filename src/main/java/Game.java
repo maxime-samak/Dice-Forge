@@ -1,8 +1,9 @@
 import bot.AbstractBot;
 import bot.SimpleBot;
-import engine.ScoreCounter;
-import objects.Dice;
-import objects.Sanctuary;
+import game.ScoreCounter;
+import game.dice.BuyDiceCard;
+import game.dice.Dice;
+import game.dice.Sanctuary;
 
 public class Game {
 
@@ -32,26 +33,27 @@ public class Game {
 
     public void turn() {
         for (int i = 0; i < nbPlayers; i++){
-            System.out.println("Tour de : " + botArray[i].getBotID());
+            System.out.println("Tour de: " + botArray[i].getBotID());
             for (int j = 0; j < nbPlayers; j++){
-                System.out.println("Lancer de dés " + botArray[j].getBotID() + " :");
+                System.out.println("Lancer de dés " + botArray[j].getBotID() + ":");
                 String lancer = botArray[j].rollDices();
-                ScoreCounter.updateScore(botArray[j].getBotscore(),lancer);
-                System.out.println(botArray[j].getBotscore().getInfos() + "\n");
+                ScoreCounter.updateScore(botArray[j].getBotScore(),lancer);
+                System.out.println(botArray[j].getBotScore().getInfos() + "\n");
             }
-            System.out.println("DES DU BOT AVANT");
-            System.out.println(botArray[i].getDice1().toString());
-            System.out.println(botArray[i].getDice2().toString());
+            //System.out.println("DES DU BOT AVANT");
+            //System.out.println(botArray[i].getDice1().toString());
+            //System.out.println(botArray[i].getDice2().toString());
             botArray[i].play(sanctuary);
-            System.out.println("DES DU BOT APRES");
-            System.out.println(botArray[i].getDice1().toString());
-            System.out.println(botArray[i].getDice2().toString());
+            BuyDiceCard.resetBotLog();
+            //System.out.println("DES DU BOT APRES");
+            //System.out.println(botArray[i].getDice1().toString());
+            //System.out.println(botArray[i].getDice2().toString());
         }
     }
 
     public void begin() {
         for(int i = 0; i < nbTurn; i++) {
-            System.out.println("**** Tour : " + (i + 1) + " ****");
+            System.out.println("**** Tour: " + (i + 1) + " ****");
             this.turn();
             System.out.println("******************\n");
         }
@@ -60,16 +62,16 @@ public class Game {
     public void end() {
         String finalScore = "";
         String winner = botArray[0].getBotID();
-        int acc = botArray[0].getBotscore().getVictory();
+        int acc = botArray[0].getBotScore().getVictory();
         for(AbstractBot bot : botArray) {
-            if(bot.getBotscore().getVictory() > acc) {
+            if(bot.getBotScore().getVictory() > acc) {
                 winner = bot.getBotID();
-                acc = bot.getBotscore().getVictory();
+                acc = bot.getBotScore().getVictory();
             }
             else {
 
             }
-            finalScore += bot.getBotID() + ": " + bot.getBotscore().getVictory() + "\n";
+            finalScore += bot.getBotID() + ": " + bot.getBotScore().getVictory() + "\n";
         }
         System.out.println();
         System.out.println("*************************************");

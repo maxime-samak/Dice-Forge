@@ -1,6 +1,6 @@
-package engine;
+package game;
 
-import objects.Dice;
+import game.dice.Dice;
 
 public class DiceRoll {
 

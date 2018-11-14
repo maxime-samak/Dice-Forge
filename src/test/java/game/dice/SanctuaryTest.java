@@ -1,10 +1,6 @@
-package objects;
+package game.dice;
 
-import org.junit.Assert;
 import org.junit.Test;
-
-import java.text.Normalizer;
-import java.util.*;
 
 
 public class SanctuaryTest {
