@@ -3,13 +3,14 @@ package game.dice;
 import org.junit.*;
 
 import java.util.ArrayList;
+import java.util.*;
 
 
 public class SanctuaryTest {
 
     @Test
     public void SanctuaryTest() {
-        // 2 Joueurs
+
         ArrayList<String> poolDeux=new ArrayList<String>();
         poolDeux.add("1 LUNAR");
         poolDeux.add("1 LUNAR");
@@ -32,12 +33,14 @@ public class SanctuaryTest {
         poolHuit.add("3 VICTORY");
         poolHuit.add("3 VICTORY");
 
+        // 2 Joueurs
         Sanctuary s1 = new Sanctuary(2);
         Assert.assertEquals(poolDeux.toString(),s1.getPoolAvailables(2).toString());
         Assert.assertEquals(poolTrois.toString(),s1.getPoolAvailables(3).toString());
         Assert.assertEquals(poolSix.toString(),s1.getPoolAvailables(6).toString());
         Assert.assertEquals(poolHuit.toString(),s1.getPoolAvailables(8).toString());
 
+        System.out.println(s1.getPoolAvailables(4));
 
 
 

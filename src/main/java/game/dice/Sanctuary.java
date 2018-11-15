@@ -1,6 +1,8 @@
 package game.dice;
 
 import java.util.ArrayList;
+import java.util.*;
+import java.util.Collections;
 import java.util.HashMap;
 
 public class Sanctuary {
@@ -20,15 +22,17 @@ public class Sanctuary {
 
         DiceCard[] pool3 = new DiceCard[nbPlayers * 2]; //1solar and 4 gold
 
-        //DiceCard[] pool4 = new DiceCard[4]; //choix
-
-        //DiceCard[] pool5 = new DiceCard[4]; //choix
+        /* *********************** */
+        /* -- DiceCard Complexe -- */
+        /* *********************** */
+        DiceCard[] pool4 = new DiceCard[nbPlayers];
+        //DiceCard[] pool5 = new DiceCard[4];
+        //DiceCard[] pool12 = new DiceCard[4];
 
         DiceCard[] pool6 = new DiceCard[nbPlayers]; //2lunar
 
         DiceCard[] pool8 = new DiceCard[nbPlayers * 2]; //3solar and 3 victory
 
-        //DiceCard[] pool12 = new DiceCard[4]; //choix
 
         // pool2
         for(int i = 0; i < nbPlayers; i++) {
@@ -46,9 +50,21 @@ public class Sanctuary {
         }
         pools.put(3,pool3);
 
-        //pool4 à faire pour v3
+        //pool4
+        /* *********************** */
+        /* -- DiceCard Complexe -- */
+        /* *********************** */
+        int[] random = {0,1,2,3};
+        shuffle(random);
+        for (int i = 0; i < nbPlayers; i++){
+            pool4[i] = randomDiceCard(random[i]);
+        }
+        pools.put(4,pool4);
 
-        //pool5 à faire pour v3
+        //pool5
+        /* *********************** */
+        /* -- DiceCard Complexe -- */
+        /* *********************** */
 
         //pool6
         for(int i = 0; i < nbPlayers; i++) {
@@ -64,7 +80,10 @@ public class Sanctuary {
         }
         pools.put(8,pool8);
 
-        //pool12 à faire pour v3
+        //pool12
+        /* *********************** */
+        /* -- DiceCard Complexe -- */
+        /* *********************** */
     }
 
     /**
@@ -93,6 +112,41 @@ public class Sanctuary {
         }
         return false;
     }
+
+    /* *********************** */
+    /* -- DiceCard Complexe -- */
+    /* *********************** */
+    private DiceCard randomDiceCard(int e){
+        e = e%4;
+        switch (e) {
+            case 0:
+                return new DiceCard(1, Resource.GOLDLUNAR);
+            case 1:
+                return new DiceCard(6, Resource.GOLD);
+            case 2:
+                return new DiceCard(1, Resource.VICTORYSOLAR);
+            case 3:
+                return new DiceCard(1, Resource.GOLDSOLARLUNAR);
+            default:
+                return  new DiceCard(-1, Resource.GOLD);
+        }
+    }
+
+    /* *********************** */
+    /* -- DiceCard Complexe -- */
+    /* *********************** */
+    private int[] shuffle(int[] e){
+        Random r = new Random();
+        for (int x=0; x<500; x++){
+            int i = r.nextInt(4);
+            int j = r.nextInt(4);
+            int tmp = e[i];
+            e[i] = e[j];
+            e[j] = tmp;
+        }
+        return e;
+    }
+
 
     public HashMap<Integer, DiceCard[]> getPools() { return this.pools; }
 }
