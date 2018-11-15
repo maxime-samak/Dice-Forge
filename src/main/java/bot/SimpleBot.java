@@ -1,5 +1,6 @@
 package bot;
 
+import game.Inventory;
 import game.dice.Dice;
 import game.dice.DiceCard;
 import game.dice.Resource;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import static game.dice.BuyDiceCard.setCard;
 
 public class SimpleBot extends AbstractBot {
+
+    private Inventory inventory;
 
     public SimpleBot(Dice d1, Dice d2, String botID) {
         super(d1,d2, botID);
