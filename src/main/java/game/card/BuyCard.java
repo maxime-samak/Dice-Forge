@@ -10,7 +10,6 @@ public class BuyCard {
      * @param islands
      * @param card
      * @param botScore
-     * @param scoreCounter
      * @return
      */
     public static boolean buyCard(Islands islands, NeutralCard card, BotScore botScore){
@@ -20,6 +19,7 @@ public class BuyCard {
                     ScoreCounter.paySolar(botScore, card.getPrice()[0]);
                     ScoreCounter.payLunar(botScore, card.getPrice()[1]);
                     ScoreCounter.addVictory(botScore, card.getVictory());
+                    islands.removeCard(card);
                     return true;
                 }
             }

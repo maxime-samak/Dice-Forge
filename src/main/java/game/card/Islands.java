@@ -37,4 +37,14 @@ public class Islands {
         return islands;
     }
 
+    public void removeCard(AbstractCard card){
+        int key = Math.max(card.getPrice()[0], card.getPrice()[1]);
+        for(int i = 0; i < islands.get(key).length; i++){
+            if (islands.get(key)[i] == card){
+                islands.get(key)[i] = null;
+                break;
+            }
+        }
+    }
+
 }
