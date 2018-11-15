@@ -251,13 +251,13 @@ public class SimpleBot extends AbstractBot {
     private Boolean shopIslandSolar(Islands islands,int i)
     {
         ArrayList<AbstractCard> cards = islands.getIslandAvailables(i);
-        for(int cpt=0;cpt<cards.size()-1;cpt++)
+        for(int cpt=0;cpt<cards.size();cpt++)
         {
             if(cards.get(cpt).getPrice()[0]==i)
             {
                 if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore())==true)
                 {
-                    System.out.println("Le "+this.getBotID()+" a acheté une carte à "+i+" Lunar et à gagner "+cards.get(cpt).getVictory()+" Victory");
+                    System.out.println("Le "+this.getBotID()+" a acheté une carte à "+i+" Solar et à gagner "+cards.get(cpt).getVictory()+" Victory");
                     return true;
                 }
             }
@@ -268,13 +268,13 @@ public class SimpleBot extends AbstractBot {
     private Boolean shopIslandLunar(Islands islands,int i)
     {
         ArrayList<AbstractCard> cards = islands.getIslandAvailables(i);
-        for(int cpt=0;cpt<cards.size()-1;cpt++)
+        for(int cpt=0;cpt<cards.size();cpt++)
         {
             if(cards.get(cpt).getPrice()[1]==i)
             {
                 if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore())==true)
                 {
-                    System.out.println("Le "+this.getBotID()+" a acheté une carte à "+i+" Solar et à gagner "+cards.get(cpt).getVictory()+" Victory");
+                    System.out.println("Le "+this.getBotID()+" a acheté une carte à "+i+" Lunar et à gagner "+cards.get(cpt).getVictory()+" Victory");
                     return true;
                 }
             }
