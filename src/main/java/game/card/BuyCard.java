@@ -5,6 +5,14 @@ import game.ScoreCounter;
 
 public class BuyCard {
 
+    /**
+     *
+     * @param islands
+     * @param card
+     * @param botScore
+     * @param scoreCounter
+     * @return
+     */
     public static boolean buyCard(Islands islands, NeutralCard card, BotScore botScore, ScoreCounter scoreCounter){
         if(card.getPrice()[0] <= botScore.getSolar() && card.getPrice()[1] <= botScore.getLunar()) {
             for (AbstractCard i : islands.getIslands().get(Math.max(card.getPrice()[0],card.getPrice()[1]))) {

@@ -40,6 +40,15 @@ public class SimpleBot extends AbstractBot {
         else { System.out.println(this.getBotID() + "passe son tour. \n"); }
     }
 
+    /**
+     * Le bot va vérifier les faces disponibles dans la pool passée en paramètre, il va ensuite vérifier, pour chaque face qu'il peut acheter,
+     * si il possède un emplacement sur un de ses deux dés où il est intéréssant de placer cette nouvelle face. Si oui il achète la face et la remplace,
+     * si non alors il n'achète rien et la méthode renvois false.
+     *
+     * @param sanctuary
+     * @param pool
+     * @return
+     */
     public boolean diceShopping(Sanctuary sanctuary, int pool) {
         ArrayList<DiceCard> buyable = sanctuary.getPoolAvailables(pool);
 
