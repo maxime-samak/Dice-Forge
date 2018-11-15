@@ -58,7 +58,7 @@ public class Sanctuary {
 
         //pool8
         for(int i = 0; i < nbPlayers; i++) {
-            pool8[i] = new DiceCard(3, Resource.SOLAR);
+            pool8[i] = new DiceCard(2, Resource.SOLAR);
 
             pool8[i + nbPlayers] = new DiceCard(3, Resource.VICTORY);
         }
