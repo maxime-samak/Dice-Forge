@@ -98,11 +98,11 @@
                 <!--argument de la commande java (en plus du nom de la classe et du classpath-->
                 <!-- arguments récupérés dans le main -->
 
-                        <arguments>
+                        <!--<arguments>
                                 <argument>argument1</argument>
-                        </arguments><!-- arguments de configuration système -->
+                        </arguments>-->
 
-
+                        <!-- arguments de configuration système -->
                         <systemProperties>
                                 <systemProperty>
                                     <key>myproperty</key>
