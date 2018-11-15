@@ -19,8 +19,7 @@ public abstract class AbstractBot implements Bot {
         this.botscore = new BotScore();
     }
 
-    public BotScore getBotScore()
-    {
+    public BotScore getBotScore() {
         return botscore;
     }
 
@@ -32,11 +31,6 @@ public abstract class AbstractBot implements Bot {
 
     public Dice getDice2() {
         return dice2;
-    }
-
-    public String rollDices()
-    {
-        return DiceRoll.roll(dice1,dice2);
     }
 
     public void play(Sanctuary sanctuary){}

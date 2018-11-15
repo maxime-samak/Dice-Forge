@@ -55,7 +55,7 @@ public class SimpleBot extends AbstractBot {
                     if(dice == 1){ fd1 = this.getDice1().getFi(face);}
                     else{fd1 = this.getDice2().getFi(face);}
 
-                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()) || (fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() < buy.getValue())) {
+                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()) || (fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() <= buy.getValue())) {
 
                         if(dice == 1) {
                             d = this.getDice1();
@@ -80,4 +80,12 @@ public class SimpleBot extends AbstractBot {
         }
         return false;
     }
+
+    /**public void cheat() {
+        getBotScore().addSolar(9);
+
+        ScoreCounter.updateScore(getBotScore(), "12@GOLD%12@GOLD");
+
+
+    }**/
 }
