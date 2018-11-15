@@ -1,6 +1,7 @@
 import bot.AbstractBot;
 import bot.SimpleBot;
 import game.ScoreCounter;
+import game.card.Islands;
 import game.dice.BuyDiceCard;
 import game.dice.Dice;
 import game.dice.Sanctuary;
@@ -13,6 +14,7 @@ public class Game {
     private final SimpleBot[] botArray;
     private final int nbTurn;
     private final Sanctuary sanctuary;
+    private final Islands islands;
 
     /**
      * Créer et lance un partie avec un nombre de joueur passé en paramètre.
@@ -23,6 +25,7 @@ public class Game {
         this.nbPlayers = nbPlayers;
         this.botArray = new SimpleBot[nbPlayers];
         this.sanctuary = new Sanctuary(nbPlayers);
+        this.islands= new Islands(nbPlayers);
 
         if(nbPlayers == 3) {this.nbTurn = 10;}
         else {this.nbTurn = 9;}
@@ -53,7 +56,9 @@ public class Game {
             //System.out.println("DES DU BOT AVANT");
             //System.out.println(botArray[i].getDice1().toString());
             //System.out.println(botArray[i].getDice2().toString());
-            botArray[i].play(sanctuary);
+            System.out.println("Phase d'action de "+botArray[i].getBotID()+" :");
+            botArray[i].play(sanctuary,islands);
+            System.out.println("____\n");
             BuyDiceCard.resetBotLog();
             //System.out.println("DES DU BOT APRES");
             //System.out.println(botArray[i].getDice1().toString());

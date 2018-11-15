@@ -1,5 +1,6 @@
 package game.card;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Islands {
@@ -17,7 +18,7 @@ public class Islands {
 
         NeutralCard[] island4 = new NeutralCard[nbPLayers * 2];
 
-        NeutralCard[] island5 = new NeutralCard[nbPLayers];
+        NeutralCard[] island10 = new NeutralCard[nbPLayers];
 
         for(int i = 0; i < nbPLayers; i++) {
             island4[i] = new NeutralCard(12, Effect.SIMPLE, 0, 4);
@@ -27,9 +28,9 @@ public class Islands {
         islands.put(4, island4);
 
         for(int i = 0; i < nbPLayers; i++) {
-            island5[i] = new NeutralCard(26, Effect.SIMPLE, 5, 5);
+            island10[i] = new NeutralCard(26, Effect.SIMPLE, 5, 5);
         }
-        islands.put(5, island5);
+        islands.put(10, island10);
 
     }
 
@@ -45,6 +46,18 @@ public class Islands {
                 break;
             }
         }
+    }
+
+    public ArrayList<AbstractCard> getIslandAvailables(int i)
+    {
+        ArrayList<AbstractCard> buyables = new ArrayList<>();
+        AbstractCard[] cards = islands.get(i);
+        for(int j = 0; j < cards.length; j++) {
+            if(cards[j] != null) {
+                buyables.add(cards[j]);
+            }
+        }
+        return buyables;
     }
 
 }

@@ -12,7 +12,7 @@ public class BuyCard {
      * @param botScore
      * @return
      */
-    public static boolean buyCard(Islands islands, NeutralCard card, BotScore botScore){
+    public static boolean buyCard(Islands islands, AbstractCard card, BotScore botScore){
         if(card.getPrice()[0] <= botScore.getSolar() && card.getPrice()[1] <= botScore.getLunar()) {
             for (AbstractCard i : islands.getIslands().get(Math.max(card.getPrice()[0],card.getPrice()[1]))) {
                 if(i != null && i.equals(card)) {
