@@ -14,6 +14,10 @@ public class Game {
     private final int nbTurn;
     private final Sanctuary sanctuary;
 
+    /**
+     * Créer et lance un partie avec un nombre de joueur passé en paramètre.
+     * @param nbPlayers
+     */
     public Game(int nbPlayers) {
 
         this.nbPlayers = nbPlayers;
@@ -33,6 +37,10 @@ public class Game {
         }
     }
 
+    /**
+     * la méthode fais passer les tours, a chaque tour de "jeu" il y'a un tour de chaque joueur,
+     * au tour d'un joueur tout le monde lance les dés et le dis joueur peut aplliquer sa stratégie.
+     */
     public void turn() {
         for (int i = 0; i < nbPlayers; i++){
             System.out.println("Tour de: " + botArray[i].getBotID());
