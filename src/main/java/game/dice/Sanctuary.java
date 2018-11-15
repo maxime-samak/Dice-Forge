@@ -86,6 +86,12 @@ public class Sanctuary {
         /* *********************** */
     }
 
+    /**
+     * La méthode renvoie les faces de dès qui n'ont pas été achetées dans une poule donnée dont le numéro est passé en paramètre (i).
+     *
+     * @param i numéro de la pool
+     * @return
+     */
     public ArrayList<DiceCard> getPoolAvailables(int i) {
         ArrayList<DiceCard> buyables = new ArrayList<DiceCard>();
         DiceCard[] cards = pools.get(i);
