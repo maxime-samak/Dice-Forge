@@ -21,7 +21,7 @@ public class BuyCardTest {
         Islands islands = new Islands(2);
         BotScore bs1 = new BotScore();
 
-        NeutralCard card = new NeutralCard(12, Effect.SIMPLE, 0, 4);
+        Card card = Card.LE_PASSEUR;
         ScoreCounter.updateScore(bs1, "0@SOLAR%4@LUNAR");
         Assert.assertEquals(true, buyCard(islands, card, bs1));
         Assert.assertEquals(0, bs1.getSolar());

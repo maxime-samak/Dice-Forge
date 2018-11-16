@@ -70,4 +70,10 @@ public class ScoreCounter {
     public static void payLunar(BotScore botScore, int price) { botScore.removeLunar(price); }
 
     public static void addVictory(BotScore botScore, int victory) { botScore.addVictory(victory); }
+
+    public static void gainLunar(BotScore botScore, int lunar) { botScore.addLunar(lunar); }
+
+    public static void gainSolar(BotScore botScore, int solar) { botScore.addSolar(solar); }
+
+    public static void gainGold(BotScore botScore, int gold) { botScore.addGold(gold); }
 }

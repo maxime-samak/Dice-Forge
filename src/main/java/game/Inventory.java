@@ -1,19 +1,19 @@
 package game;
 
-import game.card.AbstractCard;
+import game.card.Card;
 
 import java.util.ArrayList;
 
 public class Inventory {
 
 
-    private ArrayList<AbstractCard> cardAssignement;
+    private ArrayList<Card> cardAssignement;
 
-    public Inventory(ArrayList<AbstractCard> cardAssignement) {
+    public Inventory(ArrayList<Card> cardAssignement) {
         this.cardAssignement = cardAssignement;
     }
 
-    public ArrayList<AbstractCard> getCardAssignement() {
+    public ArrayList<Card> getCardAssignement() {
         return cardAssignement;
     }
 
@@ -22,7 +22,7 @@ public class Inventory {
      * @param cardAssignement est une liste des cartes Engrenage détenu par un joueur.
      * @param card est une carte avec un type d'effet Engrenage(effet à chaque tour jusqu'à la fin).
      */
-    protected void setCardAssignement(ArrayList<AbstractCard> cardAssignement, AbstractCard card) {
+    protected void setCardAssignement(ArrayList<Card> cardAssignement, Card card) {
         cardAssignement.add(card);
     }
 }

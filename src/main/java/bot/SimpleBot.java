@@ -1,8 +1,8 @@
 package bot;
 
 import game.Inventory;
-import game.card.AbstractCard;
 import game.card.BuyCard;
+import game.card.Card;
 import game.card.Islands;
 import game.dice.Dice;
 import game.dice.DiceCard;
@@ -232,7 +232,7 @@ public class SimpleBot extends AbstractBot {
 
     private Boolean shopIsland(Islands islands,int i)
     {
-        AbstractCard[] cards = islands.getIslands().get(i);
+        Card[] cards = islands.getIslands().get(i);
         for(int cpt=0;cpt<cards.length;cpt++)
         {
             if(BuyCard.buyCard(islands,cards[cpt],this.getBotScore()))
@@ -245,7 +245,7 @@ public class SimpleBot extends AbstractBot {
 
     private Boolean shopIslandSolar(Islands islands,int i)
     {
-        ArrayList<AbstractCard> cards = islands.getIslandAvailables(i);
+        ArrayList<Card> cards = islands.getIslandAvailables(i);
         for(int cpt=0;cpt<cards.size();cpt++)
         {
             if(cards.get(cpt).getPrice()[0]==i)
@@ -262,7 +262,7 @@ public class SimpleBot extends AbstractBot {
 
     private Boolean shopIslandLunar(Islands islands,int i)
     {
-        ArrayList<AbstractCard> cards = islands.getIslandAvailables(i);
+        ArrayList<Card> cards = islands.getIslandAvailables(i);
         for(int cpt=0;cpt<cards.size();cpt++)
         {
             if(cards.get(cpt).getPrice()[1]==i)

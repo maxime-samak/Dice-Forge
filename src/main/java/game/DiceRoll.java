@@ -29,4 +29,17 @@ public class DiceRoll {
         //output complexe = x@nom%y@nom@z@nom
         return output;
     }
+
+    public static String roll(Dice d1) {
+        int rollD1 = (int) (Math.random() * 6) + 1;
+
+        d1.showFace(rollD1); // print
+
+        String output = d1.getFi(rollD1).getValue() + "@" + d1.getFi(rollD1).getResource();
+        //output = x@nom
+        return output;
+    }
+
+
+
 }
