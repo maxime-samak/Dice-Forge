@@ -2,7 +2,6 @@ package game.dice;
 
 import java.util.ArrayList;
 import java.util.*;
-import java.util.Collections;
 import java.util.HashMap;
 
 public class Sanctuary {
@@ -18,6 +17,8 @@ public class Sanctuary {
 
     public void initPool() {
 
+        int[] random = {0,1,2,3};
+
         DiceCard[] pool2 = new DiceCard[nbPlayers * 2]; //1lunar and 3gold
 
         DiceCard[] pool3 = new DiceCard[nbPlayers * 2]; //1solar and 4 gold
@@ -25,14 +26,15 @@ public class Sanctuary {
         /* *********************** */
         /* -- DiceCard Complexe -- */
         /* *********************** */
-        DiceCard[] pool4 = new DiceCard[nbPlayers];
-        //DiceCard[] pool5 = new DiceCard[4];
-        //DiceCard[] pool12 = new DiceCard[4];
+        DiceCard[] pool4 = new DiceCard[nbPlayers]; //Complexe
+
+        DiceCard[] pool5 = new DiceCard[nbPlayers]; //Complexe
 
         DiceCard[] pool6 = new DiceCard[nbPlayers]; //2lunar
 
         DiceCard[] pool8 = new DiceCard[nbPlayers * 2]; //3solar and 3 victory
 
+        DiceCard[] pool12 = new DiceCard[nbPlayers]; //Complexe
 
         // pool2
         for(int i = 0; i < nbPlayers; i++) {
@@ -54,10 +56,10 @@ public class Sanctuary {
         /* *********************** */
         /* -- DiceCard Complexe -- */
         /* *********************** */
-        int[] random = {0,1,2,3};
+
         shuffle(random);
         for (int i = 0; i < nbPlayers; i++){
-            pool4[i] = randomDiceCard(random[i]);
+            pool4[i] = randomPool4(random[i]);
         }
         pools.put(4,pool4);
 
@@ -65,6 +67,10 @@ public class Sanctuary {
         /* *********************** */
         /* -- DiceCard Complexe -- */
         /* *********************** */
+        for (int i = 0; i < nbPlayers; i++){
+            pool5[i] = new DiceCard(new int[]{0, 3, 2}, new Resource[]{Resource.CHOICE, Resource.VICTORY, Resource.GOLD});
+        }
+        pools.put(5, pool5);
 
         //pool6
         for(int i = 0; i < nbPlayers; i++) {
@@ -84,10 +90,15 @@ public class Sanctuary {
         /* *********************** */
         /* -- DiceCard Complexe -- */
         /* *********************** */
+        shuffle(random);
+        for (int i = 0; i < nbPlayers; i++){
+            pool12[i] = randomPool12(random[i]);
+        }
+        pools.put(12,pool12);
     }
 
     /**
-     * La méthode renvoie les faces de dès qui n'ont pas été achetées dans une poule donnée dont le numéro est passé en paramètre (i).
+     * La méthode renvoie les faces de dès qui n'ont pas été achetées dans une pool donnée dont le numéro est passé en paramètre (i).
      *
      * @param i numéro de la pool
      * @return
@@ -116,17 +127,33 @@ public class Sanctuary {
     /* *********************** */
     /* -- DiceCard Complexe -- */
     /* *********************** */
-    private DiceCard randomDiceCard(int e){
-        e = e%4;
+    private DiceCard randomPool4(int e){
+        e = e % 4;
         switch (e) {
             case 0:
-                return new DiceCard(1, Resource.GOLDLUNAR);
+                return new DiceCard(new int[]{0, 2, 1} , new Resource[]{Resource.PLUS, Resource.GOLD, Resource.LUNAR});
             case 1:
                 return new DiceCard(6, Resource.GOLD);
             case 2:
-                return new DiceCard(1, Resource.VICTORYSOLAR);
+                return new DiceCard(new int[]{0, 1, 1}, new Resource[]{Resource.PLUS, Resource.VICTORY, Resource.SOLAR});
             case 3:
-                return new DiceCard(1, Resource.GOLDSOLARLUNAR);
+                return new DiceCard(new int[]{0, 1, 1, 1}, new Resource[]{Resource.CHOICE, Resource.GOLD, Resource.SOLAR, Resource.LUNAR});
+            default:
+                return  new DiceCard(-1, Resource.GOLD);
+        }
+    }
+
+    private DiceCard randomPool12(int e){
+        e = e % 4;
+        switch (e) {
+            case 0:
+                return new DiceCard(4, Resource.VICTORY);
+            case 1:
+                return new DiceCard(new int[]{0, 2 ,2}, new  Resource[]{Resource.PLUS, Resource.VICTORY, Resource.LUNAR});
+            case 2:
+                return new DiceCard(new int[]{0, 2, 2, 2}, new Resource[]{Resource.CHOICE, Resource.GOLD, Resource.SOLAR, Resource.LUNAR});
+            case 3:
+                return new DiceCard(new int[]{0, 1, 1, 1, 1}, new Resource[]{Resource.PLUS, Resource.VICTORY, Resource.GOLD, Resource.SOLAR, Resource.LUNAR});
             default:
                 return  new DiceCard(-1, Resource.GOLD);
         }
@@ -137,7 +164,7 @@ public class Sanctuary {
     /* *********************** */
     private int[] shuffle(int[] e){
         Random r = new Random();
-        for (int x=0; x<500; x++){
+        for (int x = 0; x < 500; x++){
             int i = r.nextInt(4);
             int j = r.nextInt(4);
             int tmp = e[i];
@@ -146,7 +173,6 @@ public class Sanctuary {
         }
         return e;
     }
-
 
     public HashMap<Integer, DiceCard[]> getPools() { return this.pools; }
 }

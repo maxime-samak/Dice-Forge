@@ -40,10 +40,6 @@ public class SanctuaryTest {
         Assert.assertEquals(poolSix.toString(),s1.getPoolAvailables(6).toString());
         Assert.assertEquals(poolHuit.toString(),s1.getPoolAvailables(8).toString());
 
-        System.out.println(s1.getPoolAvailables(4));
-
-
-
     }
 
 }

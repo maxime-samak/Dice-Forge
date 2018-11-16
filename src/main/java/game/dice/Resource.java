@@ -20,19 +20,14 @@ public enum Resource {
     /* *********************** */
     /* -- DiceCard Complexe -- */
     /* *********************** */
-    GOLDLUNAR{
+    PLUS{
         @Override
-        public String resourceName() { return "PLUSGOLDLUNAR"; }
+        public String resourceName() { return "PLUS"; }
     },
-    VICTORYSOLAR{
+    CHOICE{
         @Override
-        public String resourceName() { return "PLUSVICTORYSOLAR"; }
-    },
-    GOLDSOLARLUNAR{
-        @Override
-        public String resourceName() { return "GOLDSOLARLUNAR"; }
+        public String resourceName() { return "CHOICE"; }
     };
-
 
     public abstract String resourceName();
 

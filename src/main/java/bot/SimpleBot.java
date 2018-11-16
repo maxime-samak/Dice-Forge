@@ -19,37 +19,32 @@ public class SimpleBot extends AbstractBot {
         super(d1,d2, botID);
     }
 
-    public void play(Sanctuary sanctuary,Islands islands)
-    {
+    public void play(Sanctuary sanctuary,Islands islands) {
         this.diceShopping(sanctuary);
         this.cardShopping(islands);
     }
 
     public void diceShopping(Sanctuary sanctuary) {
-        int nbBuy=0;
+        int nbBuy = 0;
         int gold = this.getBotScore().getGold();
-        /*if(goldAvailable >= 12)
-            if(shopPoolI(12,sanctuary))
-                return true;*/
-        if(gold >= 8 && nbBuy<1) { if(diceShopping(sanctuary, 8))nbBuy++; }
 
-        if(gold >= 6 && nbBuy<1) { if(diceShopping(sanctuary,6))nbBuy++; }
-        /*if(goldAvailable >= 5)
-        {
-            if(shopPoolI(5,sanctuary))
-                return true;
-        }
-        if(goldAvailable >= 4)
-        {
-            if(shopPoolI(4,sanctuary))
-                return true;
-         }*/
+        //if(gold >= 12 && nbBuy < 1) { if(diceShopping(sanctuary,12)) nbBuy++; }
+
+        if(gold >= 8 && nbBuy < 1) { if(diceShopping(sanctuary, 8)) nbBuy++; }
+
+        if(gold >= 6 && nbBuy < 1) { if(diceShopping(sanctuary,6)) nbBuy++; }
+
+        if(gold >= 5 && nbBuy < 1) { if(diceShopping(sanctuary,5)) nbBuy++; }
+
+        if(gold >= 4 && nbBuy < 1) { if(diceShopping(sanctuary,4)) nbBuy++; }
+
         if(gold >= 3 && nbBuy<1) { if(diceShopping(sanctuary, 3))nbBuy++; }
 
         if(gold >= 2 && nbBuy<1) { if(diceShopping(sanctuary, 2 ))nbBuy++; }
 
-        if(nbBuy==0) { System.out.println(this.getBotID() + " n'achète pas de face."); }
-        if(nbBuy>0) { System.out.println(this.getBotID() + " n'achète plus de face."); }
+        if(nbBuy == 0) { System.out.println(this.getBotID() + " n'achète pas de face."); }
+
+        if(nbBuy > 0) { System.out.println(this.getBotID() + " n'achète plus de face."); }
     }
 
     /**
@@ -65,10 +60,10 @@ public class SimpleBot extends AbstractBot {
         ArrayList<DiceCard> buyable = sanctuary.getPoolAvailables(pool);
         buyable = this.favoriseVictory(buyable);
         Dice d = null;
-        int dNum =0;
+        int dNum = 0;
         int f = 0;
-        DiceCard oldFace=null;
-        for (int i = 0; i <buyable.size(); i++) {
+        DiceCard oldFace = null;
+        for (int i = 0; i < buyable.size(); i++) {
 
             DiceCard buy = buyable.get(i);
 
@@ -77,22 +72,22 @@ public class SimpleBot extends AbstractBot {
                     DiceCard fd1;
                     fd1 = this.getDice1().getFi(face);
 
-                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()) || (fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() <= buy.getValue())) {
+                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()) || fd1.getResource() == Resource.GOLD.resourceName()) {
 
                         d = this.getDice1();
-                        dNum=1;
+                        dNum = 1;
                         f = face;
-                        oldFace=d.getFi(f);
+                        oldFace = d.getFi(f);
                         break;
 
                     }
                     fd1 = this.getDice2().getFi(face);
-                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()) || (fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() <= buy.getValue())) {
+                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()) || fd1.getResource() == Resource.GOLD.resourceName()) {
 
                         d = this.getDice2();
-                        dNum=2;
+                        dNum = 2;
                         f = face;
-                        oldFace=d.getFi(f);
+                        oldFace = d.getFi(f);
                         break;
                     }
                 }
@@ -102,7 +97,7 @@ public class SimpleBot extends AbstractBot {
             }
             if(d != null) {
                 if (setCard(sanctuary,pool,buy,d,f,this.getBotScore())){
-                    System.out.println("Le "+this.getBotID()+" a acheter la face "+buy.toString()+" et l'a placé sur le dé "+dNum+" à la face "+f+" ("+oldFace+")");
+                    System.out.println("Le "+this.getBotID()+" a acheté la face "+buy.toString()+" et l'a placé sur le dé "+dNum+" à la face "+f+" ("+oldFace+")");
                     return true; }
             }
         }
@@ -112,7 +107,7 @@ public class SimpleBot extends AbstractBot {
 
     private ArrayList<DiceCard> favoriseVictory(ArrayList<DiceCard> buyable)
     {
-        int i=0;
+        int i = 0;
         ArrayList<Integer> listVictory= new ArrayList<>();
         ArrayList<DiceCard> newBuy= new ArrayList<>();
         for(int cpt=0;cpt<buyable.size();cpt++)

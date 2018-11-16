@@ -67,6 +67,12 @@ public class Game {
     }
 
     public void begin() {
+        System.out.println("\nEtat initial des scores:\n");
+        for(int i = 0; i < nbPlayers; i++) {
+            System.out.println(botArray[i].getBotID() + ": " + botArray[i].getBotScore().getInfos());
+        }
+        System.out.println();
+
         for(int i = 0; i < nbTurn; i++) {
             System.out.println("**** Tour: " + (i + 1) + " ****");
             this.turn();
@@ -86,7 +92,7 @@ public class Game {
             else {
 
             }
-            finalScore += bot.getBotID() + ": " + bot.getBotScore().getVictory() + "\n";
+            finalScore += bot.getBotID() + ": " + bot.getBotScore().getInfos() + "\n";
         }
         System.out.println();
         System.out.println("*************************************");

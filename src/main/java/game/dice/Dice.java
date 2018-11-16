@@ -53,22 +53,22 @@ public class Dice {
     public void showFace(int i) {
         switch(i){
             case 1:
-                System.out.println(F1.getValue() + " " + F1.getResource());
+                System.out.println(F1);
                 break;
             case 2:
-                System.out.println(F2.getValue() + " " + F2.getResource());
+                System.out.println(F2);
                 break;
             case 3:
-                System.out.println(F3.getValue() + " " + F3.getResource());
+                System.out.println(F3);
                 break;
             case 4:
-                System.out.println(F4.getValue() + " " + F4.getResource());
+                System.out.println(F4);
                 break;
             case 5:
-                System.out.println(F5.getValue() + " " + F5.getResource());
+                System.out.println(F5);
                 break;
             case 6:
-                System.out.println(F6.getValue() + " " + F6.getResource());
+                System.out.println(F6);
                 break;
             default:
                 System.out.println(">>>Problème<<<");
