@@ -28,7 +28,7 @@ public class SimpleBot extends AbstractBot {
         int nbBuy = 0;
         int gold = this.getBotScore().getGold();
 
-        //if(gold >= 12 && nbBuy < 1) { if(diceShopping(sanctuary,12)) nbBuy++; }
+        if(gold >= 12 && nbBuy < 1) { if(diceShopping(sanctuary,12)) nbBuy++; }
 
         if(gold >= 8 && nbBuy < 1) { if(diceShopping(sanctuary, 8)) nbBuy++; }
 
@@ -38,9 +38,9 @@ public class SimpleBot extends AbstractBot {
 
         if(gold >= 4 && nbBuy < 1) { if(diceShopping(sanctuary,4)) nbBuy++; }
 
-        if(gold >= 3 && nbBuy<1) { if(diceShopping(sanctuary, 3))nbBuy++; }
+        if(gold >= 3 && nbBuy < 1) { if(diceShopping(sanctuary, 3)) nbBuy++; }
 
-        if(gold >= 2 && nbBuy<1) { if(diceShopping(sanctuary, 2 ))nbBuy++; }
+        if(gold >= 2 && nbBuy < 1) { if(diceShopping(sanctuary, 2 )) nbBuy++; }
 
         if(nbBuy == 0) { System.out.println(this.getBotID() + " n'achète pas de face."); }
 
@@ -252,7 +252,7 @@ public class SimpleBot extends AbstractBot {
             {
                 if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore())==true)
                 {
-                    System.out.println("Le "+this.getBotID()+" a acheté une carte à "+i+" Solar et à gagner "+cards.get(cpt).getVictory()+" Victory");
+                    System.out.println("Le "+this.getBotID()+" a acheté une carte à "+i+" Solar et a gagné "+cards.get(cpt).getVictory()+" Victory");
                     return true;
                 }
             }
