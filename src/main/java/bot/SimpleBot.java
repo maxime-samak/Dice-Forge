@@ -72,7 +72,7 @@ public class SimpleBot extends AbstractBot {
                     DiceCard fd1;
                     fd1 = this.getDice1().getFi(face);
 
-                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()) || fd1.getResource() == Resource.GOLD.resourceName()) {
+                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()) || fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() == 1) {
 
                         d = this.getDice1();
                         dNum = 1;
@@ -82,7 +82,7 @@ public class SimpleBot extends AbstractBot {
 
                     }
                     fd1 = this.getDice2().getFi(face);
-                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()) || fd1.getResource() == Resource.GOLD.resourceName()) {
+                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()) || fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() == 1) {
 
                         d = this.getDice2();
                         dNum = 2;
