@@ -35,17 +35,18 @@ Groupe DFG
 
 ### [Livraison 3](https://github.com/SamakM/Dice-Forge/milestone/3)
 #### Objectif de livraison
-- [ ] Ajout d'achat de cartes (les cartes n'ont aucun effet elles représentent simplement un gain de points).
-- [ ] Ajout des cartes qui réalise une action en plus jusqu'à la fin et pour un seul tour.
-- [ ] Ajout des faces de dé ayant un effet "complexe".
-- [ ] Ajout de nouveaux tests.
-- [ ] Optimisation et améliorations du code.
+- [X] Ajout d'achat de cartes (les cartes n'ont aucun effet elles représentent simplement un gain de points).
+- [ ] ~~Ajout des cartes qui réalise une action en plus jusqu'à la fin et pour un seul tour.~~
+- [X] Ajout des faces de dé ayant un effet "complexe".
+- [X] Ajout de nouveaux tests.
+- [X] Optimisation et améliorations du code.
 
 #### Date prévu
 *16/11/2018*
 
 ### [Livraison 4](https://github.com/SamakM/Dice-Forge/milestone/4)
 #### Objectif de livraison
+- [ ] Ajout des cartes qui réalise une action en plus jusqu'à la fin et pour un seul tour.
 - [ ] Finalisation des dés(ajout des deux dernières face de dé apporté par les effets de carte).
 - [ ] Ajout de tous les effets de carte(gain de point, changement de face de dé).
 - [ ] Optimisation du bot(stratégie carte, face de dé).
@@ -53,7 +54,7 @@ Groupe DFG
 - [ ] Optimisation et améliorations du code.
 
 #### Date prévu
-*23/11/2018*
+*30/11/2018*
 
 ### [Livraison 5](https://github.com/SamakM/Dice-Forge/milestone/5)
 #### Objectif de livraison
@@ -63,7 +64,7 @@ Groupe DFG
 - [ ] Optimisation et améliorations du code.
 
 #### Date prévu
-*30/11/2018*
+*07/12/2018*
 
 ### [Livraison 6](https://github.com/SamakM/Dice-Forge/milestone/6)
 #### Objectif de livraison
@@ -74,7 +75,7 @@ Groupe DFG
 - [ ] Ajout des ilots et des pions.
 
 #### Date prévu
-*07/12/2018*
+*14/12/2018*
 
 ## Note
 
@@ -85,10 +86,10 @@ Groupe DFG
 ## Diagrammes UML
 
 * Livraison 1:
-  ![FullUML](src/Javadoc/UML/iteration1/UML-V1.png)
-  ![FullUML](src/Javadoc/UML/iteration2/Sequence_Partie_Iteration_1_DFG.jpg)
+  ![DiagrammeUMLL](src/Javadoc/UML/iteration1/UML-V1.png)
+  ![DigrammeSequence](src/Javadoc/UML/iteration1/Sequence_Partie_Iteration_1_DFG.jpg)
 * Livraison 2:
-  ![FullUML](src/Javadoc/UML/iteration2/Sequence_Partie_Iteration_2_DFG.jpg)
+  ![DiagrammeUML](src/Javadoc/UML/iteration2/Sequence_Partie_Iteration_2_DFG.jpg)
 * Livraison 3:
 * Livraison 4:
 * Livraison 5:
