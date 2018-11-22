@@ -34,6 +34,9 @@ public class CardTest {
         ScoreCounter sc = new ScoreCounter();
         Dice d1 = new Dice();
         d1.solarDiceInit();
+        Dice d2 = new Dice();
+        d2.lunarDiceInit();
+        SimpleBot b = new SimpleBot(d1, d2, "Bot1");
         //c4.doEffect(d1, bs, sc);
 
         Card c5 = Card.L_ANCIEN;
@@ -41,7 +44,7 @@ public class CardTest {
         //c5.doEffect(d1, bs, sc); //bug à réparer
 
         Card c6 = Card.LES_AILES_DE_LA_GARDIENNES;
-        c6.doEffect(d1, bs, sc);
+        c6.doEffect(d1, bs, sc, b);
 
 
 

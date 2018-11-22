@@ -277,4 +277,19 @@ public class SimpleBot extends AbstractBot {
         return false;
     }
 
-}
+    public String strategyCard(Card card){
+        switch (card) {
+            case L_ANCIEN:
+                return "Yes";
+            case LES_AILES_DE_LA_GARDIENNES:
+                if (this.getBotScore().getSolar() > this.getBotScore().getLunar()) {
+                    return "Lunar";
+                } else {
+                    return "Solar";
+                }
+                default: return "Unknown";
+        }
+    }
+
+
+        }

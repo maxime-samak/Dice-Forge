@@ -1,11 +1,10 @@
 package game.card;
 
+import bot.SimpleBot;
 import game.BotScore;
 import game.DiceRoll;
 import game.ScoreCounter;
 import game.dice.Dice;
-
-import java.util.Scanner;
 
 public enum Card {
 
@@ -28,7 +27,8 @@ public enum Card {
         this.typeReinforcement = typeReinforcement;
     }
 
-    protected void doEffect(Dice d1, BotScore bs, ScoreCounter sc) {
+    protected void doEffect(Dice d1, BotScore bs, ScoreCounter sc, SimpleBot b) {
+        String anwers = "";
         switch (this) {
             case LES_SABOTS_D_ARGENT: // lui demander le dé ?
                 System.out.println("Biche");
@@ -42,16 +42,9 @@ public enum Card {
                 if (bs.getGold() < 3){
                     System.out.println("Vous n'avez pas assez d'or pour effectuer l'effet de la carte L'ancien");
                 }
-                else{// bug à réparer
-                    System.out.println(L_ANCIEN + "\n Voulez-vous effectuer cette action ?y/n \n");
-                    Scanner scan = new Scanner(System.in);
-                    String res = scan.nextLine();
-
-                    while(res != "y" || res != "n") {
-                        System.out.println("Saisie incorecte. y/n  ?");
-                        res = scan.nextLine();
-                    }
-                    if (res == "y") {
+                else {
+                    anwers = b.strategyCard(L_ANCIEN);
+                    if (anwers == "Yes") {
                         sc.payGold(bs, 3);
                         sc.addVictory(bs, 4);
                     }
@@ -61,9 +54,9 @@ public enum Card {
             case LES_AILES_DE_LA_GARDIENNES:
                 System.out.println("Gardienne");
                 sc.gainGold(bs, 1);
-                //implémentater : soit un solar ou un lunar
-                sc.gainLunar(bs, 1);
-                sc.gainSolar(bs, 1);
+                anwers = b.strategyCard(LES_AILES_DE_LA_GARDIENNES);
+                if(anwers == "Lunar"){ sc.gainLunar(bs, 1);}
+                else{ sc.gainSolar(bs, 1);}
                 break;
 
             default: {
