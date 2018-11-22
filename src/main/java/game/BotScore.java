@@ -1,5 +1,8 @@
 package game;
 
+/**
+ * Classe BotScore permet au bot de connaitre ses ressources et également de déterminer le gagnant.
+ */
 public class BotScore {
 
     private int gold = 0;

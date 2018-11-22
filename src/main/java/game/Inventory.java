@@ -4,6 +4,9 @@ import game.card.Card;
 
 import java.util.ArrayList;
 
+/**
+ *
+ */
 public class Inventory {
 
 

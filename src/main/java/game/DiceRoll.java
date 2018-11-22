@@ -2,6 +2,9 @@ package game;
 
 import game.dice.Dice;
 
+/**
+ * Classe DiceRoll représente un lancé de dés pseudo-aléatoire
+ */
 public class DiceRoll {
 
     public static String roll(Dice d1, Dice d2) {

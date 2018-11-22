@@ -8,6 +8,9 @@ import game.dice.Sanctuary;
 
 import static game.DiceRoll.roll;
 
+/**
+ * Classe Game représente celui qui gère les tours de jeux, l'affichage du vainqueur, le lancé de dés
+ */
 public class Game {
 
     private final int nbPlayers;
