@@ -11,6 +11,9 @@ import game.dice.Sanctuary;
 import java.util.ArrayList;
 import static game.dice.BuyDiceCard.setCard;
 
+/**
+ * Classe SimpleBot représente notre stratégie initiale
+ */
 public class SimpleBot extends AbstractBot {
 
     private Inventory inventory;

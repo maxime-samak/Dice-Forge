@@ -5,6 +5,9 @@ import game.DiceRoll;
 import game.dice.Dice;
 import game.dice.Sanctuary;
 
+/**
+ * Classe abstraite AbstractBot implément l'interface Bot
+ */
 public abstract class AbstractBot implements Bot {
 
     private final String botID;
