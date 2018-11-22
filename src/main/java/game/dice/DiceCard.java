@@ -69,3 +69,7 @@ public class DiceCard {
         return value[0] + " " + resource[0].resourceName();
     }
 }
+
+
+
+

@@ -23,10 +23,10 @@ public class BuyCardTest {
 
         Card card = Card.LE_PASSEUR;
         ScoreCounter.updateScore(bs1, "0@SOLAR%4@LUNAR");
-        Assert.assertEquals(true, buyCard(islands, card, bs1));
+        Assert.assertEquals(true, buyCard(islands, card, bs1,false));
         Assert.assertEquals(0, bs1.getSolar());
         Assert.assertEquals(12, bs1.getVictory());
 
-        Assert.assertEquals(false, buyCard(islands, card, bs1));
+        Assert.assertEquals(false, buyCard(islands, card, bs1,false));
     }
 }
