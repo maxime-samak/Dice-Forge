@@ -4,7 +4,9 @@ import game.dice.Dice;
 import game.dice.DiceCard;
 
 import java.util.Random;
-
+/**
+ * Classe DiceRoll représente un lancé de dés pseudo-aléatoire
+ */
 public class DiceRoll {
 
     public static DiceCard[] roll(Dice d1, Dice d2) {
