@@ -4,6 +4,8 @@ import bot.SimpleBot;
 import game.BotScore;
 import game.ScoreCounter;
 import game.dice.Dice;
+import game.dice.DiceCard;
+import game.dice.Resource;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -40,7 +42,7 @@ public class CardTest {
         //c4.doEffect(d1, bs, sc);
 
         Card c5 = Card.L_ANCIEN;
-        sc.updateScore(bs, "3@GOLD%0@VICTORY");
+        sc.updateScore(bs, new DiceCard[]{new DiceCard(2, Resource.GOLD), new DiceCard(1, Resource.GOLD)});
         //c5.doEffect(d1, bs, sc); //bug à réparer
 
         Card c6 = Card.LES_AILES_DE_LA_GARDIENNES;

@@ -1,6 +1,8 @@
 package game;
 
 import game.dice.Dice;
+import game.dice.DiceCard;
+import game.dice.Resource;
 import org.junit.Assert;
 import org.junit.Test;
 import static game.DiceRoll.roll;
@@ -13,17 +15,17 @@ public class DiceRollTest {
         d1.solarDiceInit();
         Dice d2 = new Dice();
         d2.lunarDiceInit();
-        String roll = roll(d1,d2);
-        final String[] token = roll.split("%");
+        DiceCard[] roll = roll(d1,d2);
+
+        DiceCard roll0 = roll[0];
+        DiceCard roll1 = roll[1];
 
 
-        Assert.assertTrue("Roll Control pt1",
-                (token[0].equals("1@SOLAR"))||
-                        (token[0].equals("1@GOLD")));
-        Assert.assertTrue("Roll Control pt2",
-                (token[1].equals("1@LUNAR"))||
-                        (token[1].equals("1@GOLD"))||
-                        (token[1].equals("2@VICTORY")));
+        Assert.assertTrue((roll[0].equals(new DiceCard(1, Resource.SOLAR)))||
+                        (roll[0].equals(new DiceCard(1, Resource.GOLD))));
+        Assert.assertTrue((roll[1].equals(new DiceCard(1, Resource.LUNAR)))||
+                        (roll[1].equals(new DiceCard(1, Resource.GOLD)))||
+                        (roll[1].equals(new DiceCard(2, Resource.VICTORY))));
 
     }
 }

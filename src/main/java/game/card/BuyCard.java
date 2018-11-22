@@ -2,6 +2,7 @@ package game.card;
 
 import game.BotScore;
 import game.ScoreCounter;
+import game.dice.Resource;
 
 public class BuyCard {
 
@@ -25,7 +26,7 @@ public class BuyCard {
                         ScoreCounter.paySolar(botScore, card.getPrice()[0]);
                     }
                     ScoreCounter.payLunar(botScore, card.getPrice()[1]);
-                    ScoreCounter.addVictory(botScore, card.getVictory());
+                    ScoreCounter.addResource(botScore, Resource.VICTORY, card.getVictory());
                     islands.removeCard(card);
                     if(card.isTypeReinforcement()){
 

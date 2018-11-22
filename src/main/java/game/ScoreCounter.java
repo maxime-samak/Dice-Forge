@@ -1,65 +1,58 @@
 package game;
 
+import game.dice.DiceCard;
 import game.dice.Resource;
 
 public class ScoreCounter {
 
-    public static void updateScore(BotScore botscore, String roll) {
-        String[] scoreToken = roll.split("%");
-        String[] d1Token = scoreToken[0].split("@");
-        String[] d2Token = scoreToken[1].split("@");
+    public static void updateScore(BotScore botscore, DiceCard[] roll) {
 
-        evalueToken(botscore, d1Token);
-        evalueToken(botscore, d2Token);
+        DiceCard rollD1 = roll[0];
+        DiceCard rollD2 = roll[1];
+
+        evalueRoll(botscore,rollD1);
+        evalueRoll(botscore, rollD2);
     }
 
-    private static void evalueToken(BotScore botscore, String[] token) {
-        int value = Integer.parseInt(token[0]);
-        String resource = token[1];
-        if(resource == Resource.PLUS.resourceName()) {
-            for(int i = 3; i < token.length; i += 2) {
+    public static void updateScore(BotScore botscore, DiceCard roll) {
+        evalueRoll(botscore,roll);
+    }
 
-                if (token[i].equals(Resource.SOLAR.resourceName())) {
-                    botscore.addSolar(Integer.parseInt(token[i - 1]));
-                }
-                else if (token[i].equals(Resource.LUNAR.resourceName())) {
-                    botscore.addLunar(Integer.parseInt(token[i - 1]));
-                }
-                else if (token[i].equals(Resource.VICTORY.resourceName())) {
-                    botscore.addVictory(Integer.parseInt(token[i - 1]));
-                }
-                else {
-                    botscore.addGold(Integer.parseInt(token[i - 1]));
+    private static void evalueRoll(BotScore botscore, DiceCard roll) {
+        int[] value = roll.getValueArray();
+        Resource[] resource = roll.getResourceArray();
+
+        if(resource.length == 1) {
+            addResource(botscore, resource[0], value[0]);
+        }
+
+        else if(resource.length > 1) {
+            if(resource[0] == Resource.CHOICE) {
+                addResource(botscore, resource[1], value[1]);
+            }
+
+            else if(resource[0] == Resource.PLUS) {
+                for(int i = 1; i < resource.length; i++) {
+                    addResource(botscore, resource[i], value[i]);
                 }
             }
         }
+    }
 
-        if(resource == Resource.CHOICE.resourceName()) {
-            if (token[3].equals(Resource.SOLAR.resourceName())) {
-                botscore.addSolar(Integer.parseInt(token[2]));
-            }
-            else if (token[3].equals(Resource.LUNAR.resourceName())) {
-                botscore.addLunar(Integer.parseInt(token[2]));
-            }
-            else if (token[3].equals(Resource.VICTORY.resourceName())) {
-                botscore.addVictory(Integer.parseInt(token[2]));
-            }
-            else {
-                botscore.addGold(Integer.parseInt(token[2]));
-            }
-        }
-
-        else{
-
-            if (resource.equals(Resource.SOLAR.resourceName())) {
-                botscore.addSolar(value);
-            } else if (resource.equals(Resource.LUNAR.resourceName())) {
-                botscore.addLunar(value);
-            } else if (resource.equals(Resource.VICTORY.resourceName())) {
-                botscore.addVictory(value);
-            } else {
+    public static void addResource(BotScore botscore, Resource resource, int value) {
+        switch(resource) {
+            case GOLD:
                 botscore.addGold(value);
-            }
+                break;
+            case LUNAR:
+                botscore.addLunar(value);
+                break;
+            case SOLAR:
+                botscore.addSolar(value);
+                break;
+            case VICTORY:
+                botscore.addVictory(value);
+                break;
         }
     }
 
@@ -69,11 +62,11 @@ public class ScoreCounter {
 
     public static void payLunar(BotScore botScore, int price) { botScore.removeLunar(price); }
 
-    public static void addVictory(BotScore botScore, int victory) { botScore.addVictory(victory); }
+    //public static void addVictory(BotScore botScore, int victory) { botScore.addVictory(victory); }
 
-    public static void gainLunar(BotScore botScore, int lunar) { botScore.addLunar(lunar); }
+    //public static void gainLunar(BotScore botScore, int lunar) { botScore.addLunar(lunar); }
 
-    public static void gainSolar(BotScore botScore, int solar) { botScore.addSolar(solar); }
+    //public static void gainSolar(BotScore botScore, int solar) { botScore.addSolar(solar); }
 
-    public static void gainGold(BotScore botScore, int gold) { botScore.addGold(gold); }
+    //public static void gainGold(BotScore botScore, int gold) { botScore.addGold(gold); }
 }

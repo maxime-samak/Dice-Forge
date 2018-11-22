@@ -5,6 +5,8 @@ import game.BotScore;
 import game.DiceRoll;
 import game.ScoreCounter;
 import game.dice.Dice;
+import game.dice.DiceCard;
+import game.dice.Resource;
 
 public enum Card {
 
@@ -32,8 +34,7 @@ public enum Card {
         switch (this) {
             case LES_SABOTS_D_ARGENT: // lui demander le dé ?
                 System.out.println("Biche");
-                String roll = DiceRoll.roll(d1);
-                roll += "%0@LUNAR";
+                DiceCard roll = DiceRoll.roll(d1);
                 sc.updateScore(bs, roll);
                 break;
 
@@ -46,17 +47,17 @@ public enum Card {
                     anwers = b.strategyCard(L_ANCIEN);
                     if (anwers == "Yes") {
                         sc.payGold(bs, 3);
-                        sc.addVictory(bs, 4);
+                        sc.addResource(bs, Resource.VICTORY, 4);
                     }
                 }
                 break;
 
             case LES_AILES_DE_LA_GARDIENNES:
                 System.out.println("Gardienne");
-                sc.gainGold(bs, 1);
+                sc.addResource(bs, Resource.GOLD, 1);
                 anwers = b.strategyCard(LES_AILES_DE_LA_GARDIENNES);
-                if(anwers == "Lunar"){ sc.gainLunar(bs, 1);}
-                else{ sc.gainSolar(bs, 1);}
+                if(anwers == "Lunar"){ sc.addResource(bs, Resource.LUNAR, 1);;}
+                else{ sc.addResource(bs, Resource.VICTORY, 1);;}
                 break;
 
             default: {
@@ -99,4 +100,3 @@ public enum Card {
     }
 
 }
-

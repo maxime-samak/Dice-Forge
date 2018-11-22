@@ -1,9 +1,7 @@
 package bot;
 
 import game.ScoreCounter;
-import game.dice.BuyDiceCard;
-import game.dice.Dice;
-import game.dice.Sanctuary;
+import game.dice.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -31,13 +29,13 @@ public class SimpleBotTest {
         Assert.assertFalse(bot1.diceShopping(sanctuary,2));
 
 
-        ScoreCounter.updateScore(bot1.getBotScore(), "12@GOLD%12@GOLD"); //Budget d'achat = 12.
+        ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
 
         Assert.assertTrue(bot1.diceShopping(sanctuary,8));
         Assert.assertTrue(bot1.diceShopping(sanctuary,2));
         Assert.assertTrue(bot1.diceShopping(sanctuary,2));
 
-        ScoreCounter.updateScore(bot1.getBotScore(), "12@GOLD%12@GOLD"); //Budget d'achat = 12.
+        ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
 
         Assert.assertTrue(bot1.diceShopping(sanctuary,6));
         Assert.assertTrue(bot1.diceShopping(sanctuary,3));
@@ -46,7 +44,7 @@ public class SimpleBotTest {
 
         BuyDiceCard.resetBotLog();
         sanctuary = new Sanctuary(2);
-        ScoreCounter.updateScore(bot1.getBotScore(), "12@GOLD%12@GOLD"); //Budget d'achat = 12.
+        ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
 
         //pool 3 = {A,A,B,B}
         Assert.assertTrue(bot1.diceShopping(sanctuary,3)); //Achat carte A
@@ -56,7 +54,7 @@ public class SimpleBotTest {
 
         BuyDiceCard.resetBotLog();
         sanctuary = new Sanctuary(2);
-        ScoreCounter.updateScore(bot1.getBotScore(), "12@GOLD%12@GOLD"); //Budget d'achat = 12.
+        ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
 
         //pool 3 = {A,A,B,B}
         Assert.assertTrue(bot1.diceShopping(sanctuary,3)); //Achat carte A

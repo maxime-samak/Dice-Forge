@@ -4,6 +4,7 @@ import game.ScoreCounter;
 import game.card.Islands;
 import game.dice.BuyDiceCard;
 import game.dice.Dice;
+import game.dice.DiceCard;
 import game.dice.Sanctuary;
 
 import static game.DiceRoll.roll;
@@ -49,8 +50,9 @@ public class Game {
             System.out.println("Tour de: " + botArray[i].getBotID());
             for (int j = 0; j < nbPlayers; j++){
                 System.out.println("Lancer de dés " + botArray[j].getBotID() + ":");
-                String lancer = roll(botArray[j].getDice1(), botArray[j].getDice2());
-                ScoreCounter.updateScore(botArray[j].getBotScore(),lancer);
+                DiceCard[] roll = roll(botArray[j].getDice1(), botArray[j].getDice2());
+                ScoreCounter.updateScore(botArray[j].getBotScore(),roll);
+                System.out.println(roll[0] + "\n" + roll[1]);
                 System.out.println(botArray[j].getBotScore().getInfos() + "\n");
             }
             //System.out.println("DES DU BOT AVANT");
