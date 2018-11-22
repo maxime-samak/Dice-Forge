@@ -1,5 +1,8 @@
 package game.dice;
 
+/**
+ * Classe DiceCard représente les faces d'un dés
+ */
 public class DiceCard {
 
     private int[] value;

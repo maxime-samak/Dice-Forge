@@ -1,5 +1,8 @@
 package game.dice;
 
+/**
+ * Classe Resource regroupe les différentes formes de ressources
+ */
 public enum Resource {
     GOLD{
         @Override

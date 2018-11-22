@@ -3,6 +3,9 @@ package game;
 import game.dice.DiceCard;
 import game.dice.Resource;
 
+/**
+ * Classe ScoreCounter : étant donné un lancé de dés ou un gain de ressources, cela actualise le botscore
+ */
 public class ScoreCounter {
 
     public static void updateScore(BotScore botscore, DiceCard[] roll) {
