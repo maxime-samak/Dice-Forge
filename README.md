@@ -44,6 +44,14 @@ Groupe DFG
 #### Date prévu
 *16/11/2018*
 
+### [Livraison 3.5](https://github.com/SamakM/Dice-Forge/milestone/7)
+#### Objectif de livraison
+- [ ] Modification de ScoreCounter en fonction du nouveau DiceRoll 
+- [ ] Modification de l'affichage produit par Game
+- [ ] Modification des test en relation avec DiceRoll
+- [ ] Modification de la classe DiceRoll
+
+
 ### [Livraison 4](https://github.com/SamakM/Dice-Forge/milestone/4)
 #### Objectif de livraison
 - [ ] Ajout des cartes qui réalise une action en plus jusqu'à la fin et pour un seul tour.
