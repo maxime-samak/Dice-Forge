@@ -1,6 +1,5 @@
 package bot;
 
-import game.Inventory;
 import game.card.BuyCard;
 import game.card.Card;
 import game.card.Islands;
@@ -16,7 +15,6 @@ import static game.dice.BuyDiceCard.setCard;
  */
 public class SimpleBot extends AbstractBot {
 
-    private Inventory inventory;
 
     public SimpleBot(Dice d1, Dice d2, String botID) {
         super(d1,d2, botID);
@@ -269,7 +267,7 @@ public class SimpleBot extends AbstractBot {
         Card[] cards = islands.getIslands().get(i);
         for(int cpt=0;cpt<cards.length;cpt++)
         {
-            if(BuyCard.buyCard(islands,cards[cpt],this.getBotScore(),buyed))
+            if(BuyCard.buyCard(islands,cards[cpt],this.getBotScore(),buyed, this))
             {
                 return true;
             }
@@ -284,7 +282,7 @@ public class SimpleBot extends AbstractBot {
         {
             if(cards.get(cpt).getPrice()[0]==i)
             {
-                if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(),buyed)==true)
+                if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(),buyed,this)==true)
                 {
                     System.out.println("Le "+this.getBotID()+" a acheté une carte à "+i+" Solar et a gagné "+cards.get(cpt).getVictory()+" Victory");
                     return true;
@@ -301,7 +299,7 @@ public class SimpleBot extends AbstractBot {
         {
             if(cards.get(cpt).getPrice()[1]==i)
             {
-                if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(),buyed)==true)
+                if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(),buyed, this)==true)
                 {
                     System.out.println("Le "+this.getBotID()+" a acheté une carte à "+i+" Lunar et à gagner "+cards.get(cpt).getVictory()+" Victory");
                     return true;
@@ -321,7 +319,9 @@ public class SimpleBot extends AbstractBot {
                 } else {
                     return "Solar";
                 }
-                default: return "Unknown";
+            case LES_SABOTS_D_ARGENT:
+                return "dice1";
+            default: return "Unknown";
         }
     }
 

@@ -42,25 +42,27 @@ public enum Card {
 
     /**
      * Effect éxecute un des case.
-     * @param d1
      * @param bs
      * @param sc
      * @param b
      */
-    protected void doEffect(Dice d1, BotScore bs, ScoreCounter sc, SimpleBot b) {
+    protected void doEffect(BotScore bs, ScoreCounter sc, SimpleBot b) {
         String anwers = "";
         switch (this) {
-            case LES_SABOTS_D_ARGENT: // lui demander le dé ?
-                System.out.println("Biche");
-                DiceCard roll = DiceRoll.roll(d1);
-                sc.updateScore(bs, roll);
+            case LES_SABOTS_D_ARGENT:
+                anwers = b.strategyCard(LES_SABOTS_D_ARGENT);
+                if(anwers == "dice1"){
+                    DiceCard roll = DiceRoll.roll(b.getDice1());
+                    sc.updateScore(bs, roll);
+                }
+                else{
+                    DiceCard roll = DiceRoll.roll(b.getDice2());
+                    sc.updateScore(bs, roll);
+                }
                 break;
 
             case L_ANCIEN:
-                System.out.println("Ancien");
-                if (bs.getGold() < 3){
-                    System.out.println("Vous n'avez pas assez d'or pour effectuer l'effet de la carte L'ancien");
-                }
+                if (bs.getGold() < 3){}
                 else {
                     anwers = b.strategyCard(L_ANCIEN);
                     if (anwers == "Yes") {
@@ -71,7 +73,6 @@ public enum Card {
                 break;
 
             case LES_AILES_DE_LA_GARDIENNES:
-                System.out.println("Gardienne");
                 sc.addResource(bs, Resource.GOLD, 1);
                 anwers = b.strategyCard(LES_AILES_DE_LA_GARDIENNES);
                 if(anwers == "Lunar"){ sc.addResource(bs, Resource.LUNAR, 1);;}
@@ -118,3 +119,4 @@ public enum Card {
     }
 
 }
+

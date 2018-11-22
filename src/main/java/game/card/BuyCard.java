@@ -1,5 +1,6 @@
 package game.card;
 
+import bot.AbstractBot;
 import game.BotScore;
 import game.ScoreCounter;
 import game.dice.Resource;
@@ -18,7 +19,7 @@ public class BuyCard {
      * @param botScore
      * @return
      */
-    public static boolean buyCard(Islands islands, Card card, BotScore botScore,boolean buyed){
+    public static boolean buyCard(Islands islands, Card card, BotScore botScore, boolean buyed, AbstractBot bot){
         if(card.getPrice()[0] <= botScore.getSolar() && card.getPrice()[1] <= botScore.getLunar()) {
             for (Card i : islands.getIslands().get(Math.max(card.getPrice()[0],card.getPrice()[1]))) {
                 if(i != null && i.equals(card)) {
@@ -34,7 +35,7 @@ public class BuyCard {
                     ScoreCounter.addResource(botScore, Resource.VICTORY, card.getVictory());
                     islands.removeCard(card);
                     if(card.isTypeReinforcement()){
-
+                        CardAssignement.setCardAssignement(bot, card);
                     }
                     return true;
                 }

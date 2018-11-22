@@ -1,6 +1,8 @@
 import bot.AbstractBot;
 import bot.SimpleBot;
 import game.ScoreCounter;
+import game.card.Card;
+import game.card.CardAssignement;
 import game.card.Islands;
 import game.dice.BuyDiceCard;
 import game.dice.Dice;
@@ -62,9 +64,10 @@ public class Game {
             //System.out.println(botArray[i].getDice1().toString());
             //System.out.println(botArray[i].getDice2().toString());
             System.out.println("Phase d'action de "+botArray[i].getBotID()+" :");
-
+            //for(Card card : CardAssignement.getListCard(botArray[i])){
+            //    card.doEffect(botArray[i].getBotScore(), ScoreCounter, );
+            //}
             botArray[i].play(sanctuary,islands);
-
             System.out.println("____\n");
             BuyDiceCard.resetBotLog();
             //System.out.println("DES DU BOT APRES");

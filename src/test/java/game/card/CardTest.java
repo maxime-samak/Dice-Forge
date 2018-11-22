@@ -46,7 +46,7 @@ public class CardTest {
         //c5.doEffect(d1, bs, sc); //bug à réparer
 
         Card c6 = Card.LES_AILES_DE_LA_GARDIENNES;
-        c6.doEffect(d1, bs, sc, b);
+        c6.doEffect(bs, sc, b);
 
 
 
