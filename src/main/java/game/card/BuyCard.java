@@ -3,10 +3,15 @@ package game.card;
 import game.BotScore;
 import game.ScoreCounter;
 
+/**
+ *
+ * Classe BuyCard permet l'achat d'objet Carte.
+ *
+ */
 public class BuyCard {
 
     /**
-     *
+     * Cette méthode fait payer le cout de la carte au bot. Elle ajoute également les points de victoire, éxécute l'effet de la carte, supprime la carte de l'ile.
      * @param islands
      * @param card
      * @param botScore

@@ -2,6 +2,9 @@ package game.dice;
 
 import static game.dice.Resource.*;
 
+/**
+ * Classe Dice représente l'objet dé
+ */
 public class Dice {
 
     private DiceCard F1;

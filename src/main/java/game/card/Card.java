@@ -6,6 +6,10 @@ import game.DiceRoll;
 import game.ScoreCounter;
 import game.dice.Dice;
 
+/**
+ * Classe Card permet la création de cartes prédéfinies
+ *
+ */
 public enum Card {
 
     LES_SABOTS_D_ARGENT(2, 0, 2, true),
@@ -20,13 +24,27 @@ public enum Card {
     private int cost_lunar;
     private boolean typeReinforcement;
 
-    Card(int victory, int cost_solar, int cost_lunar, boolean typeReinforcement) {
+    /**
+     * Construction de la classe, qui prend 4 attributs
+     * @param victory
+     * @param cost_solar
+     * @param cost_lunar
+     * @param typeReinforcement
+     */
+     Card(int victory, int cost_solar, int cost_lunar, boolean typeReinforcement) {
         this.victory = victory;
         this.cost_solar = cost_solar;
         this.cost_lunar = cost_lunar;
         this.typeReinforcement = typeReinforcement;
     }
 
+    /**
+     * Effect éxecute un des case.
+     * @param d1
+     * @param bs
+     * @param sc
+     * @param b
+     */
     protected void doEffect(Dice d1, BotScore bs, ScoreCounter sc, SimpleBot b) {
         String anwers = "";
         switch (this) {

@@ -4,6 +4,9 @@ import game.BotScore;
 import game.ScoreCounter;
 import java.util.ArrayList;
 
+/**
+ * Classe BuyDiceCard sert à acheter des faces de dés.
+ */
 public class BuyDiceCard {
 
     private static ArrayList<DiceCard> bought = new ArrayList<>();
@@ -42,6 +45,9 @@ public class BuyDiceCard {
         return false;
     }
 
+    /**
+     *
+     */
     public static void resetBotLog() {
         bought = new ArrayList<>();
     }

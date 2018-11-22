@@ -3,17 +3,28 @@ package game.card;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Classe Islands permet de créer le deck de cartes de bases
+ */
 public class Islands {
 
     private HashMap<Integer, Card[]> islands = new HashMap<>();
     private final int nbPLayers;
 
+    /**
+     * Constructeur de base
+     * @param nbPLayers
+     */
     public Islands(int nbPLayers) {
         this.initIslands(nbPLayers);
         this.nbPLayers = nbPLayers;
 
     }
 
+    /**
+     *
+     * @param nbPLayers
+     */
     public void initIslands(int nbPLayers) {
         Card[] island1 = new Card[nbPLayers * 4];
         Card[] island2 = new Card[nbPLayers * 2];
