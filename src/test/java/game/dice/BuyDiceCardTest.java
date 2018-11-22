@@ -55,12 +55,12 @@ public class BuyDiceCardTest {
         Assert.assertEquals(card5, d1.getFi(6));
         Assert.assertEquals(0, bot.getBotScore().getGold());
 
-        Assert.assertTrue(bot.getDice1().toString().equals("3 GOLD\n" +
-                "1 LUNAR\n" +
-                "4 GOLD\n" +
-                "1 SOLAR\n" +
-                "2 LUNAR\n" +
-                "3 VICTORY\n"));
+        Assert.assertTrue(bot.getDice1().toString().equals("3 GOLD \n" +
+                "1 LUNAR \n" +
+                "4 GOLD \n" +
+                "1 SOLAR \n" +
+                "2 LUNAR \n" +
+                "3 VICTORY \n"));
 
     }
 }

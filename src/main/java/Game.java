@@ -62,7 +62,9 @@ public class Game {
             //System.out.println(botArray[i].getDice1().toString());
             //System.out.println(botArray[i].getDice2().toString());
             System.out.println("Phase d'action de "+botArray[i].getBotID()+" :");
+
             botArray[i].play(sanctuary,islands);
+
             System.out.println("____\n");
             BuyDiceCard.resetBotLog();
             //System.out.println("DES DU BOT APRES");

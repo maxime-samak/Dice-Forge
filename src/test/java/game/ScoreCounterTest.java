@@ -30,7 +30,7 @@ public class ScoreCounterTest {
         Assert.assertEquals(3, bs.getSolar());
         Assert.assertEquals(3, bs.getGold());
 
-        sc.updateScore(bs, new DiceCard[]{new DiceCard(1, Resource.SOLAR), new DiceCard(2, Resource.LUNAR)});
+        sc.updateScore(bs, new DiceCard[]{new DiceCard(1, Resource.SOLAR), new DiceCard(1, Resource.LUNAR)});
 
         Assert.assertEquals(4, bs.getSolar());
         Assert.assertEquals(1, bs.getLunar());
@@ -42,8 +42,7 @@ public class ScoreCounterTest {
 
         sc.updateScore(bs, new DiceCard[]{new DiceCard(2, Resource.VICTORY), new DiceCard(1, Resource.SOLAR)});
 
-        Assert.assertNotEquals(6, bs.getVictory()); // d1 de la string roll doit être un dé solar
-        Assert.assertNotEquals(5, bs.getSolar()); // d2 de la string roll doit être un dé lunar
-
+        Assert.assertNotEquals(5, bs.getVictory());
+        Assert.assertNotEquals(4, bs.getSolar());
     }
 }
