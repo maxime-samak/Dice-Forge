@@ -21,6 +21,10 @@ public class BuyDiceCard {
         return pricesArray;
     }
 
+    public static Boolean getFeePayed() {
+        return feePayed;
+    }
+
     /**
      * La méthode vérifie dans la pool passée en paramètre si la face que le bot veut acheter est disponible,
      * c'est à dire si il possède assez d'argent et si il n'a pas acheter de face équivalente pendant ce tour.
@@ -36,6 +40,7 @@ public class BuyDiceCard {
      * @return
      */
     public static boolean setCard(Sanctuary sanctuary, int pool, DiceCard card, Dice dice, int cardToChange, BotScore botscore,Boolean bougth) {
+        feePayed=false;
         for(DiceCard i : boughtArray) {
             if(i.equals(card)){
                 return false;
