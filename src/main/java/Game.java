@@ -4,10 +4,7 @@ import game.ScoreCounter;
 import game.card.Card;
 import game.card.CardAssignement;
 import game.card.Islands;
-import game.dice.BuyDiceCard;
-import game.dice.Dice;
-import game.dice.DiceCard;
-import game.dice.Sanctuary;
+import game.dice.*;
 
 import java.util.ArrayList;
 
@@ -45,6 +42,7 @@ public class Game {
             d2.lunarDiceInit();
 
             botArray[i] = new SimpleBot(d1, d2, "bot#" + (i+1));
+            ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, this.nbPlayers - i);
         }
     }
 
@@ -65,7 +63,7 @@ public class Game {
             //System.out.println("DES DU BOT AVANT");
             //System.out.println(botArray[i].getDice1().toString());
             //System.out.println(botArray[i].getDice2().toString());
-            System.out.println("Phase d'action de "+botArray[i].getBotID()+" :");
+            System.out.println("Phase d'action de " + botArray[i].getBotID()+" :");
             //for(int k = 0;  i < CardAssignement.getListCard(botArray[i]).size(); k++){ il n'y à aucune clé bot dans la table de hachage, à réparer
             //    if(CardAssignement.getListCard(botArray[i]) != null) {
             //        CardAssignement.getListCard(botArray[i]).get(k).doEffect(botArray[i]);

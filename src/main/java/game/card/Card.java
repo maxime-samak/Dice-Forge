@@ -75,7 +75,7 @@ public enum Card {
                 ScoreCounter.addResource(bs, Resource.GOLD, 1);
                 anwers = b.strategyCard(LES_AILES_DE_LA_GARDIENNES);
                 if(anwers == "Lunar"){ ScoreCounter.addResource(bs, Resource.LUNAR, 1);;}
-                else{ ScoreCounter.addResource(bs, Resource.VICTORY, 1);;}
+                else{ ScoreCounter.addResource(bs, Resource.SOLAR, 1);;}
                 break;
 
             default: {
