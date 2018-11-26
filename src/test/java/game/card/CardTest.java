@@ -29,26 +29,33 @@ public class CardTest {
         Assert.assertEquals(5, c3.getPrice()[0]);
         Assert.assertEquals(5, c3.getPrice()[1]);
 
-        Card c4 = Card.LES_SABOTS_D_ARGENT;
-        System.out.println(c4);
-
-        BotScore bs = new BotScore();
-        ScoreCounter sc = new ScoreCounter();
         Dice d1 = new Dice();
         d1.solarDiceInit();
         Dice d2 = new Dice();
         d2.lunarDiceInit();
         SimpleBot b = new SimpleBot(d1, d2, "Bot1");
-        //c4.doEffect(d1, bs, sc);
 
-        Card c5 = Card.L_ANCIEN;
-        sc.updateScore(bs, new DiceCard[]{new DiceCard(2, Resource.GOLD), new DiceCard(1, Resource.GOLD)});
-        //c5.doEffect(d1, bs, sc); //bug à réparer
+        //carte avec effet
+        Card c4 = Card.LES_SABOTS_D_ARGENT;
+        c4.doEffect(b); // le bot choisit le d1 donc 1 solar ou un gold.
 
-        Card c6 = Card.LES_AILES_DE_LA_GARDIENNES;
-        c6.doEffect(bs, sc, b);
+        Assert.assertTrue(b.getBotScore().getGold() == 1 || b.getBotScore().getSolar() == 1);
+        Assert.assertTrue(b.getBotScore().getGold() == 0 || b.getBotScore().getSolar() == 0);
 
+        Card c5 = Card.L_ANCIEN; //il paye 3 gold et recoit 4 point de gloire.
+        ScoreCounter.updateScore(b.getBotScore(), new DiceCard[]{new DiceCard(2, Resource.GOLD), new DiceCard(1, Resource.GOLD)});
+        int tmp = b.getBotScore().getGold();
+        c5.doEffect(b);
+        Assert.assertEquals(4, b.getBotScore().getVictory());
+        Assert.assertEquals(tmp - 3, b.getBotScore().getGold());
 
+        Card c6 = Card.LES_AILES_DE_LA_GARDIENNES; // donne 1 gold et un lunar ou solar.
+        tmp = b.getBotScore().getGold();
+        int tmpS = b.getBotScore().getSolar();
+        int tmpL = b.getBotScore().getLunar();
+        c6.doEffect(b);
+        Assert.assertEquals(tmp + 1, b.getBotScore().getGold());
+        Assert.assertTrue(b.getBotScore().getSolar() == tmpS + 1 || b.getBotScore().getLunar() == tmpL + 1);
 
     }
 }

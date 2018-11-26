@@ -42,22 +42,21 @@ public enum Card {
 
     /**
      * Effect éxecute un des case.
-     * @param bs
-     * @param sc
      * @param b
      */
-    protected void doEffect(BotScore bs, ScoreCounter sc, SimpleBot b) {
+    public void doEffect(SimpleBot b) { //le bot peut tricher, à modifier.
+        BotScore bs = b.getBotScore();
         String anwers = "";
         switch (this) {
             case LES_SABOTS_D_ARGENT:
                 anwers = b.strategyCard(LES_SABOTS_D_ARGENT);
                 if(anwers == "dice1"){
                     DiceCard roll = DiceRoll.roll(b.getDice1());
-                    sc.updateScore(bs, roll);
+                    ScoreCounter.updateScore(bs, roll);
                 }
                 else{
                     DiceCard roll = DiceRoll.roll(b.getDice2());
-                    sc.updateScore(bs, roll);
+                    ScoreCounter.updateScore(bs, roll);
                 }
                 break;
 
@@ -66,17 +65,17 @@ public enum Card {
                 else {
                     anwers = b.strategyCard(L_ANCIEN);
                     if (anwers == "Yes") {
-                        sc.payGold(bs, 3);
-                        sc.addResource(bs, Resource.VICTORY, 4);
+                        ScoreCounter.payGold(bs, 3);
+                        ScoreCounter.addResource(bs, Resource.VICTORY, 4);
                     }
                 }
                 break;
 
             case LES_AILES_DE_LA_GARDIENNES:
-                sc.addResource(bs, Resource.GOLD, 1);
+                ScoreCounter.addResource(bs, Resource.GOLD, 1);
                 anwers = b.strategyCard(LES_AILES_DE_LA_GARDIENNES);
-                if(anwers == "Lunar"){ sc.addResource(bs, Resource.LUNAR, 1);;}
-                else{ sc.addResource(bs, Resource.VICTORY, 1);;}
+                if(anwers == "Lunar"){ ScoreCounter.addResource(bs, Resource.LUNAR, 1);;}
+                else{ ScoreCounter.addResource(bs, Resource.VICTORY, 1);;}
                 break;
 
             default: {

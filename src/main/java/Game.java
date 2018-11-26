@@ -9,6 +9,8 @@ import game.dice.Dice;
 import game.dice.DiceCard;
 import game.dice.Sanctuary;
 
+import java.util.ArrayList;
+
 import static game.DiceRoll.roll;
 
 /**
@@ -64,8 +66,10 @@ public class Game {
             //System.out.println(botArray[i].getDice1().toString());
             //System.out.println(botArray[i].getDice2().toString());
             System.out.println("Phase d'action de "+botArray[i].getBotID()+" :");
-            //for(Card card : CardAssignement.getListCard(botArray[i])){
-            //    card.doEffect(botArray[i].getBotScore(), ScoreCounter, );
+            //for(int k = 0;  i < CardAssignement.getListCard(botArray[i]).size(); k++){ il n'y à aucune clé bot dans la table de hachage, à réparer
+            //    if(CardAssignement.getListCard(botArray[i]) != null) {
+            //        CardAssignement.getListCard(botArray[i]).get(k).doEffect(botArray[i]);
+            //    }
             //}
             botArray[i].play(sanctuary,islands);
             System.out.println("____\n");
