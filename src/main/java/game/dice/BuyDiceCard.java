@@ -9,7 +9,17 @@ import java.util.ArrayList;
  */
 public class BuyDiceCard {
 
-    private static ArrayList<DiceCard> bought = new ArrayList<>();
+    private static ArrayList<DiceCard> boughtArray = new ArrayList<>();
+    private static ArrayList<Integer> pricesArray = new ArrayList<>();
+    private static Boolean feePayed;
+
+    public static ArrayList<DiceCard> getBoughtArray() {
+        return boughtArray;
+    }
+
+    public static ArrayList<Integer> getPricesArray() {
+        return pricesArray;
+    }
 
     /**
      * La méthode vérifie dans la pool passée en paramètre si la face que le bot veut acheter est disponible,
@@ -26,7 +36,7 @@ public class BuyDiceCard {
      * @return
      */
     public static boolean setCard(Sanctuary sanctuary, int pool, DiceCard card, Dice dice, int cardToChange, BotScore botscore,Boolean bougth) {
-        for(DiceCard i : bought) {
+        for(DiceCard i : boughtArray) {
             if(i.equals(card)){
                 return false;
             }
@@ -37,10 +47,12 @@ public class BuyDiceCard {
         }
 
         else if(sanctuary.removeCard(pool, card)){
+            boughtArray.add(dice.getFi(cardToChange));
             dice.setDiceCard(cardToChange, card);
-            bought.add(card);
+            boughtArray.add(card);
+            pricesArray.add(pool);
             ScoreCounter.payGold(botscore,pool);
-            if(bougth){ScoreCounter.paySolar(botscore,2);}
+            if(bougth){ScoreCounter.paySolar(botscore,2);feePayed=true;}
             return true;
         }
         return false;
@@ -50,7 +62,9 @@ public class BuyDiceCard {
      *
      */
     public static void resetBotLog() {
-        bought = new ArrayList<>();
+        boughtArray = new ArrayList<>();
+        pricesArray = new ArrayList<>();
+        feePayed=false;
     }
 
 }

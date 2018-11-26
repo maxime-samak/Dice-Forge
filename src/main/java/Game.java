@@ -1,6 +1,8 @@
 import bot.AbstractBot;
+import bot.Bot;
 import bot.SimpleBot;
 import game.ScoreCounter;
+import game.card.BuyCard;
 import game.card.Card;
 import game.card.CardAssignement;
 import game.card.Islands;
@@ -70,8 +72,10 @@ public class Game {
             //    }
             //}
             botArray[i].play(sanctuary,islands);
+            printActions(botArray[i].getBotID());
             System.out.println("____\n");
             BuyDiceCard.resetBotLog();
+            BuyCard.resetBotLog();
             //System.out.println("DES DU BOT APRES");
             //System.out.println(botArray[i].getDice1().toString());
             //System.out.println(botArray[i].getDice2().toString());
@@ -113,5 +117,50 @@ public class Game {
         System.out.println(winner + " est le gagnant");
         System.out.println("*************************************");
 
+    }
+
+    public void printActions(String bot)
+    {
+        printDiceCardsBougth(bot);
+        printCardsBougth(bot);
+    }
+
+    private void printDiceCardsBougth(String bot)
+    {
+        ArrayList<DiceCard> diceCardsBougth = BuyDiceCard.getBoughtArray();
+        ArrayList<Integer> prices = BuyDiceCard.getPricesArray();
+        if(diceCardsBougth.isEmpty())
+        {
+            System.out.println("Le bot " + bot + " n'a pas acheter de faces de dés.");
+        }
+        else
+        {
+            while(!diceCardsBougth.isEmpty())
+            {
+                System.out.println("Le bot "+bot+" a acheter la face "+diceCardsBougth.get(1)+" pour "+prices.get(0)+" GOLD et a remplacer la face "+diceCardsBougth.get(0));
+                diceCardsBougth.remove(1);
+                diceCardsBougth.remove(0);
+                prices.remove(0);
+            }
+            System.out.println("Le bot "+bot+" n'achète plus de faces.");
+        }
+
+    }
+
+    private void printCardsBougth(String bot) {
+        ArrayList<Card> cardsBougth = BuyCard.getBoughtArray();
+
+        if (cardsBougth.isEmpty()) {
+            System.out.println("Le bot " + bot + " n'a pas acheter de cartes.");
+        }
+        else
+        {
+            while (!cardsBougth.isEmpty())
+            {
+                if(BuyCard.getFeePayed()){ System.out.println("Le bot " + bot + " a payer 2 SOLAR pour jouer une nouvelle action");}
+                System.out.println("Le bot " + bot + " a acheter la carte " + cardsBougth.get(0).name() + " pour " + cardsBougth.get(0).getPrice()[0] + " SOLAR et "+cardsBougth.get(0).getPrice()[0]+" LUNAR et a gagner " + cardsBougth.get(0).getVictory()+" VICTORY");
+                cardsBougth.remove(0);
+            }
+        }
     }
 }
