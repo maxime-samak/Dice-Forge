@@ -25,7 +25,7 @@ public class BuyDiceCard {
      * @param botscore inventaire du bot
      * @return
      */
-    public static boolean setCard(Sanctuary sanctuary, int pool, DiceCard card, Dice dice, int cardToChange, BotScore botscore) {
+    public static boolean setCard(Sanctuary sanctuary, int pool, DiceCard card, Dice dice, int cardToChange, BotScore botscore,Boolean bougth) {
         for(DiceCard i : bought) {
             if(i.equals(card)){
                 return false;
@@ -40,6 +40,7 @@ public class BuyDiceCard {
             dice.setDiceCard(cardToChange, card);
             bought.add(card);
             ScoreCounter.payGold(botscore,pool);
+            if(bougth){ScoreCounter.paySolar(botscore,2);}
             return true;
         }
         return false;

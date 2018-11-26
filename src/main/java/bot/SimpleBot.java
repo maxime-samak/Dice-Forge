@@ -1,5 +1,6 @@
 package bot;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import game.card.BuyCard;
 import game.card.Card;
 import game.card.Islands;
@@ -21,39 +22,77 @@ public class SimpleBot extends AbstractBot {
     }
 
     public void play(Sanctuary sanctuary,Islands islands) {
-        Boolean buy = this.diceShopping(sanctuary);
+        buyInOrder(sanctuary,islands,false);
+    }
+
+    public void buyInOrder(Sanctuary sanctuary,Islands islands,Boolean secondBuy) {
+
+        int gold = this.getBotScore().getGold();
         int solar = this.getBotScore().getSolar();
         int lunar = this.getBotScore().getLunar();
-        if(buy)
+
+        if(secondBuy)
         {
-            if(solar>=3 || (solar>=2&&lunar>=1))
+            if((gold > lunar && gold > solar))
+            {
+                this.diceShopping(sanctuary,true);
+            }
+            else
             {
                 this.cardShopping(islands,true);
             }
         }
         else
         {
-            this.cardShopping(islands,false);
+            if ((gold > lunar && gold > solar))
+            {
+                Boolean buy = this.diceShopping(sanctuary,false);
+                if (buy)
+                {
+                    if (solar >= 3 || (solar >= 2 && lunar >= 1))
+                    {
+                        this.cardShopping(islands, true);
+                    }
+                }
+                else
+                {
+                    this.cardShopping(islands, false);
+                }
+            }
+            else
+            {
+                Boolean buy = this.cardShopping(islands, false);
+                if (buy)
+                {
+                   buyInOrder(sanctuary,islands,true);
+                }
+                else
+                {
+                    this.diceShopping(sanctuary,false);
+                }
+            }
         }
+
+
     }
 
-    public Boolean diceShopping(Sanctuary sanctuary) {
+    public Boolean diceShopping(Sanctuary sanctuary,boolean bougth) {
         int nbBuy = 0;
         int gold = this.getBotScore().getGold();
 
-        if(gold >= 12 && nbBuy < 1) { if(diceShopping(sanctuary,12)) nbBuy++; }
+        if(gold >= 12 && nbBuy < 1) { if(diceShopping(sanctuary,12,bougth)) nbBuy++; }
 
-        if(gold >= 8 && nbBuy < 1) { if(diceShopping(sanctuary, 8)) nbBuy++; }
+        if(gold >= 8 && nbBuy < 1) { if(diceShopping(sanctuary, 8,bougth)) nbBuy++; }
 
-        if(gold >= 6 && nbBuy < 1) { if(diceShopping(sanctuary,6)) nbBuy++; }
+        if(gold >= 6 && nbBuy < 1) { if(diceShopping(sanctuary,6,bougth)) nbBuy++; }
 
-        if(gold >= 5 && nbBuy < 1) { if(diceShopping(sanctuary,5)) nbBuy++; }
+        if(gold >= 5 && nbBuy < 1) { if(diceShopping(sanctuary,5,bougth)) nbBuy++; }
 
-        if(gold >= 4 && nbBuy < 1) { if(diceShopping(sanctuary,4)) nbBuy++; }
+        if(gold >= 4 && nbBuy < 1) { if(diceShopping(sanctuary,4,bougth)) nbBuy++; }
 
-        if(gold >= 3 && nbBuy < 1) { if(diceShopping(sanctuary, 3)) nbBuy++; }
+        if(gold >= 3 && nbBuy < 1) { if(diceShopping(sanctuary, 3,bougth)) nbBuy++; }
 
-        if(gold >= 2 && nbBuy < 1) { if(diceShopping(sanctuary, 2 )) nbBuy++; }
+        if(gold >= 2 && nbBuy < 1) { if(diceShopping(sanctuary, 2,bougth)) nbBuy++; }
 
         if(nbBuy == 0) { System.out.println(this.getBotID() + " n'achète pas de face."); return false; }
 
@@ -69,7 +108,7 @@ public class SimpleBot extends AbstractBot {
      * @param pool
      * @return
      */
-    public boolean diceShopping(Sanctuary sanctuary, int pool) {
+    public boolean diceShopping(Sanctuary sanctuary, int pool,Boolean bougth) {
         ArrayList<DiceCard> buyable = sanctuary.getPoolAvailables(pool);
         buyable = this.favoriseVictory(buyable);
         Dice d = null;
@@ -109,7 +148,7 @@ public class SimpleBot extends AbstractBot {
                 }
             }
             if(d != null) {
-                if (setCard(sanctuary,pool,buy,d,f,this.getBotScore())){
+                if (setCard(sanctuary,pool,buy,d,f,this.getBotScore(),bougth)){
                     System.out.println("Le "+this.getBotID()+" a acheté la face "+buy.toString()+" et l'a placé sur le dé "+dNum+" à la face "+f+" ("+oldFace+")");
                     return true; }
             }
@@ -168,7 +207,7 @@ public class SimpleBot extends AbstractBot {
     }**/
 
 
-    private void cardShopping(Islands islands,boolean buyed)
+    private Boolean cardShopping(Islands islands, boolean buyed)
     {
         int nbBuy=0;
         int lunar = this.getBotScore().getLunar();
@@ -178,20 +217,41 @@ public class SimpleBot extends AbstractBot {
         if(lunar >= 5 && solar >= 5+solarFee) { shopIsland(islands,10,buyed); nbBuy++; }
         if(nbBuy==0)
         {
-            if(lunar>=solar)
+            if(lunar<=solar)
             {
-                if (solarShopping(islands,buyed)){nbBuy++;}
-                else{ if (lunarShopping(islands,buyed)){nbBuy++;}}
+                if (solarShopping(islands,buyed))
+                {
+                    nbBuy++;
+                    return true;
+                }
+                else
+                {
+                    if (lunarShopping(islands,buyed))
+                    {
+                        nbBuy++;
+                        return true;
+                    }
+                }
             }
             else
             {
-                if (lunarShopping(islands,buyed)){nbBuy++;}
-                else{ if (solarShopping(islands,buyed)){nbBuy++;}}
+                if (lunarShopping(islands,buyed))
+                {
+                    nbBuy++;
+                    return true;
+                }
+                else
+                {
+                    if (solarShopping(islands,buyed))
+                    {
+                        nbBuy++;
+                        return true;
+                    }
+                }
             }
 
         }
-        if(nbBuy==0) { System.out.println(this.getBotID() + " n'achète pas de carte."); }
-        if(nbBuy>0) { System.out.println(this.getBotID() + " n'achète plus de carte."); }
+       return false;
 
     }
 
