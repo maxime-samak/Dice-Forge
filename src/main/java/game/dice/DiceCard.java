@@ -60,17 +60,16 @@ public class DiceCard {
     public String toString(){
         String res = "";
         for(int i = 0; i < this.getValueArray().length; i++) {
-            res += value[i] + " " + resource[i].resourceName() + " ";
+            if(i==0 && !(resource[i]==Resource.LUNAR)&& !(resource[i]==Resource.SOLAR)&& !(resource[i]==Resource.GOLD)&& !(resource[i]==Resource.VICTORY))
+            {
+                res +=resource[i].resourceName() + " ";
+            }
+            else
+                res += value[i] + " " + resource[i].resourceName() + " ";
         }
         return res;
     }
 
-    /* *********************** */
-    /* -- DiceCard Complexe -- */
-    /* *********************** */
-    public String toString2() {
-        return value[0] + " " + resource[0].resourceName();
-    }
 }
 
 

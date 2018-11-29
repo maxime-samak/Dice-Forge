@@ -59,8 +59,17 @@ public class Game {
             for (int j = 0; j < nbPlayers; j++){
                 System.out.println("Lancer de dés " + botArray[j].getBotID() + ":");
                 DiceCard[] roll = roll(botArray[j].getDice1(), botArray[j].getDice2());
-                ScoreCounter.updateScore(botArray[j].getBotScore(),roll);
-                System.out.println(roll[0] + "\n" + roll[1]);
+                DiceCard dc0=botArray[j].choose(roll[0]);
+                DiceCard dc1=botArray[j].choose(roll[1]);
+                if(roll[0].getResource()==Resource.CHOICE.resourceName()&&roll[1].getResource()==Resource.CHOICE.resourceName())
+                    System.out.println(roll[0] +" ("+dc0+" choisi )"+ "\n" + roll[1]+" ("+dc1+" choisi )");
+                else if(roll[0].getResource()==Resource.CHOICE.resourceName())
+                    System.out.println(roll[0] +" ("+dc0+" choisi )"+ "\n" + roll[1]);
+                else if(roll[0].getResource()==Resource.CHOICE.resourceName())
+                    System.out.println(roll[0] + "\n" + roll[1]+" ("+dc1+" choisi )");
+                else
+                    System.out.println(roll[0] + "\n" + roll[1]);
+                ScoreCounter.updateScore(botArray[j].getBotScore(),new DiceCard[]{dc0,dc1});
                 System.out.println(botArray[j].getBotScore().getInfos() + "\n");
             }
             //System.out.println("DES DU BOT AVANT");
