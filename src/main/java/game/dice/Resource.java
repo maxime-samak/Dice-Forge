@@ -23,6 +23,14 @@ public enum Resource {
     /* *********************** */
     /* -- DiceCard Complexe -- */
     /* *********************** */
+    QUESTION{
+        @Override
+        public String resourceName() { return "?"; }
+    },
+    X3{
+        @Override
+        public String resourceName() { return "x3"; }
+    },
     PLUS{
         @Override
         public String resourceName() { return "PLUS"; }
