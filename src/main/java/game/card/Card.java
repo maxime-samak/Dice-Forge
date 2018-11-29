@@ -44,7 +44,7 @@ public enum Card {
      * Effect éxecute un des case.
      * @param b
      */
-    public void doEffect(SimpleBot b) { //le bot peut tricher, à modifier.
+    public Object doEffect(SimpleBot b) { //le bot peut tricher, à modifier.
         BotScore bs = b.getBotScore();
         String anwers = "";
         switch (this) {
@@ -52,14 +52,15 @@ public enum Card {
                 anwers = b.strategyCard(LES_SABOTS_D_ARGENT);
                 if(anwers == "dice1"){
                     DiceCard roll = DiceRoll.roll(b.getDice1());
+                    roll = b.choose(roll);
                     ScoreCounter.updateScore(bs, roll);
+                    return roll;
                 }
                 else{
                     DiceCard roll = DiceRoll.roll(b.getDice2());
                     ScoreCounter.updateScore(bs, roll);
+                    return roll;
                 }
-                break;
-
             case L_ANCIEN:
                 if (bs.getGold() < 3){}
                 else {
@@ -67,20 +68,28 @@ public enum Card {
                     if (anwers == "Yes") {
                         ScoreCounter.payGold(bs, 3);
                         ScoreCounter.addResource(bs, Resource.VICTORY, 4);
+                        return "Carte utilisée";
                     }
+                    return "Carte inutilisée";
                 }
                 break;
 
             case LES_AILES_DE_LA_GARDIENNES:
                 ScoreCounter.addResource(bs, Resource.GOLD, 1);
                 anwers = b.strategyCard(LES_AILES_DE_LA_GARDIENNES);
-                if(anwers == "Lunar"){ ScoreCounter.addResource(bs, Resource.LUNAR, 1);;}
-                else{ ScoreCounter.addResource(bs, Resource.SOLAR, 1);;}
-                break;
+                if(anwers == "Lunar"){
+                    ScoreCounter.addResource(bs, Resource.LUNAR, 1);
+                    return new DiceCard(new int[]{0,1,1},new Resource[]{Resource.PLUS,Resource.GOLD,Resource.LUNAR});
+                }
+                else{
+                    ScoreCounter.addResource(bs, Resource.SOLAR, 1);
+                    return new DiceCard(new int[]{0,1,1},new Resource[]{Resource.PLUS,Resource.GOLD,Resource.SOLAR});
+                }
 
             default: {
             }
         }
+        return null;
     }
 
     public int getVictory() {

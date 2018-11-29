@@ -79,7 +79,10 @@ public class Game {
             for(int k = 0;  k < CardAssignement.getListCard(botArray[i]).size()-1; k++){
                 System.out.println("Exécution carte renfort: " + CardAssignement.getListCard(botArray[i]).get(k).name());
                 System.out.println(CardAssignement.getListCard(botArray[i]).get(k).toString());
-                CardAssignement.getListCard(botArray[i]).get(k).doEffect(botArray[i]);
+                Object result=CardAssignement.getListCard(botArray[i]).get(k).doEffect(botArray[i]);
+                if(result!=null)
+                    System.out.println(botArray[i].getBotID()+" a reçu : "+result.toString());
+                System.out.println(botArray[i].getBotScore().getInfos() + "\n");
             }
             botArray[i].play(sanctuary,islands);
             printChanges(botArray[i].getBotID());

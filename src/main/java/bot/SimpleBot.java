@@ -362,9 +362,9 @@ public class SimpleBot extends AbstractBot {
                 return new DiceCard(values[1],resources[1]);
             else
             {
-                if(this.getBotScore().getGold()>=this.getBotScore().getSolar()&&this.getBotScore().getGold()>=this.getBotScore().getLunar())
+                if(this.getBotScore().getGold()<=this.getBotScore().getSolar()&&this.getBotScore().getGold()<=this.getBotScore().getLunar())
                     i=1;
-                if(this.getBotScore().getSolar()>this.getBotScore().getGold()&&this.getBotScore().getSolar()>=this.getBotScore().getLunar())
+                if(this.getBotScore().getSolar()<this.getBotScore().getGold()&&this.getBotScore().getSolar()<=this.getBotScore().getLunar())
                     i=2;
                 else
                     i=3;
