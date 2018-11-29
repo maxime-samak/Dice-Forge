@@ -1,8 +1,10 @@
 import bot.AbstractBot;
+import bot.Bot;
 import bot.SimpleBot;
 import game.ScoreCounter;
 import game.card.BuyCard;
 import game.card.Card;
+import game.card.CardAssignement;
 import game.card.Islands;
 import game.dice.*;
 
@@ -30,7 +32,7 @@ public class Game {
         this.nbPlayers = nbPlayers;
         this.botArray = new SimpleBot[nbPlayers];
         this.sanctuary = new Sanctuary(nbPlayers);
-        this.islands = new Islands(nbPlayers);
+        this.islands= new Islands(nbPlayers);
 
         if(nbPlayers == 3) {this.nbTurn = 10;}
         else {this.nbTurn = 9;}
@@ -44,6 +46,7 @@ public class Game {
             botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1));
             ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, this.nbPlayers - i);
         }
+        CardAssignement.initCardAssignement(botArray);
     }
 
     /**
@@ -64,12 +67,12 @@ public class Game {
             //System.out.println(botArray[i].getDice1().toString());
             //System.out.println(botArray[i].getDice2().toString());
             System.out.println("Phase d'action de " + botArray[i].getBotID()+" :");
-            //for(int k = 0;  i < CardAssignement.getListCard(botArray[i]).size(); k++){ il n'y à aucune clé bot dans la table de hachage, à réparer
-            //    if(CardAssignement.getListCard(botArray[i]) != null) {
-            //        CardAssignement.getListCard(botArray[i]).get(k).doEffect(botArray[i]);
-            //    }
-            //}
-            botArray[i].play(sanctuary, islands);
+            for(int k = 0;  k < CardAssignement.getListCard(botArray[i]).size()-1; k++){
+                System.out.println("Exécution carte renfort: " + CardAssignement.getListCard(botArray[i]).get(k).name());
+                System.out.println(CardAssignement.getListCard(botArray[i]).get(k).toString());
+                CardAssignement.getListCard(botArray[i]).get(k).doEffect(botArray[i]);
+            }
+            botArray[i].play(sanctuary,islands);
             printChanges(botArray[i].getBotID());
             System.out.println("____\n");
             BuyDiceCard.resetBotLog();

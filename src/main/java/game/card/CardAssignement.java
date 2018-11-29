@@ -7,7 +7,6 @@ import java.util.HashMap;
 
 public class CardAssignement {
 
-    private static CardAssignement uniqueInstance = null;
     private static HashMap<AbstractBot, ArrayList<Card>> cardAssignement =  new HashMap<>();
 
     public static ArrayList<Card> getListCard(AbstractBot bot) {
@@ -16,14 +15,15 @@ public class CardAssignement {
 
     protected static void setCardAssignement(AbstractBot bot, Card card){
         if(card.isTypeReinforcement()){
-            if (cardAssignement.containsKey(bot)) {
                 cardAssignement.get(bot).add(card);
-            }
-            else {
-                ArrayList<Card> listCard = new ArrayList<>();
-                listCard.add(card);
-                cardAssignement.put(bot, listCard);
-            }
         }
     }
+
+    public static void initCardAssignement(AbstractBot[] bots){
+        for(AbstractBot bot : bots){
+            ArrayList<Card> listCard = new ArrayList<>();
+            cardAssignement.put(bot, listCard);
+        }
+    }
+
 }
