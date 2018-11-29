@@ -1,10 +1,8 @@
 import bot.AbstractBot;
-import bot.Bot;
 import bot.SimpleBot;
 import game.ScoreCounter;
 import game.card.BuyCard;
 import game.card.Card;
-import game.card.CardAssignement;
 import game.card.Islands;
 import game.dice.*;
 
@@ -32,7 +30,7 @@ public class Game {
         this.nbPlayers = nbPlayers;
         this.botArray = new SimpleBot[nbPlayers];
         this.sanctuary = new Sanctuary(nbPlayers);
-        this.islands= new Islands(nbPlayers);
+        this.islands = new Islands(nbPlayers);
 
         if(nbPlayers == 3) {this.nbTurn = 10;}
         else {this.nbTurn = 9;}
@@ -43,7 +41,7 @@ public class Game {
             d1.solarDiceInit();
             d2.lunarDiceInit();
 
-            botArray[i] = new SimpleBot(d1, d2, "bot#" + (i+1));
+            botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1));
             ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, this.nbPlayers - i);
         }
     }
@@ -71,8 +69,8 @@ public class Game {
             //        CardAssignement.getListCard(botArray[i]).get(k).doEffect(botArray[i]);
             //    }
             //}
-            botArray[i].play(sanctuary,islands);
-            printActions(botArray[i].getBotID());
+            botArray[i].play(sanctuary, islands);
+            printChanges(botArray[i].getBotID());
             System.out.println("____\n");
             BuyDiceCard.resetBotLog();
             BuyCard.resetBotLog();
@@ -119,57 +117,41 @@ public class Game {
 
     }
 
-    public void printActions(String bot)
-    {
-        if(BuyDiceCard.getFeePayed())
-        {
-            printCardsBougth(bot);
-            printDiceCardsBougth(bot);
+    public void printChanges(String bot) {
+
+        printDiceCards(bot);
+        if ((BuyDiceCard.getBought().size() > 0 && BuyCard.getBought().size() > 0) || BuyCard.getBought().size() > 1) {
+            System.out.println("Le bot " + bot + " a payé 2 SOLAR pour jouer une action supplémentaire");
+
         }
-        else
-        {
-            printDiceCardsBougth(bot);
-            printCardsBougth(bot);
-        }
+        printCards(bot);
+
     }
 
-    private void printDiceCardsBougth(String bot)
-    {
-        ArrayList<DiceCard> diceCardsBougth = BuyDiceCard.getBoughtArray();
-        ArrayList<Integer> prices = BuyDiceCard.getPricesArray();
-        if(diceCardsBougth.isEmpty())
-        {
+    private void printDiceCards(String bot) {
+        if(BuyDiceCard.getBought().isEmpty()) {
             System.out.println("Le bot " + bot + " n'a pas acheté de faces de dés.");
         }
-        else
-        {
-            while(!diceCardsBougth.isEmpty())
-            {
-                if(BuyDiceCard.getFeePayed()){ System.out.println("Le bot " + bot + " a payé 2 SOLAR pour jouer une action suplémentaire");}
-                System.out.println("Le bot "+bot+" a acheté la face "+diceCardsBougth.get(1)+" pour "+prices.get(0)+" GOLD et a remplacé la face "+diceCardsBougth.get(0));
-                diceCardsBougth.remove(1);
-                diceCardsBougth.remove(0);
-                prices.remove(0);
+
+        else {
+            for(int i = 0; i < BuyDiceCard.getBought().size(); i++) {
+                System.out.println("Le bot " + bot + " a acheté la face " + BuyDiceCard.getBought().get(0) + " pour "+ BuyDiceCard.getPrices().get(0) + " GOLD et a remplacé la face " + BuyDiceCard.getReplaced().get(0));
             }
+
             System.out.println("Le bot "+bot+" n'achète plus de faces.");
         }
 
     }
 
-    private void printCardsBougth(String bot) {
-        ArrayList<Card> cardsBougth = BuyCard.getBoughtArray();
-
-        if (cardsBougth.isEmpty()) {
+    private void printCards(String bot) {
+        if (BuyCard.getBought().isEmpty()) {
             System.out.println("Le bot " + bot + " n'a pas acheté de cartes.");
         }
-        else
-        {
-            while (!cardsBougth.isEmpty())
-            {
-                if(BuyCard.getFeePayed()){ System.out.println("Le bot " + bot + " a payé 2 SOLAR pour jouer une action suplémentaire");}
-                System.out.println("Le bot " + bot + " a acheté la carte " + cardsBougth.get(0).name() + " pour " + cardsBougth.get(0).getPrice()[0] + " SOLAR et "+cardsBougth.get(0).getPrice()[1]+" LUNAR et a gagné " + cardsBougth.get(0).getVictory()+" VICTORY");
-                cardsBougth.remove(0);
+        else {
+            for(int i = 0; i < BuyCard.getBought().size(); i++) {
+                System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).name() + " pour " + BuyCard.getBought().get(i).getPrice()[0] + " SOLAR et "+ BuyCard.getBought().get(i).getPrice()[1] + " LUNAR et a gagné " + BuyCard.getBought().get(i).getVictory() + " VICTORY");
             }
         }
     }
+
 }

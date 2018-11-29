@@ -1,7 +1,6 @@
 package bot;
 
 import game.BotScore;
-import game.DiceRoll;
 import game.dice.Dice;
 import game.dice.Sanctuary;
 

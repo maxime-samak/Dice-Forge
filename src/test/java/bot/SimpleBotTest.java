@@ -20,26 +20,26 @@ public class SimpleBotTest {
         Assert.assertNotNull(bot1);
 
         //Budget d'achat = 0.
-        //Assert.assertFalse(bot1.diceShopping(sanctuary,12));
-        Assert.assertFalse(bot1.diceShopping(sanctuary,8,false));
-        Assert.assertFalse(bot1.diceShopping(sanctuary,6,false));
-        //Assert.assertFalse(bot1.diceShopping(sanctuary,5));
-        //Assert.assertFalse(bot1.diceShopping(sanctuary,4));
-        Assert.assertFalse(bot1.diceShopping(sanctuary,3,false));
-        Assert.assertFalse(bot1.diceShopping(sanctuary,2,false));
+        Assert.assertFalse(bot1.diceShopping(sanctuary,12));
+        Assert.assertFalse(bot1.diceShopping(sanctuary,8));
+        Assert.assertFalse(bot1.diceShopping(sanctuary,6));
+        Assert.assertFalse(bot1.diceShopping(sanctuary,5));
+        Assert.assertFalse(bot1.diceShopping(sanctuary,4));
+        Assert.assertFalse(bot1.diceShopping(sanctuary,3));
+        Assert.assertFalse(bot1.diceShopping(sanctuary,2));
 
 
         ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
 
-        Assert.assertTrue(bot1.diceShopping(sanctuary,8,false));
-        Assert.assertTrue(bot1.diceShopping(sanctuary,2,false));
-        Assert.assertTrue(bot1.diceShopping(sanctuary,2,false));
+        Assert.assertTrue(bot1.diceShopping(sanctuary,8));
+        Assert.assertTrue(bot1.diceShopping(sanctuary,2));
+        Assert.assertTrue(bot1.diceShopping(sanctuary,2));
 
         ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
 
-        Assert.assertTrue(bot1.diceShopping(sanctuary,6,false));
-        Assert.assertTrue(bot1.diceShopping(sanctuary,3,false));
-        Assert.assertTrue(bot1.diceShopping(sanctuary,3,false));
+        Assert.assertTrue(bot1.diceShopping(sanctuary,6));
+        Assert.assertTrue(bot1.diceShopping(sanctuary,3));
+        Assert.assertTrue(bot1.diceShopping(sanctuary,3));
 
 
         BuyDiceCard.resetBotLog();
@@ -47,9 +47,9 @@ public class SimpleBotTest {
         ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
 
         //pool 3 = {A,A,B,B}
-        Assert.assertTrue(bot1.diceShopping(sanctuary,3,false)); //Achat carte A
-        Assert.assertTrue(bot1.diceShopping(sanctuary,3,false)); //Achat carte B
-        Assert.assertFalse(bot1.diceShopping(sanctuary,3,false)); //Si achat -> doublon
+        Assert.assertTrue(bot1.diceShopping(sanctuary,3)); //Achat carte A
+        Assert.assertTrue(bot1.diceShopping(sanctuary,3)); //Achat carte B
+        Assert.assertFalse(bot1.diceShopping(sanctuary,3)); //Si achat -> doublon
 
 
         BuyDiceCard.resetBotLog();
@@ -57,10 +57,10 @@ public class SimpleBotTest {
         ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
 
         //pool 3 = {A,A,B,B}
-        Assert.assertTrue(bot1.diceShopping(sanctuary,3,false)); //Achat carte A
-        Assert.assertTrue(bot1.diceShopping(sanctuary,3,false)); //Achat carte B
+        Assert.assertTrue(bot1.diceShopping(sanctuary,3)); //Achat carte A
+        Assert.assertTrue(bot1.diceShopping(sanctuary,3)); //Achat carte B
         BuyDiceCard.resetBotLog(); //Reset de l'historique d'achat.
-        Assert.assertTrue(bot1.diceShopping(sanctuary,3,false)); //Achat carte A ou B -> devrait être valide
+        Assert.assertTrue(bot1.diceShopping(sanctuary,3)); //Achat carte A ou B -> devrait être valide
 
     }
 }

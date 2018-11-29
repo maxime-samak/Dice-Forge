@@ -2,6 +2,8 @@ package game.dice;
 
 import game.BotScore;
 import game.ScoreCounter;
+import game.card.BuyCard;
+
 import java.util.ArrayList;
 
 /**
@@ -9,21 +11,22 @@ import java.util.ArrayList;
  */
 public class BuyDiceCard {
 
-    private static ArrayList<DiceCard> boughtArray = new ArrayList<>();
-    private static ArrayList<Integer> pricesArray = new ArrayList<>();
-    private static Boolean feePayed;
+    private static ArrayList<DiceCard> bought = new ArrayList<>();
+    private static ArrayList<DiceCard> replaced = new ArrayList<>();
+    private static ArrayList<Integer> prices = new ArrayList<>();
+    //private static boolean fee;
 
-    public static ArrayList<DiceCard> getBoughtArray() {
-        return boughtArray;
+    public static ArrayList<DiceCard> getBought() {
+        return bought;
     }
 
-    public static ArrayList<Integer> getPricesArray() {
-        return pricesArray;
+    public static ArrayList<DiceCard> getReplaced() { return replaced; }
+
+    public static ArrayList<Integer> getPrices() {
+        return prices;
     }
 
-    public static Boolean getFeePayed() {
-        return feePayed;
-    }
+    //public static boolean isFee() { return fee; }
 
     /**
      * La méthode vérifie dans la pool passée en paramètre si la face que le bot veut acheter est disponible,
@@ -39,37 +42,53 @@ public class BuyDiceCard {
      * @param botscore inventaire du bot
      * @return
      */
-    public static boolean setCard(Sanctuary sanctuary, int pool, DiceCard card, Dice dice, int cardToChange, BotScore botscore,Boolean bougth) {
-        feePayed=false;
-        for(DiceCard i : boughtArray) {
+    public static boolean setCard(Sanctuary sanctuary, int pool, DiceCard card, Dice dice, int cardToChange, BotScore botscore) {
+        if(botscore.getGold() < pool) {
+            return false;
+        }
+
+        for(DiceCard i : bought) {
             if(i.equals(card)){
                 return false;
             }
         }
 
-        if(botscore.getGold() < pool) {
-            return false;
+        if(BuyCard.getBought().size() > 0){
+
+            if (bought.size() == 0) {
+                if (!(botscore.getSolar() >= 2)) {
+                    return false;
+                }
+
+                else if(sanctuary.removeCard(pool, card)) {
+                    ScoreCounter.paySolar(botscore,2);
+                    replaced.add(dice.getFi(cardToChange));
+                    dice.setDiceCard(cardToChange, card);
+                    bought.add(card);
+                    prices.add(pool);
+                    ScoreCounter.payGold(botscore,pool);
+                    return true;
+                }
+            }
         }
 
-        else if(sanctuary.removeCard(pool, card)){
-            boughtArray.add(dice.getFi(cardToChange));
+        if (sanctuary.removeCard(pool, card)){
+            replaced.add(dice.getFi(cardToChange));
             dice.setDiceCard(cardToChange, card);
-            boughtArray.add(card);
-            pricesArray.add(pool);
+            bought.add(card);
+            prices.add(pool);
             ScoreCounter.payGold(botscore,pool);
-            if(bougth){ScoreCounter.paySolar(botscore,2);feePayed=true;}
             return true;
         }
         return false;
     }
 
     /**
-     *
+     * Réinitialise l'historique d'achat des bots en créant une nouvelle ArrayList vierge qui remplace l'ancien.
      */
     public static void resetBotLog() {
-        boughtArray = new ArrayList<>();
-        pricesArray = new ArrayList<>();
-        feePayed=false;
+        bought = new ArrayList<>();
+        prices = new ArrayList<>();
     }
 
 }

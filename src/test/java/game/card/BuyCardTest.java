@@ -25,10 +25,10 @@ public class BuyCardTest {
         SimpleBot bot =  new SimpleBot(d1, d2, "Bot1");
         Card card = Card.LE_PASSEUR;
         ScoreCounter.updateScore(bs1, new DiceCard[]{new DiceCard(2, Resource.LUNAR), new DiceCard(2, Resource.LUNAR)});
-        Assert.assertEquals(true, buyCard(islands, card, bs1,false, bot));
+        Assert.assertEquals(true, buyCard(islands, card, bs1, bot));
         Assert.assertEquals(0, bs1.getSolar());
         Assert.assertEquals(12, bs1.getVictory());
 
-        Assert.assertEquals(false, buyCard(islands, card, bs1,false, bot));
+        Assert.assertEquals(false, buyCard(islands, card, bs1, bot));
     }
 }

@@ -3,6 +3,7 @@ package game.card;
 import bot.AbstractBot;
 import game.BotScore;
 import game.ScoreCounter;
+import game.dice.BuyDiceCard;
 import game.dice.Resource;
 
 import java.util.ArrayList;
@@ -14,15 +15,10 @@ import java.util.ArrayList;
  */
 public class BuyCard {
 
-    private static ArrayList<Card> boughtArray = new ArrayList<>();
-    private static Boolean feePayed;
+    private static ArrayList<Card> bought = new ArrayList<>();
 
-    public static ArrayList<Card> getBoughtArray() {
-        return boughtArray;
-    }
-
-    public static Boolean getFeePayed() {
-        return feePayed;
+    public static ArrayList<Card> getBought() {
+        return bought;
     }
 
     /**
@@ -32,27 +28,38 @@ public class BuyCard {
      * @param botScore
      * @return
      */
-    public static boolean buyCard(Islands islands, Card card, BotScore botScore, boolean buyed, AbstractBot bot){
+    public static boolean buyCard(Islands islands, Card card, BotScore botScore, AbstractBot bot){
         if(card.getPrice()[0] <= botScore.getSolar() && card.getPrice()[1] <= botScore.getLunar()) {
-            for (Card i : islands.getIslands().get(Math.max(card.getPrice()[0],card.getPrice()[1]))) {
-                if(i != null && i.equals(card)) {
-                    if(buyed)
-                    {
-                        ScoreCounter.paySolar(botScore, card.getPrice()[0]+2);
-                        feePayed=true;
+            for (Card c : islands.getIslands().get(card.getPrice()[0] + card.getPrice()[1])) {
+                if(c != null && c.equals(c)) {
+
+                    if((BuyDiceCard.getBought().size() > 0 || bought.size() > 0) && botScore.getSolar() >= card.getPrice()[0] + 2) {
+                        ScoreCounter.paySolar(botScore, c.getPrice()[0] + 2);
+                        ScoreCounter.payLunar(botScore, c.getPrice()[1]);
+                        ScoreCounter.addResource(botScore, Resource.VICTORY, c.getVictory());
+                        BuyCard.bought.add(c);
+                        islands.removeCard(c);
+
+                        if(c.isTypeReinforcement()){
+                            CardAssignement.setCardAssignement(bot, c);
+                        }
+
+                        return true;
                     }
-                    else
-                    {
-                        ScoreCounter.paySolar(botScore, card.getPrice()[0]);
+
+                    else if (!(BuyDiceCard.getBought().size() > 0 && bought.size() > 0)) {
+                        ScoreCounter.paySolar(botScore, c.getPrice()[0]);
+                        ScoreCounter.payLunar(botScore, c.getPrice()[1]);
+                        ScoreCounter.addResource(botScore, Resource.VICTORY, c.getVictory());
+                        BuyCard.bought.add(c);
+                        islands.removeCard(c);
+
+                        if(c.isTypeReinforcement()){
+                            CardAssignement.setCardAssignement(bot, c);
+                        }
+
+                        return true;
                     }
-                    ScoreCounter.payLunar(botScore, card.getPrice()[1]);
-                    ScoreCounter.addResource(botScore, Resource.VICTORY, card.getVictory());
-                    boughtArray.add(card);
-                    islands.removeCard(card);
-                    if(card.isTypeReinforcement()){
-                        CardAssignement.setCardAssignement(bot, card);
-                    }
-                    return true;
                 }
             }
         }
@@ -61,7 +68,6 @@ public class BuyCard {
     }
 
     public static void resetBotLog() {
-        boughtArray = new ArrayList<>();
-        feePayed=false;
+        bought = new ArrayList<>();
     }
 }
