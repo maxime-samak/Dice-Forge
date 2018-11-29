@@ -36,6 +36,7 @@ public class Islands {
 
         for(int i = 0; i < nbPLayers; i++) {
             island1[i] = Card.L_ANCIEN;
+            island1[i + nbPLayers] = Card.LE_COFFRE_DU_FORGERON;
         }
         islands.put(1, island1);
 

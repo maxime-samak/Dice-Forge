@@ -8,23 +8,29 @@ import game.dice.Dice;
 import game.dice.DiceCard;
 import game.dice.Resource;
 
+import static game.dice.Resource.X3;
+
 /**
  * Classe Card permet la création de cartes prédéfinies
  *
  */
 public enum Card {
 
-    LES_SABOTS_D_ARGENT(2, 0, 2, true),
-    L_ANCIEN(0, 1, 0, true),
-    LES_AILES_DE_LA_GARDIENNES(4, 2, 0, true),
-    LE_PASSEUR(12, 0, 4, false),
-    LA_MEDUSE(14, 4, 0, false),
-    L_HYDRE(26, 5, 5, false);
+    LES_SABOTS_D_ARGENT(2, 0, 2, true, false),
+    L_ANCIEN(0, 1, 0, true, false),
+    LES_AILES_DE_LA_GARDIENNES(4, 2, 0, true, false),
+    LE_PASSEUR(12, 0, 4, false, false),
+    LA_MEDUSE(14, 4, 0, false, false),
+    L_HYDRE(26, 5, 5, false, false),
+    LES_SATYRES(6,0,3,false,true),
+    LE_CASQUE_D_INVISIBILITE(4,0,5, false, true),
+    LE_COFFRE_DU_FORGERON(2,0,1,false, true);
 
     private int victory;
     private int cost_solar;
     private int cost_lunar;
     private boolean typeReinforcement;
+    private boolean typeInstant;
 
     /**
      * Construction de la classe, qui prend 4 attributs
@@ -32,12 +38,15 @@ public enum Card {
      * @param cost_solar
      * @param cost_lunar
      * @param typeReinforcement
+     * @param typeInstant
      */
-     Card(int victory, int cost_solar, int cost_lunar, boolean typeReinforcement) {
+
+    Card(int victory, int cost_solar, int cost_lunar, boolean typeReinforcement, boolean typeInstant) {
         this.victory = victory;
         this.cost_solar = cost_solar;
         this.cost_lunar = cost_lunar;
         this.typeReinforcement = typeReinforcement;
+        this.typeInstant = typeInstant;
     }
 
     /**
@@ -86,6 +95,10 @@ public enum Card {
                     return new DiceCard(new int[]{0,1,1},new Resource[]{Resource.PLUS,Resource.GOLD,Resource.SOLAR});
                 }
 
+            case LE_COFFRE_DU_FORGERON:
+                ScoreCounter.incrementExtended(b.getBotScore());
+                break;
+
             default: {
             }
         }
@@ -121,6 +134,8 @@ public enum Card {
                 return noEffect;
             case L_HYDRE:
                 return noEffect;
+            case LE_COFFRE_DU_FORGERON:
+                return "Etend la réserve du joueur";
             default:
                 return "La carte n'existe pas.";
         }

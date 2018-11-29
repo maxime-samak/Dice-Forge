@@ -90,4 +90,9 @@ public class BotScore {
             this.lunar -= lunar;
         }
     }
+
+    protected void incrementExtended() {
+        extended++;
+    }
+
 }
