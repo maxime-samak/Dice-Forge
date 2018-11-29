@@ -58,7 +58,7 @@ public class Game {
             System.out.println("Tour de: " + botArray[i].getBotID());
             for (int j = 0; j < nbPlayers; j++){
                 System.out.println("Lancer de dés " + botArray[j].getBotID() + ":");
-                DiceCard[] roll = roll(botArray[j].getDice1(), botArray[j].getDice2());
+                DiceCard[] roll = new DiceCard[]{roll(botArray[j].getDice1()), roll(botArray[j].getDice2())};
                 DiceCard dc0=botArray[j].choose(roll[0]);
                 DiceCard dc1=botArray[j].choose(roll[1]);
                 if(roll[0].getResource()==Resource.CHOICE.resourceName()&&roll[1].getResource()==Resource.CHOICE.resourceName())
