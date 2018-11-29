@@ -46,10 +46,10 @@ Groupe DFG
 
 ### [Livraison 3.5](https://github.com/SamakM/Dice-Forge/milestone/7)
 #### Objectif de livraison
-- [ ] Modification de ScoreCounter en fonction du nouveau DiceRoll 
-- [ ] Modification de l'affichage produit par Game
-- [ ] Modification des test en relation avec DiceRoll
-- [ ] Modification de la classe DiceRoll
+- [x] Modification de ScoreCounter en fonction du nouveau DiceRoll 
+- [x] Modification de l'affichage produit par Game
+- [x] Modification des test en relation avec DiceRoll
+- [x] Modification de la classe DiceRoll
 
 
 ### [Livraison 4](https://github.com/SamakM/Dice-Forge/milestone/4)
