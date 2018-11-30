@@ -15,7 +15,7 @@ public class DiceRollTest {
         d1.solarDiceInit();
         Dice d2 = new Dice();
         d2.lunarDiceInit();
-        DiceCard[] roll = roll(d1,d2);
+        DiceCard[] roll = new DiceCard[]{roll(d1), roll(d2)};
 
         Assert.assertTrue((roll[0].equals(new DiceCard(1, Resource.SOLAR)))||
                         (roll[0].equals(new DiceCard(1, Resource.GOLD))));

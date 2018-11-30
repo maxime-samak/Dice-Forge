@@ -53,31 +53,6 @@ public class Dice {
         F6 = new DiceCard(1, GOLD);
     }
 
-    public void showFace(int i) {
-        switch(i){
-            case 1:
-                System.out.println(F1);
-                break;
-            case 2:
-                System.out.println(F2);
-                break;
-            case 3:
-                System.out.println(F3);
-                break;
-            case 4:
-                System.out.println(F4);
-                break;
-            case 5:
-                System.out.println(F5);
-                break;
-            case 6:
-                System.out.println(F6);
-                break;
-            default:
-                System.out.println(">>>Problème<<<");
-        }
-    }
-
     protected void setDiceCard(int i, DiceCard card) {
         switch (i) {
             case 1:
@@ -98,8 +73,6 @@ public class Dice {
             case 6:
                 F6 = card;
                 break;
-            default:
-                System.out.println("Out of range > Error");
         }
     }
 
