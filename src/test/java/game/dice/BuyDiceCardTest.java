@@ -2,14 +2,18 @@ package game.dice;
 
 import bot.SimpleBot;
 import game.ScoreCounter;
+import game.card.BuyCard;
 import org.junit.Assert;
 import org.junit.Test;
 
 public class BuyDiceCardTest {
 
     @Test
-    public void BuyDiceCardTest()
-    {
+    public void BuyDiceCardTest() {
+
+        BuyDiceCard.resetBotLog();
+        BuyCard.resetBotLog();
+
         Dice d1 = new Dice();
         d1.solarDiceInit();
         Dice d2 = new Dice();

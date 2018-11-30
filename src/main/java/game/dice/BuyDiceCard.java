@@ -3,7 +3,6 @@ package game.dice;
 import game.BotScore;
 import game.ScoreCounter;
 import game.card.BuyCard;
-
 import java.util.ArrayList;
 
 /**
@@ -14,7 +13,6 @@ public class BuyDiceCard {
     private static ArrayList<DiceCard> bought = new ArrayList<>();
     private static ArrayList<DiceCard> replaced = new ArrayList<>();
     private static ArrayList<Integer> prices = new ArrayList<>();
-    //private static boolean fee;
 
     public static ArrayList<DiceCard> getBought() {
         return bought;
@@ -25,8 +23,6 @@ public class BuyDiceCard {
     public static ArrayList<Integer> getPrices() {
         return prices;
     }
-
-    //public static boolean isFee() { return fee; }
 
     /**
      * La méthode vérifie dans la pool passée en paramètre si la face que le bot veut acheter est disponible,

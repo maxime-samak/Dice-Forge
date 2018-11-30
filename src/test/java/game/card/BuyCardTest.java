@@ -3,6 +3,7 @@ package game.card;
 import bot.SimpleBot;
 import game.BotScore;
 import game.ScoreCounter;
+import game.dice.BuyDiceCard;
 import game.dice.Dice;
 import game.dice.DiceCard;
 import game.dice.Resource;
@@ -15,6 +16,10 @@ public class BuyCardTest {
 
     @Test
     public void BuyCardTest() {
+
+        BuyDiceCard.resetBotLog();
+        BuyCard.resetBotLog();
+
         Dice d1 = new Dice();
         d1.solarDiceInit();
         Dice d2 = new Dice();
