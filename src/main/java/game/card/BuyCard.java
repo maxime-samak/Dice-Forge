@@ -43,6 +43,9 @@ public class BuyCard {
                         if(c.isTypeReinforcement()){
                             CardAssignement.setCardAssignement(bot, c);
                         }
+                        if(c.isTypeInstant()){
+                            c.doEffect(bot);
+                        }
 
                         return true;
                     }

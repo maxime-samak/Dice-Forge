@@ -231,11 +231,11 @@ public class SimpleBot extends AbstractBot {
         int buyCard=0;
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
-       /* if(lunar >= 6 && buyCard ==0 && solar>=solarFee)
+        if(lunar >= 6 && buyCard ==0 && solar>=solarFee)
         {
             if(shopIslandLunar(islands,6)){return true;}
         }
-        if(lunar >= 5 && buyCard ==0 && solar>=solarFee)
+        /* if(lunar >= 5 && buyCard ==0 && solar>=solarFee)
         {
             if(shopIslandLunar(islands,5)){return true;}
         }*/
@@ -264,11 +264,11 @@ public class SimpleBot extends AbstractBot {
         int buyCard=0;
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
-       /* if(solar >= 6+solarFee && buyCard ==0)
+        if(solar >= 6+solarFee && buyCard ==0)
         {
             if(shopIslandSolar(islands,6)){return true;}
         }
-        if(solar >= 5+solarFee && buyCard ==0)
+        /*if(solar >= 5+solarFee && buyCard ==0)
         {
             if(shopIslandSolar(islands,5)){return true;}
         }*/
@@ -342,6 +342,10 @@ public class SimpleBot extends AbstractBot {
                 }
             case LES_SABOTS_D_ARGENT:
                 return "dice1";
+            case L_ENIGME:
+                return "dice1";
+            case LE_CASQUE_D_INVISIBILITE: case LE_MIROIR_ABYSSAL:
+                return "dice1#1";
             default: return "Unknown";
         }
     }

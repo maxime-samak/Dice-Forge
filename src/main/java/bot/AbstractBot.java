@@ -1,7 +1,9 @@
 package bot;
 
 import game.BotScore;
+import game.card.Card;
 import game.dice.Dice;
+import game.dice.DiceCard;
 import game.dice.Sanctuary;
 
 /**
@@ -36,5 +38,9 @@ public abstract class AbstractBot implements Bot {
     }
 
     public void play(Sanctuary sanctuary){}
+
+    public abstract String strategyCard(Card card);
+
+    public abstract DiceCard choose(DiceCard d);
 
 }

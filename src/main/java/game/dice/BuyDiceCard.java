@@ -87,4 +87,14 @@ public class BuyDiceCard {
         prices = new ArrayList<>();
     }
 
+    /**
+     * Modifie la face de dé souhaité, et la remplace par card.
+     * @param diceCard
+     * @param dice
+     * @param cardToChange
+     */
+    public static void setCard(DiceCard diceCard, Dice dice, int cardToChange){
+        dice.setDiceCard(cardToChange, diceCard);
+    }
+
 }
