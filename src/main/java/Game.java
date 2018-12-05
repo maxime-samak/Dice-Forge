@@ -1,5 +1,6 @@
 import bot.AbstractBot;
 import bot.Bot;
+import bot.SavingBot;
 import bot.SimpleBot;
 import game.ScoreCounter;
 import game.card.BuyCard;
@@ -18,7 +19,7 @@ import static game.DiceRoll.roll;
 public class Game {
 
     private final int nbPlayers;
-    private final SimpleBot[] botArray;
+    private final AbstractBot[] botArray;
     private final int nbTurn;
     private final Sanctuary sanctuary;
     private final Islands islands;
@@ -30,7 +31,7 @@ public class Game {
     public Game(int nbPlayers) {
 
         this.nbPlayers = nbPlayers;
-        this.botArray = new SimpleBot[nbPlayers];
+        this.botArray = new AbstractBot[nbPlayers];
         this.sanctuary = new Sanctuary(nbPlayers);
         this.islands= new Islands(nbPlayers);
 
@@ -43,7 +44,10 @@ public class Game {
             d1.solarDiceInit();
             d2.lunarDiceInit();
 
-            botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1));
+            if(i%2==0)
+                botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1));
+            else
+                botArray[i] = new SavingBot(d1, d2, "bot#" + (i + 1));
             ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, this.nbPlayers - i);
         }
         CardAssignement.initCardAssignement(botArray);

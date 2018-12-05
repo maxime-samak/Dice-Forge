@@ -18,6 +18,7 @@ public class SavingBot extends AbstractBot {
         super(d1,d2, botID);
     }
 
+    @Override
     public void play(Sanctuary sanctuary,Islands islands) {
         buyInOrder(sanctuary,islands);
     }
@@ -65,7 +66,7 @@ public class SavingBot extends AbstractBot {
         int gold = this.getBotScore().getGold();
         int[] pools = new int[]{12,8,6,5,4,3,2};
 
-        for(int i=0;i<pools.length-1;i++)
+        for(int i=0;i<pools.length;i++)
         {
             if(!(sanctuary.getPoolAvailables(pools[i]).isEmpty()) && gold >= pools[i])
             {
@@ -177,7 +178,7 @@ public class SavingBot extends AbstractBot {
         int solar = this.getBotScore().getSolar();
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
-        if(lunar >= 5 && solar >= 5 + solarFee) { shopIsland(islands,10); nbBuy++; }
+        if(!(islands.getIslandAvailables(10).isEmpty()) && lunar >= 5 && solar >= 5 + solarFee) { shopIslandTen(islands); nbBuy++; }
         if(nbBuy == 0) {
             if(lunar <= solar) {
                 if (solarShopping(islands)) {
@@ -230,7 +231,7 @@ public class SavingBot extends AbstractBot {
     private Boolean solarShopping(Islands islands)
     {
         int solar = this.getBotScore().getSolar();
-        int buyCard=0;
+
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
 
@@ -245,12 +246,12 @@ public class SavingBot extends AbstractBot {
         return false;
     }
 
-    private Boolean shopIsland(Islands islands,int i)
+    private Boolean shopIslandTen(Islands islands)
     {
-        Card[] cards = islands.getIslands().get(i);
-        for(int cpt=0;cpt<cards.length;cpt++)
+        ArrayList<Card> cards = islands.getIslandAvailables(10);
+        for(int cpt=0;cpt<cards.size();cpt++)
         {
-            if(BuyCard.buyCard(islands,cards[cpt],this.getBotScore(), this))
+            if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(), this))
             {
                 return true;
             }
