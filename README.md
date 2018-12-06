@@ -66,10 +66,12 @@ Groupe DFG
 
 ### [Livraison 5](https://github.com/SamakM/Dice-Forge/milestone/5)
 #### Objectif de livraison
-- [ ] Le bot joue le meilleur coup possible.
-- [ ] Les deux bots appliquent des "stratégies" différentes.
+- [ ] Ajout de tous les effets de cartes.
+- [ ] Le joueur éxécute l'effet d'une carte.
+- [ ] Optimisation et améliorations du code. 
 - [ ] Ajout de nouveaux tests.
-- [ ] Optimisation et améliorations du code.
+- [ ] Les deux bots appliquent des "stratégies" différentes.
+- [ ] Ajout des stratégies sur les cartes.
 
 #### Date prévu
 *07/12/2018*

@@ -1,11 +1,12 @@
-package game.card.newcard;
+package game.card;
 
 import bot.SimpleBot;
+import game.card.AbstractCard;
+import game.card.ResourceCard;
 import game.dice.Dice;
 import game.dice.Resource;
 import org.junit.Test;
-import game.card.newcard.ResourceCard;
-import game.card.newcard.AbstractCard;
+
 import game.*;
 import org.junit.*;
 

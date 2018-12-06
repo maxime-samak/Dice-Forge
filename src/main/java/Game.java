@@ -1,15 +1,11 @@
 import bot.AbstractBot;
-import bot.Bot;
 import bot.SavingBot;
 import bot.SimpleBot;
 import game.ScoreCounter;
 import game.card.BuyCard;
-import game.card.Card;
-import game.card.CardAssignement;
 import game.card.Islands;
+import game.card.Inventory;
 import game.dice.*;
-
-import java.util.ArrayList;
 
 import static game.DiceRoll.roll;
 
@@ -23,6 +19,7 @@ public class Game {
     private final int nbTurn;
     private final Sanctuary sanctuary;
     private final Islands islands;
+    private Inventory inventory;
 
     /**
      * Créer et lance un partie avec un nombre de joueur passé en paramètre.
@@ -33,7 +30,8 @@ public class Game {
         this.nbPlayers = nbPlayers;
         this.botArray = new AbstractBot[nbPlayers];
         this.sanctuary = new Sanctuary(nbPlayers);
-        this.islands= new Islands(nbPlayers);
+        this.islands = new Islands(nbPlayers);
+
 
         if(nbPlayers == 3) {this.nbTurn = 10;}
         else {this.nbTurn = 9;}
@@ -44,13 +42,13 @@ public class Game {
             d1.solarDiceInit();
             d2.lunarDiceInit();
 
-            if(i%2==0)
+            if(i%2 == 0)
                 botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1));
             else
                 botArray[i] = new SavingBot(d1, d2, "bot#" + (i + 1));
             ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, this.nbPlayers - i);
         }
-        CardAssignement.initCardAssignement(botArray);
+        this.inventory = new Inventory(botArray);
     }
 
     /**
@@ -76,26 +74,23 @@ public class Game {
                 ScoreCounter.updateScore(botArray[j].getBotScore(),new DiceCard[]{dc0,dc1});
                 System.out.println(botArray[j].getBotScore().getInfos() + "\n");
             }
-            //System.out.println("DES DU BOT AVANT");
-            //System.out.println(botArray[i].getDice1().toString());
-            //System.out.println(botArray[i].getDice2().toString());
+
             System.out.println("Phase d'action de " + botArray[i].getBotID()+" :");
-            for(int k = 0;  k < CardAssignement.getListCard(botArray[i]).size()-1; k++){
-                System.out.println("Exécution carte renfort: " + CardAssignement.getListCard(botArray[i]).get(k).name());
-                System.out.println(CardAssignement.getListCard(botArray[i]).get(k).toString());
-                Object result=CardAssignement.getListCard(botArray[i]).get(k).doEffect(botArray[i]);
+            for(int k = 0;  k < inventory.getRecurrent(botArray[i]).size(); k++){
+                System.out.println("Exécution carte renfort: " + inventory.getRecurrent(botArray[i]).get(k).getName());
+                System.out.println(inventory.getRecurrent(botArray[i]).get(k).effectToString());
+                inventory.getRecurrent(botArray[i]).get(k).getEffect(botArray[i]);
+
+                /*Object result=CardAssignement.getListCard(botArray[i]).get(k).doEffect(botArray[i]);
                 if(result!=null)
                     System.out.println(botArray[i].getBotID()+" a reçu : "+result.toString());
-                System.out.println(botArray[i].getBotScore().getInfos() + "\n");
+                System.out.println(botArray[i].getBotScore().getInfos() + "\n");*/
             }
-            botArray[i].play(sanctuary,islands);
+            botArray[i].play(sanctuary, islands);
             printChanges(botArray[i].getBotID());
             System.out.println("____\n");
             BuyDiceCard.resetBotLog();
             BuyCard.resetBotLog();
-            //System.out.println("DES DU BOT APRES");
-            //System.out.println(botArray[i].getDice1().toString());
-            //System.out.println(botArray[i].getDice2().toString());
         }
     }
 
@@ -107,7 +102,7 @@ public class Game {
         System.out.println();
 
         for(int i = 0; i < nbTurn; i++) {
-            System.out.println("**** Tour: " + (i + 1) + " ****");
+            System.out.println("**** Manche: " + (i + 1) + " ****");
             this.turn();
             System.out.println("******************\n");
         }
@@ -168,7 +163,7 @@ public class Game {
         }
         else {
             for(int i = 0; i < BuyCard.getBought().size(); i++) {
-                System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).name() + " pour " + BuyCard.getBought().get(i).getPrice()[0] + " SOLAR et "+ BuyCard.getBought().get(i).getPrice()[1] + " LUNAR et a gagné " + BuyCard.getBought().get(i).getVictory() + " VICTORY");
+                System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).getName() + " pour " + BuyCard.getBought().get(i).getPrice()[0] + " SOLAR et "+ BuyCard.getBought().get(i).getPrice()[1] + " LUNAR et a gagné " + BuyCard.getBought().get(i).getVictory() + " VICTORY");
             }
         }
     }
