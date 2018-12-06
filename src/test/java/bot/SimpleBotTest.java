@@ -1,6 +1,7 @@
 package bot;
 
 import game.ScoreCounter;
+import game.card.BuyCard;
 import game.dice.*;
 import org.junit.Assert;
 import org.junit.Test;
@@ -8,7 +9,11 @@ import org.junit.Test;
 public class SimpleBotTest {
 
     @Test
-    public void SimpleBotTest(){ //Test de
+    public void SimpleBotTest(){
+
+        BuyDiceCard.resetBotLog();
+        BuyCard.resetBotLog();
+
         Dice d1 = new Dice();
         d1.solarDiceInit();
         Dice d2 = new Dice();

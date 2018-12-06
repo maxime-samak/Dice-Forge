@@ -13,7 +13,7 @@ public class CardAssignement {
         return cardAssignement.get(bot);
     }
 
-    protected static void setCardAssignement(AbstractBot bot, Card card){
+    protected static void setCardAssignement(AbstractBot bot, Card card) {
         if(card.isTypeReinforcement()){
                 cardAssignement.get(bot).add(card);
         }

@@ -3,7 +3,6 @@ package game.dice;
 import game.BotScore;
 import game.ScoreCounter;
 import game.card.BuyCard;
-
 import java.util.ArrayList;
 
 /**
@@ -14,7 +13,6 @@ public class BuyDiceCard {
     private static ArrayList<DiceCard> bought = new ArrayList<>();
     private static ArrayList<DiceCard> replaced = new ArrayList<>();
     private static ArrayList<Integer> prices = new ArrayList<>();
-    //private static boolean fee;
 
     public static ArrayList<DiceCard> getBought() {
         return bought;
@@ -25,8 +23,6 @@ public class BuyDiceCard {
     public static ArrayList<Integer> getPrices() {
         return prices;
     }
-
-    //public static boolean isFee() { return fee; }
 
     /**
      * La méthode vérifie dans la pool passée en paramètre si la face que le bot veut acheter est disponible,
@@ -53,7 +49,7 @@ public class BuyDiceCard {
             }
         }
 
-        if(BuyCard.getBought().size() > 0){
+        if(BuyCard.getBought().size() > 0) {
 
             if (bought.size() == 0) {
                 if (!(botscore.getSolar() >= 2)) {
@@ -83,12 +79,32 @@ public class BuyDiceCard {
         return false;
     }
 
+    public static boolean setSpecial(Dice dice, int face, DiceCard newcard) {
+        if (!newcard.equals(new DiceCard(0,Resource.X3)) && !newcard.equals(new DiceCard(0,Resource.QUESTION))) {
+            return false;
+        }
+        else {
+            dice.setDiceCard(face, newcard);
+            return true;
+        }
+    }
+
     /**
      * Réinitialise l'historique d'achat des bots en créant une nouvelle ArrayList vierge qui remplace l'ancien.
      */
     public static void resetBotLog() {
         bought = new ArrayList<>();
         prices = new ArrayList<>();
+    }
+
+    /**
+     * Modifie la face de dé souhaité, et la remplace par card.
+     * @param diceCard
+     * @param dice
+     * @param cardToChange
+     */
+    public static void setCard(DiceCard diceCard, Dice dice, int cardToChange){
+        dice.setDiceCard(cardToChange, diceCard);
     }
 
 }

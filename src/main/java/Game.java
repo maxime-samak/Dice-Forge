@@ -1,5 +1,6 @@
 import bot.AbstractBot;
 import bot.Bot;
+import bot.SavingBot;
 import bot.SimpleBot;
 import game.ScoreCounter;
 import game.card.BuyCard;
@@ -18,7 +19,7 @@ import static game.DiceRoll.roll;
 public class Game {
 
     private final int nbPlayers;
-    private final SimpleBot[] botArray;
+    private final AbstractBot[] botArray;
     private final int nbTurn;
     private final Sanctuary sanctuary;
     private final Islands islands;
@@ -30,7 +31,7 @@ public class Game {
     public Game(int nbPlayers) {
 
         this.nbPlayers = nbPlayers;
-        this.botArray = new SimpleBot[nbPlayers];
+        this.botArray = new AbstractBot[nbPlayers];
         this.sanctuary = new Sanctuary(nbPlayers);
         this.islands= new Islands(nbPlayers);
 
@@ -43,14 +44,17 @@ public class Game {
             d1.solarDiceInit();
             d2.lunarDiceInit();
 
-            botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1));
+            if(i%2==0)
+                botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1));
+            else
+                botArray[i] = new SavingBot(d1, d2, "bot#" + (i + 1));
             ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, this.nbPlayers - i);
         }
         CardAssignement.initCardAssignement(botArray);
     }
 
     /**
-     * la méthode fais passer les tours, a chaque tour de "jeu" il y'a un tour de chaque joueur,
+     * la méthode fais passer les tours, a chaque manche il y'a un tour de chaque joueur,
      * au tour d'un joueur tout le monde lance les dés et le dis joueur peut aplliquer sa stratégie.
      */
     public void turn() {
@@ -59,8 +63,8 @@ public class Game {
             for (int j = 0; j < nbPlayers; j++){
                 System.out.println("Lancer de dés " + botArray[j].getBotID() + ":");
                 DiceCard[] roll = new DiceCard[]{roll(botArray[j].getDice1()), roll(botArray[j].getDice2())};
-                DiceCard dc0=botArray[j].choose(roll[0]);
-                DiceCard dc1=botArray[j].choose(roll[1]);
+                DiceCard dc0 = botArray[j].choose(roll[0]);
+                DiceCard dc1 = botArray[j].choose(roll[1]);
                 if(roll[0].getResource()==Resource.CHOICE.resourceName()&&roll[1].getResource()==Resource.CHOICE.resourceName())
                     System.out.println(roll[0] +" ("+dc0+" choisi )"+ "\n" + roll[1]+" ("+dc1+" choisi )");
                 else if(roll[0].getResource()==Resource.CHOICE.resourceName())

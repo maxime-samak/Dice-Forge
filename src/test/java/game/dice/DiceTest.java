@@ -1,8 +1,5 @@
 package game.dice;
 
-import game.dice.Dice;
-import game.dice.DiceCard;
-import game.dice.Resource;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -10,7 +7,7 @@ public class DiceTest {
 
     @Test
     public void DiceTest() {
-    //
+
         Dice dice1 = new Dice();
         dice1.solarDiceInit();
         Dice dice2 = new Dice();

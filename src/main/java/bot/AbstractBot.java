@@ -1,7 +1,11 @@
 package bot;
 
 import game.BotScore;
+import game.card.Card;
+import game.card.Islands;
 import game.dice.Dice;
+import game.dice.DiceCard;
+import game.dice.Resource;
 import game.dice.Sanctuary;
 
 /**
@@ -35,6 +39,27 @@ public abstract class AbstractBot implements Bot {
         return dice2;
     }
 
-    public void play(Sanctuary sanctuary){}
+    public void play(Sanctuary sanctuary, Islands islands){}
+
+    public abstract String strategyCard(Card card);
+
+    public abstract DiceCard choose(DiceCard d);
+    //public abstract void play(Sanctuary sanctuary, Islands islands);
+
+    public boolean tradeGold() {
+        return false; //choix par défaut arbitraire
+    }
+
+    public Resource getPreferedResource() {
+        return Resource.SOLAR; //choix par défaut arbitraire
+    }
+
+    public Dice getPreferedDice() {
+        return dice1; //choix par défaut arbitraire
+    }
+
+    public int getPreferedFace() {
+        return 4; //choix par défaut arbitraire
+    }
 
 }

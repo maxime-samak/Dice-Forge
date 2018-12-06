@@ -1,18 +1,25 @@
 package bot;
 
+import game.card.newcard.Islands;
+import game.card.Card;
 import game.dice.Dice;
+import game.dice.Sanctuary;
+import game.dice.DiceCard;
 
 /**
  * Classe Bot implémente ce que le bot doit pouvoir faire
  */
 public interface Bot {
-    String getBotID();
-    Dice getDice1();
-    Dice getDice2();
 
-    /*
-     * ajouter play()
-     */
+    String getBotID();
+
+    Dice getDice1();
+
+    Dice getDice2();
+    String strategyCard(Card card);
+    DiceCard choose(DiceCard d);
+
+    //void play(Sanctuary sanctuary, Islands islands);
 
 }
 
