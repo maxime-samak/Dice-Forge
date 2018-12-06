@@ -1,9 +1,6 @@
 package bot;
 
-import game.card.AbstractCard;
-import game.card.BuyCard;
-import game.card.Card;
-import game.card.Islands;
+import game.card.*;
 import game.dice.*;
 import java.util.ArrayList;
 import static game.dice.BuyDiceCard.setCard;
@@ -21,44 +18,38 @@ public class SimpleBot extends AbstractBot {
     }
 
     @Override
-    public void play(Sanctuary sanctuary,Islands islands) {
-        buyInOrder(sanctuary,islands,false);
-    }
+    public void play(Sanctuary sanctuary, Islands islands, Inventory inventory) { buyInOrder(sanctuary,islands,false,inventory); }
 
     /**
      * Cette méthode choisit si le bot veut acheter une carte ou une face de dés
      */
-    public void buyInOrder(Sanctuary sanctuary,Islands islands,Boolean secondBuy) {
-
-        int gold = this.getBotScore().getGold();
-        int solar = this.getBotScore().getSolar();
-        int lunar = this.getBotScore().getLunar();
+    public void buyInOrder(Sanctuary sanctuary,Islands islands,Boolean secondBuy,Inventory inventory) {
 
         if(secondBuy)
         {
-            if((gold > lunar && gold > solar)) {
+            if((this.getBotScore().getGold() > this.getBotScore().getLunar() && this.getBotScore().getGold() > this.getBotScore().getSolar())) {
                 this.diceShopping(sanctuary);
             }
             else {
-                this.cardShopping(islands);
+                this.cardShopping(islands,inventory);
             }
         }
         else {
-            if ((gold > lunar && gold > solar)) {
+            if ((this.getBotScore().getGold() > this.getBotScore().getLunar() && this.getBotScore().getGold() > this.getBotScore().getSolar())) {
                 Boolean buy = this.diceShopping(sanctuary);
                 if (buy) {
-                    if (solar >= 3 || (solar >= 2 && lunar >= 1)) {
-                        this.cardShopping(islands);
+                    if (this.getBotScore().getSolar() >= 3 || (this.getBotScore().getSolar() >= 2 && this.getBotScore().getLunar() >= 1)) {
+                        this.cardShopping(islands,inventory);
                     }
                 }
                 else {
-                    this.cardShopping(islands);
+                    this.cardShopping(islands,inventory);
                 }
             }
             else {
-                Boolean buy = this.cardShopping(islands);
+                Boolean buy = this.cardShopping(islands,inventory);
                 if (buy) {
-                   buyInOrder(sanctuary,islands,true);
+                   buyInOrder(sanctuary,islands,true,inventory);
                 }
                 else {
                     this.diceShopping(sanctuary);
@@ -71,12 +62,11 @@ public class SimpleBot extends AbstractBot {
 
     public Boolean diceShopping(Sanctuary sanctuary) {
         int nbBuy = 0;
-        int gold = this.getBotScore().getGold();
-        int[] pools = new int[]{12,8,6,5,4,3,2};
+                int[] pools = new int[]{12,8,6,5,4,3,2};
 
         for(int i=0;i<pools.length;i++)
         {
-            if(gold>=pools[i] && nbBuy <=1)
+            if(this.getBotScore().getGold()>=pools[i] && nbBuy <=1)
             {
                 if(diceShopping(sanctuary,pools[i])){nbBuy++;}
             }
@@ -188,30 +178,28 @@ public class SimpleBot extends AbstractBot {
 
     }**/
 
-    protected Boolean cardShopping(Islands islands) {
+    protected Boolean cardShopping(Islands islands,Inventory inventory) {
         int nbBuy = 0;
-        int lunar = this.getBotScore().getLunar();
-        int solar = this.getBotScore().getSolar();
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
-        if(!(islands.getIslandAvailables(10).isEmpty()) && lunar >= 5 && solar >= 5 + solarFee) { if(shopIslandTen(islands)){nbBuy++;}}
+        if(!(islands.getIslandAvailables(10).isEmpty()) && this.getBotScore().getLunar() >= 5 && this.getBotScore().getSolar() >= 5 + solarFee) { if(shopIslandTen(islands,inventory)){nbBuy++;}}
         if(nbBuy == 0) {
-            if(lunar <= solar) {
-                if (solarShopping(islands)) {
+            if(this.getBotScore().getLunar() <= this.getBotScore().getSolar()) {
+                if (solarShopping(islands,inventory)) {
                     return true;
                 }
                 else {
-                    if (lunarShopping(islands)) {
+                    if (lunarShopping(islands,inventory)) {
                         return true;
                     }
                 }
             }
             else {
-                if (lunarShopping(islands)) {
+                if (lunarShopping(islands,inventory)) {
                     return true;
                 }
                 else {
-                    if (solarShopping(islands))
+                    if (solarShopping(islands,inventory))
                     {
                         return true;
                     }
@@ -223,66 +211,70 @@ public class SimpleBot extends AbstractBot {
 
     }
 
-    protected Boolean lunarShopping(Islands islands) {
-        int lunar = this.getBotScore().getLunar();
-        int solar = this.getBotScore().getSolar();
+    protected Boolean lunarShopping(Islands islands,Inventory inventory) {
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
 
         for(int i=6;i>0;i--)
         {
-            if(lunar >= i && solar>=solarFee && !(islands.getIslandAvailables(i).isEmpty()))
-            {
-                if(shopIslandLunar(islands,i)){return true;}
+            if(!(islands.getIslandAvailables(i).isEmpty())) {
+                if (this.getBotScore().getLunar() >= i && this.getBotScore().getSolar() >= solarFee) {
+                    if (shopIslandLunar(islands, i,inventory)) {
+                        return true;
+                    }
+                }
             }
         }
 
         return false;
     }
 
-    protected Boolean solarShopping(Islands islands)
+    protected Boolean solarShopping(Islands islands,Inventory inventory)
     {
-        int solar = this.getBotScore().getSolar();
 
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
 
         for(int i=6;i>0;i--)
         {
-            if(solar >=i+solarFee && !(islands.getIslandAvailables(i).isEmpty())) {
-                if(shopIslandSolar(islands,i)){return true;}
+            if(!(islands.getIslandAvailables(i).isEmpty())) {
+                if (this.getBotScore().getSolar() >= i + solarFee && !(islands.getIslandAvailables(i).isEmpty())) {
+                    if (shopIslandSolar(islands, i,inventory)) {
+                        return true;
+                    }
+                }
             }
         }
 
         return false;
     }
 
-    protected Boolean shopIslandTen(Islands islands) {
+    protected Boolean shopIslandTen(Islands islands,Inventory inventory) {
         ArrayList<AbstractCard> cards = islands.getIslandAvailables(10);
         for(int cpt = 0; cpt < cards.size(); cpt++)
         {
-            if(BuyCard.buyCard(this, islands,cards.get(cpt))) {
+            if(BuyCard.buyCard(this, islands,cards.get(cpt),inventory)) {
                 return true;
             }
         }
         return false;
     }
 
-    private Boolean shopIslandSolar(Islands islands, int i) {
+    private Boolean shopIslandSolar(Islands islands, int i,Inventory inventory) {
         ArrayList<AbstractCard> cards = islands.getIslandAvailables(i);
         for(int cpt = 0; cpt < cards.size(); cpt++) {
             if(cards.get(cpt).getPrice()[0] == i) {
-                if(BuyCard.buyCard(this, islands,cards.get(cpt))) { return true; }
+                if(BuyCard.buyCard(this, islands,cards.get(cpt),inventory)) { return true; }
             }
         }
         return false;
     }
 
-    private Boolean shopIslandLunar(Islands islands,int i) {
+    private Boolean shopIslandLunar(Islands islands,int i,Inventory inventory) {
         ArrayList<AbstractCard> cards = islands.getIslandAvailables(i);
         for(int cpt = 0; cpt < cards.size(); cpt++) {
             if(cards.get(cpt).getPrice()[1] == i) {
-                if(BuyCard.buyCard(this, islands,cards.get(cpt))) { return true; }
+                if(BuyCard.buyCard(this, islands,cards.get(cpt),inventory)) { return true; }
             }
         }
         return false;
@@ -290,7 +282,12 @@ public class SimpleBot extends AbstractBot {
 
     @Override
     public Resource getPreferedResource() {
-        return Resource.VICTORY;
+        if(this.getBotScore().getGold()<=this.getBotScore().getSolar()&&this.getBotScore().getGold()<=this.getBotScore().getLunar())
+            return Resource.GOLD;
+        else if(this.getBotScore().getSolar()<this.getBotScore().getGold()&&this.getBotScore().getSolar()<=this.getBotScore().getLunar())
+            return Resource.SOLAR;
+        else
+            return Resource.LUNAR;
     }
 
     public DiceCard choose(DiceCard d) {
@@ -319,4 +316,5 @@ public class SimpleBot extends AbstractBot {
             }
         }
     }
+
 }

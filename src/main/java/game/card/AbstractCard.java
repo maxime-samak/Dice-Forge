@@ -103,6 +103,10 @@ public abstract class AbstractCard implements Card {
                 return "Récupérez une face X3 et forgez la aussitôt sur l'un de vos dés.";
             case LE_MIROIR_ABYSSAL:
                 return "Récupérez une face QUESTION et forgez la aussitôt sur l'un de vos dés.";
+            case LE_MARTEAU_DU_FORGERON:
+                return "Vous pouvez envoyer des Golds dans la forge et recevrez des Victory";
+            case LE_COFFRE_DU_FORGERON:
+                return "Banque étendue";
             default:
                 return "La carte n'existe pas.";
         }

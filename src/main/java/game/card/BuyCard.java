@@ -30,7 +30,7 @@ public class BuyCard {
      * @param islands
      * @return
      */
-    public static boolean buyCard(AbstractBot bot, Islands islands, AbstractCard card) {
+    public static boolean buyCard(AbstractBot bot, Islands islands, AbstractCard card,Inventory inventory) {
 
         BotScore score = bot.getBotScore();
         if (card.getPrice()[0] <= score.getSolar() && card.getPrice()[1] <= score.getLunar()) {
@@ -43,6 +43,7 @@ public class BuyCard {
                         ScoreCounter.payLunar(score, c.getPrice()[1]);
                         ScoreCounter.addResource(score, Resource.VICTORY, c.getVictory());
                         bought.add(c);
+                        inventory.affectCard(bot,c);
                         islands.removeCard(c);
 
                         if (c.getType().equals(AbstractCard.Type.INSTANT)) {
@@ -57,6 +58,7 @@ public class BuyCard {
                         ScoreCounter.payLunar(score, c.getPrice()[1]);
                         ScoreCounter.addResource(score, Resource.VICTORY, c.getVictory());
                         bought.add(c);
+                        inventory.affectCard(bot,c);
                         islands.removeCard(c);
 
                         if (c.getType().equals(AbstractCard.Type.INSTANT)) {
