@@ -12,7 +12,9 @@ import static game.dice.BuyDiceCard.setCard;
  */
 public class SimpleBot extends AbstractBot {
 
-
+    /**
+     * Constructeur de SimpleBot
+     */
     public SimpleBot(Dice d1, Dice d2, String botID) {
         super(d1,d2, botID);
     }
@@ -22,6 +24,9 @@ public class SimpleBot extends AbstractBot {
         buyInOrder(sanctuary,islands,false);
     }
 
+    /**
+     * Cette méthode choisit si le bot veut acheter une carte ou une face de dés
+     */
     public void buyInOrder(Sanctuary sanctuary,Islands islands,Boolean secondBuy) {
 
         int gold = this.getBotScore().getGold();
@@ -130,7 +135,9 @@ public class SimpleBot extends AbstractBot {
         return false;
     }
 
-
+    /**
+     * Le bot achète des faces de dés avec en priorité celles avec des points de victoire
+     */
     private ArrayList<DiceCard> favoriseVictory(ArrayList<DiceCard> buyable)
     {
         int i = 0;

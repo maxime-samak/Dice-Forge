@@ -23,8 +23,12 @@ public abstract class GoldBot extends AbstractBot {
     //[0] posséder la face 2 LUNAR
     //[0] posséder la face x3
 
-
-    public GoldBot(Dice d1, Dice d2, String botID) { super(d1, d2, botID); }
+    /**
+     * Constructeur de GoldBot
+     */
+    public GoldBot(Dice d1, Dice d2, String botID) {
+        super(d1, d2, botID);
+    }
 
     public void play(Sanctuary sanctuary, Islands islands) {
 
