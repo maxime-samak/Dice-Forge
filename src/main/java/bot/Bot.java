@@ -12,9 +12,7 @@ import game.dice.DiceCard;
 public interface Bot {
 
     String getBotID();
-
     Dice getDice1();
-
     Dice getDice2();
     String strategyCard(Card card);
     DiceCard choose(DiceCard d);

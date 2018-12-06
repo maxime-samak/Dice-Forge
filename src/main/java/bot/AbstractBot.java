@@ -9,7 +9,7 @@ import game.dice.*;
 import java.util.ArrayList;
 
 /**
- * Classe abstraite AbstractBot implément l'interface Bot
+ * Classe abstraite AbstractBot implémente l'interface Bot
  */
 public abstract class AbstractBot implements Bot {
 
@@ -18,6 +18,9 @@ public abstract class AbstractBot implements Bot {
     private final Dice dice2;
     private final BotScore botscore;
 
+    /**
+     * Constructeur
+     */
     public AbstractBot(Dice d1, Dice d2, String botID) {
         this.botID = botID;
         this.dice1 = d1;
@@ -39,6 +42,9 @@ public abstract class AbstractBot implements Bot {
         return dice2;
     }
 
+    /**
+     * Défini la méthode obligatoire play à implémenter qui permet d'instancier un Sanctuaire et une Islande
+     */
     public void play(Sanctuary sanctuary, Islands islands){}
 
     public abstract String strategyCard(Card card);
