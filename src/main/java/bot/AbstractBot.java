@@ -1,12 +1,12 @@
 package bot;
 
 import game.BotScore;
+import game.card.BuyCard;
 import game.card.Card;
 import game.card.Islands;
-import game.dice.Dice;
-import game.dice.DiceCard;
-import game.dice.Resource;
-import game.dice.Sanctuary;
+import game.dice.*;
+
+import java.util.ArrayList;
 
 /**
  * Classe abstraite AbstractBot implément l'interface Bot
@@ -61,5 +61,7 @@ public abstract class AbstractBot implements Bot {
     public int getPreferedFace() {
         return 4; //choix par défaut arbitraire
     }
+
+
 
 }

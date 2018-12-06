@@ -60,6 +60,7 @@ public class Islands {
             island5[i] = Card.LE_CASQUE_D_INVISIBILITE;
             island5[i + nbPLayers] = Card.LE_MIROIR_ABYSSAL;
         }
+        islands.put(3,island4);
         islands.put(5, island5);
 
         for(int i = 0; i < nbPLayers; i++) {

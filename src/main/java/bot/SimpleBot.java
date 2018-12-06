@@ -180,77 +180,77 @@ public class SimpleBot extends AbstractBot {
 
     }**/
 
-
-    private Boolean cardShopping(Islands islands) {
+    protected Boolean cardShopping(Islands islands) {
         int nbBuy = 0;
         int lunar = this.getBotScore().getLunar();
         int solar = this.getBotScore().getSolar();
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
-        if(!(islands.getIslandAvailables(10).isEmpty()) && lunar >= 5 && solar >= 5 + solarFee) { shopIslandTen(islands); nbBuy++; }
+        if(!(islands.getIslandAvailables(10).isEmpty()) && lunar >= 5 && solar >= 5 + solarFee) { if(shopIslandTen(islands)){nbBuy++;}}
         if(nbBuy == 0) {
             if(lunar <= solar) {
                 if (solarShopping(islands)) {
-                    nbBuy++;
                     return true;
                 }
                 else {
                     if (lunarShopping(islands)) {
-                        nbBuy++;
                         return true;
                     }
                 }
             }
             else {
                 if (lunarShopping(islands)) {
-                    nbBuy++;
                     return true;
                 }
                 else {
                     if (solarShopping(islands))
                     {
-                        nbBuy++;
                         return true;
                     }
                 }
             }
 
         }
-       return false;
+        return false;
 
     }
 
-    private Boolean lunarShopping(Islands islands) {
+    protected Boolean lunarShopping(Islands islands) {
         int lunar = this.getBotScore().getLunar();
         int solar = this.getBotScore().getSolar();
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
-        for(int i=6;i<0;i--)
+
+        for(int i=6;i>0;i--)
         {
-            if(lunar >= i && solar>=solarFee)
+            if(lunar >= i && solar>=solarFee && !(islands.getIslandAvailables(i).isEmpty()))
             {
                 if(shopIslandLunar(islands,i)){return true;}
             }
         }
+
         return false;
     }
 
-    private Boolean solarShopping(Islands islands)
+    protected Boolean solarShopping(Islands islands)
     {
         int solar = this.getBotScore().getSolar();
+
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
-        for(int i=6;i<0;i--)
+
+        for(int i=6;i>0;i--)
         {
-            if(solar >=i+solarFee)
+            if(solar >=i+solarFee && !(islands.getIslandAvailables(i).isEmpty()))
             {
-                if(shopIslandLunar(islands,i)){return true;}
+                if(shopIslandSolar(islands,i)){return true;}
             }
         }
+
         return false;
     }
 
-    private Boolean shopIslandTen(Islands islands)
+    protected Boolean shopIslandTen(Islands islands)
     {
         ArrayList<Card> cards = islands.getIslandAvailables(10);
         for(int cpt=0;cpt<cards.size();cpt++)
@@ -270,7 +270,7 @@ public class SimpleBot extends AbstractBot {
         {
             if(cards.get(cpt).getPrice()[0]==i)
             {
-                if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(),this)==true) { return true; }
+                if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(),this)) { return true; }
             }
         }
         return false;
@@ -283,16 +283,23 @@ public class SimpleBot extends AbstractBot {
         {
             if(cards.get(cpt).getPrice()[1]==i)
             {
-                if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(), this)==true) { return true; }
+                if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(), this)) { return true; }
             }
         }
         return false;
     }
 
+    @Override
+    public Resource getPreferedResource() {
+        return Resource.VICTORY;
+    }
+
     public String strategyCard(Card card){
         switch (card) {
             case L_ANCIEN:
-                return "Yes";
+                if(this.getBotScore().getGold()>=3)
+                    return "Yes";
+                return "No";
             case LES_AILES_DE_LA_GARDIENNES:
                 if (this.getBotScore().getSolar() > this.getBotScore().getLunar()) {
                     return "Lunar";
@@ -327,7 +334,7 @@ public class SimpleBot extends AbstractBot {
             {
                 if(this.getBotScore().getGold()<=this.getBotScore().getSolar()&&this.getBotScore().getGold()<=this.getBotScore().getLunar())
                     i=1;
-                if(this.getBotScore().getSolar()<this.getBotScore().getGold()&&this.getBotScore().getSolar()<=this.getBotScore().getLunar())
+                else if(this.getBotScore().getSolar()<this.getBotScore().getGold()&&this.getBotScore().getSolar()<=this.getBotScore().getLunar())
                     i=2;
                 else
                     i=3;
