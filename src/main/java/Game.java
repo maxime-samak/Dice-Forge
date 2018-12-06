@@ -76,9 +76,10 @@ public class Game {
             }
 
             System.out.println("Phase d'action de " + botArray[i].getBotID()+" :");
+            System.out.println(inventory.toString(botArray[i]));
             for(int k = 0;  k < inventory.getRecurrent(botArray[i]).size(); k++){
                 System.out.println("Exécution carte renfort: " + inventory.getRecurrent(botArray[i]).get(k).getName());
-                System.out.println(inventory.getRecurrent(botArray[i]).get(k).effectToString());
+                System.out.println("--> "+inventory.getRecurrent(botArray[i]).get(k).effectToString());
                 inventory.getRecurrent(botArray[i]).get(k).getEffect(botArray[i]);
 
                 /*Object result=CardAssignement.getListCard(botArray[i]).get(k).doEffect(botArray[i]);
@@ -86,7 +87,7 @@ public class Game {
                     System.out.println(botArray[i].getBotID()+" a reçu : "+result.toString());
                 System.out.println(botArray[i].getBotScore().getInfos() + "\n");*/
             }
-            botArray[i].play(sanctuary, islands);
+            botArray[i].play(sanctuary, islands,inventory);
             printChanges(botArray[i].getBotID());
             System.out.println("____\n");
             BuyDiceCard.resetBotLog();
@@ -149,7 +150,7 @@ public class Game {
 
         else {
             for(int i = 0; i < BuyDiceCard.getBought().size(); i++) {
-                System.out.println("Le bot " + bot + " a acheté la face " + BuyDiceCard.getBought().get(0) + " pour "+ BuyDiceCard.getPrices().get(0) + " GOLD et a remplacé la face " + BuyDiceCard.getReplaced().get(0));
+                System.out.println("Le bot " + bot + " a acheté la face " + BuyDiceCard.getBought().get(i) + " pour "+ BuyDiceCard.getPrices().get(i) + " GOLD et a remplacé la face " + BuyDiceCard.getReplaced().get(i));
             }
 
             System.out.println("Le bot "+bot+" n'achète plus de faces.");

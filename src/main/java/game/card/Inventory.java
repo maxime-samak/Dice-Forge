@@ -22,25 +22,22 @@ public class Inventory {
     public ArrayList<AbstractCard> getRecurrent(AbstractBot bot) {
         ArrayList<AbstractCard> output = new ArrayList<>();
         for (AbstractCard card : inventory.get(bot)) {
-            output.add(card);
+            if(card.getType().equals(AbstractCard.Type.RECURRENT))
+                output.add(card);
         }
         return output;
     }
 
-    public String toString() {
-        String inventory = "";
-        for (AbstractBot bot : this.inventory.keySet()) {
-            String output = "(" + bot.getBotID() + ")" +" [";
-            for (int i = 0; i < this.inventory.get(bot).size(); i++) {
-                output += this.inventory.get(bot).get(i);
-                if (i + 1 < this.inventory.get(bot).size()) {
-                    output += ",";
-                }
-                output += "]\n";
-                inventory += output;
+    public String toString(AbstractBot bot) {
+        String output = "Inventaire de " + bot.getBotID() + " :" +" [";
+        for (int i = 0; i < this.inventory.get(bot).size(); i++) {
+            output =output+this.inventory.get(bot).get(i).getName();
+            if (i + 1 < this.inventory.get(bot).size()) {
+                output += ",";
             }
         }
-        return inventory;
+        output += "]\n";
+        return output;
     }
 
 }

@@ -103,4 +103,6 @@ public class ScoreCounter {
     //public static void gainSolar(BotScore botScore, int solar) { botScore.addSolar(solar); }
 
     //public static void gainGold(BotScore botScore, int gold) { botScore.addGold(gold); }
+
+    public static void incrementExtended(BotScore botScore){botScore.incrementExtended();}
 }

@@ -3,6 +3,7 @@ package bot;
 import game.BotScore;
 import game.card.BuyCard;
 import game.card.Card;
+import game.card.Inventory;
 import game.card.Islands;
 import game.dice.*;
 
@@ -45,7 +46,7 @@ public abstract class AbstractBot implements Bot {
     /**
      * Défini la méthode obligatoire play à implémenter qui permet d'instancier un Sanctuaire et une Islande
      */
-    public void play(Sanctuary sanctuary, Islands islands){}
+    public void play(Sanctuary sanctuary, Islands islands, Inventory invetory){}
 
     public abstract DiceCard choose(DiceCard d);
     //public abstract void play(Sanctuary sanctuary, Islands islands);
