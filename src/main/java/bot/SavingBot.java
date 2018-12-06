@@ -7,6 +7,9 @@ import game.dice.*;
 
 import java.util.ArrayList;
 import static game.dice.BuyDiceCard.setCard;
+import static game.dice.Resource.GOLD;
+import static game.dice.Resource.LUNAR;
+import static game.dice.Resource.SOLAR;
 
 /**
  * Classe SimpleBot représente notre stratégie initiale
@@ -68,10 +71,13 @@ public class SavingBot extends AbstractBot {
 
         for(int i=0;i<pools.length;i++)
         {
-            if(!(sanctuary.getPoolAvailables(pools[i]).isEmpty()) && gold >= pools[i])
-            {
-                if(diceShopping(sanctuary,pools[i])){return true;}
-                else{return false;}
+            if(!(sanctuary.getPoolAvailables(pools[i]).isEmpty())) {
+                if (gold >= pools[i])
+                {
+                    if (diceShopping(sanctuary, pools[i]))
+                        return true;
+                }
+                break;
             }
         }
         return false;
@@ -99,7 +105,7 @@ public class SavingBot extends AbstractBot {
                     DiceCard fd1;
                     fd1 = this.getDice1().getFi(face);
 
-                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()-1) || fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() == 1) {
+                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()-1) || fd1.getResource() == GOLD.resourceName() && fd1.getValue() == 1) {
 
                         d = this.getDice1();
                         f = face;
@@ -107,7 +113,7 @@ public class SavingBot extends AbstractBot {
 
                     }
                     fd1 = this.getDice2().getFi(face);
-                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()-1) || fd1.getResource() == Resource.GOLD.resourceName() && fd1.getValue() == 1) {
+                    if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()-1) || fd1.getResource() == GOLD.resourceName() && fd1.getValue() == 1) {
 
                         d = this.getDice2();
                         f = face;
@@ -129,7 +135,7 @@ public class SavingBot extends AbstractBot {
         ArrayList<DiceCard> newBuy= new ArrayList<>();
         for(int cpt=0;cpt<buyable.size();cpt++)
         {
-            if(buyable.get(cpt).getResource()==Resource.SOLAR.resourceName() || buyable.get(cpt).getResource()==Resource.SOLAR.resourceName() )
+            if(buyable.get(cpt).getResource()== SOLAR.resourceName() || buyable.get(cpt).getResource()== SOLAR.resourceName() )
             {
                 listSolLun.add(1);
                 i++;
@@ -266,7 +272,7 @@ public class SavingBot extends AbstractBot {
         ArrayList<Card> cards = islands.getIslandAvailables(i);
         for(int cpt=0;cpt<cards.size();cpt++)
         {
-            if(cards.get(cpt).getPrice()[0]==i)
+            if(cards.get(cpt).getPrice()[0]==i && cards.get(cpt).getPrice()[1]==0)
             {
                 if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(),this)) { return true; }
             }
@@ -294,11 +300,11 @@ public class SavingBot extends AbstractBot {
         int gold=this.getBotScore().getGold();
         int lunar=this.getBotScore().getLunar();
         if(solar<=lunar&&solar<=gold)
-            return Resource.SOLAR;
+            return SOLAR;
         else if(lunar<solar&&lunar<=gold)
-            return Resource.LUNAR;
+            return LUNAR;
         else
-            return Resource.GOLD; //choix par défaut arbitraire
+            return GOLD; //choix par défaut arbitraire
     }
 
     public String strategyCard(Card card){
@@ -342,18 +348,16 @@ public class SavingBot extends AbstractBot {
                 return new DiceCard(values[1],resources[1]);
             else
             {
-                switch(this.getPreferedResource()) {
-                    case GOLD:
-                        i = 1;
-                    case SOLAR:
-                        i = 2;
-                    case LUNAR:
-                        i = 3;
-                    default:
-                        i=1;
-                }
-                return new DiceCard(values[i],resources[i]);
+                if(getPreferedResource()==GOLD)
+                    i = 1;
+                else if(getPreferedResource()==SOLAR)
+                    i = 2;
+                else if(getPreferedResource()==LUNAR)
+                    i = 3;
+                else
+                    i=0;
             }
+                return new DiceCard(values[i],resources[i]);
         }
     }
 }
