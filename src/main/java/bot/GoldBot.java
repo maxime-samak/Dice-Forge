@@ -17,7 +17,7 @@ import static game.dice.BuyDiceCard.setCard;
  * Et la convertion de cet or en points de victoire via certaines cartes.
  * Sont ses 3 objectifs de jeu.
  */
-public class GoldBot extends AbstractBot {
+public abstract class GoldBot extends AbstractBot {
     private boolean[] completedGoals = new boolean[]{false, false, false, false};
     //[0] posséder la face 2 SOLAR
     //[0] posséder la face 2 LUNAR

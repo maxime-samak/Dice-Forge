@@ -143,8 +143,8 @@ public class SavingBot extends AbstractBot {
         {
             if(listSolLun.get(cpt2)==1)
             {
-                newBuy.add(buyable.get(cpt2));
                 i--;
+                newBuy.add(buyable.get(cpt2));
             }
             if(i==0)
             {
@@ -171,36 +171,31 @@ public class SavingBot extends AbstractBot {
 
      }**/
 
-
     private Boolean cardShopping(Islands islands) {
         int nbBuy = 0;
         int lunar = this.getBotScore().getLunar();
         int solar = this.getBotScore().getSolar();
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
-        if(!(islands.getIslandAvailables(10).isEmpty()) && lunar >= 5 && solar >= 5 + solarFee) { shopIslandTen(islands); nbBuy++; }
+        if(!(islands.getIslandAvailables(10).isEmpty()) && lunar >= 5 && solar >= 5 + solarFee) { if(shopIslandTen(islands)){nbBuy++;}}
         if(nbBuy == 0) {
-            if(lunar <= solar) {
+            if(solar >= lunar) {
                 if (solarShopping(islands)) {
-                    nbBuy++;
                     return true;
                 }
                 else {
                     if (lunarShopping(islands)) {
-                        nbBuy++;
                         return true;
                     }
                 }
             }
             else {
                 if (lunarShopping(islands)) {
-                    nbBuy++;
                     return true;
                 }
                 else {
                     if (solarShopping(islands))
                     {
-                        nbBuy++;
                         return true;
                     }
                 }
@@ -217,15 +212,19 @@ public class SavingBot extends AbstractBot {
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
 
-        for(int i=6;i<0;i--)
+        for(int i=6;i>0;i--)
         {
-            if(lunar >= i && solar>=solarFee)
+            if(!(islands.getIslandAvailables(i).isEmpty()))
             {
-                if(shopIslandLunar(islands,i)){return true;}
+                if(lunar >= i && solar>=solarFee){
+                    if (shopIslandLunar(islands, i))
+                        return true;
+                }
+                break;
             }
         }
 
-       return false;
+        return false;
     }
 
     private Boolean solarShopping(Islands islands)
@@ -235,14 +234,17 @@ public class SavingBot extends AbstractBot {
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
 
-        for(int i=6;i<0;i--)
+        for(int i=6;i>0;i--)
         {
-            if(solar >=i+solarFee)
+            if(!(islands.getIslandAvailables(i).isEmpty()))
             {
-                if(shopIslandLunar(islands,i)){return true;}
+                if(solar >=i+solarFee){
+                    if (shopIslandSolar(islands, i))
+                        return true;
+                }
+                break;
             }
         }
-
         return false;
     }
 
@@ -266,7 +268,7 @@ public class SavingBot extends AbstractBot {
         {
             if(cards.get(cpt).getPrice()[0]==i)
             {
-                if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(),this)==true) { return true; }
+                if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(),this)) { return true; }
             }
         }
         return false;
@@ -279,13 +281,30 @@ public class SavingBot extends AbstractBot {
         {
             if(cards.get(cpt).getPrice()[1]==i)
             {
-                if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(), this)==true) { return true; }
+                if(BuyCard.buyCard(islands,cards.get(cpt),this.getBotScore(), this)) { return true; }
             }
         }
         return false;
     }
 
+
+    @Override
+    public Resource getPreferedResource() {
+        int solar=this.getBotScore().getSolar();
+        int gold=this.getBotScore().getGold();
+        int lunar=this.getBotScore().getLunar();
+        if(solar<=lunar&&solar<=gold)
+            return Resource.SOLAR;
+        else if(lunar<solar&&lunar<=gold)
+            return Resource.LUNAR;
+        else
+            return Resource.GOLD; //choix par défaut arbitraire
+    }
+
     public String strategyCard(Card card){
+        int solar=this.getBotScore().getSolar();
+        int gold=this.getBotScore().getGold();
+        int lunar=this.getBotScore().getLunar();
         switch (card) {
             case L_ANCIEN:
                 if(this.getBotScore().getGold()>=10)
@@ -323,13 +342,16 @@ public class SavingBot extends AbstractBot {
                 return new DiceCard(values[1],resources[1]);
             else
             {
-                if(this.getBotScore().getGold()<=this.getBotScore().getSolar()&&this.getBotScore().getGold()<=this.getBotScore().getLunar())
-                    i=1;
-                if(this.getBotScore().getSolar()<this.getBotScore().getGold()&&this.getBotScore().getSolar()<=this.getBotScore().getLunar())
-                    i=2;
-                else
-                    i=3;
-
+                switch(this.getPreferedResource()) {
+                    case GOLD:
+                        i = 1;
+                    case SOLAR:
+                        i = 2;
+                    case LUNAR:
+                        i = 3;
+                    default:
+                        i=1;
+                }
                 return new DiceCard(values[i],resources[i]);
             }
         }
