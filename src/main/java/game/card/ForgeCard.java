@@ -1,4 +1,4 @@
-package game.card.newcard;
+package game.card;
 
 import bot.AbstractBot;
 import game.dice.BuyDiceCard;
@@ -14,7 +14,7 @@ public class ForgeCard extends AbstractCard{
 
     public void getEffect(AbstractBot bot) {
         switch (getName()) {
-            case LE_MIRROIR_ABYSSAL:
+            case LE_MIROIR_ABYSSAL:
                 BuyDiceCard.setSpecial(bot.getDice2(), bot.getPreferedFace(), new DiceCard(0, Resource.QUESTION));
                 break;
 

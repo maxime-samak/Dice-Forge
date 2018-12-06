@@ -47,8 +47,6 @@ public abstract class AbstractBot implements Bot {
      */
     public void play(Sanctuary sanctuary, Islands islands){}
 
-    public abstract String strategyCard(Card card);
-
     public abstract DiceCard choose(DiceCard d);
     //public abstract void play(Sanctuary sanctuary, Islands islands);
 

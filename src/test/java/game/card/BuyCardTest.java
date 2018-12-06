@@ -26,14 +26,14 @@ public class BuyCardTest {
         d2.lunarDiceInit();
 
         Islands islands = new Islands(2);
-        BotScore bs1 = new BotScore();
         SimpleBot bot =  new SimpleBot(d1, d2, "Bot1");
-        Card card = Card.LE_PASSEUR;
-        ScoreCounter.updateScore(bs1, new DiceCard[]{new DiceCard(2, Resource.LUNAR), new DiceCard(2, Resource.LUNAR)});
-        Assert.assertEquals(true, buyCard(islands, card, bs1, bot));
-        Assert.assertEquals(0, bs1.getSolar());
-        Assert.assertEquals(12, bs1.getVictory());
+        AbstractCard card = new RegularCard(AbstractCard.Name.LE_PASSEUR, AbstractCard.Type.INSTANT, 12, 0,4);
 
-        Assert.assertEquals(false, buyCard(islands, card, bs1, bot));
+        ScoreCounter.updateScore(bot.getBotScore(), new DiceCard[]{new DiceCard(2, Resource.LUNAR), new DiceCard(2, Resource.LUNAR)});
+        Assert.assertEquals(true, buyCard(bot, islands, card));
+        Assert.assertEquals(0, bot.getBotScore().getSolar());
+        Assert.assertEquals(12, bot.getBotScore().getVictory());
+
+        Assert.assertEquals(false, buyCard(bot, islands, card));
     }
 }

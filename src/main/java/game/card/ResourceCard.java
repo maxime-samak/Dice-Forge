@@ -1,4 +1,4 @@
-package game.card.newcard;
+package game.card;
 
 import bot.AbstractBot;
 import game.ScoreCounter;

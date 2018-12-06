@@ -15,50 +15,52 @@ import java.util.ArrayList;
  */
 public class BuyCard {
 
-    private static ArrayList<Card> bought = new ArrayList<>();
+    private static ArrayList<AbstractCard> bought = new ArrayList<>();
 
-    public static ArrayList<Card> getBought() {
+    public static ArrayList<AbstractCard> getBought() {
         return bought;
     }
 
     /**
-     * Cette méthode fait payer le cout de la carte au bot. Elle ajoute également les points de victoire, éxécute l'effet de la carte, supprime la carte de l'ile.
-     * @param islands
+     * Cette méthode fait payer le cout de la carte au bot.
+     * Elle ajoute également les points de victoire, éxécute l'effet de la carte, supprime la carte de l'ile.
+     *
+     * @param bot
      * @param card
-     * @param botScore
+     * @param islands
      * @return
      */
-    public static boolean buyCard(Islands islands, Card card, BotScore botScore, AbstractBot bot){
-        if(card.getPrice()[0] <= botScore.getSolar() && card.getPrice()[1] <= botScore.getLunar()) {
-            for (Card c : islands.getIslands().get(card.getPrice()[0] + card.getPrice()[1])) {
-                if(c != null && c.equals(c)) {
+    public static boolean buyCard(AbstractBot bot, Islands islands, AbstractCard card) {
 
-                    if((BuyDiceCard.getBought().size() > 0 || bought.size() > 0) && botScore.getSolar() >= card.getPrice()[0] + 2) {
-                        ScoreCounter.paySolar(botScore, c.getPrice()[0] + 2);
-                        ScoreCounter.payLunar(botScore, c.getPrice()[1]);
-                        ScoreCounter.addResource(botScore, Resource.VICTORY, c.getVictory());
-                        BuyCard.bought.add(c);
+        BotScore score = bot.getBotScore();
+        if (card.getPrice()[0] <= score.getSolar() && card.getPrice()[1] <= score.getLunar()) {
+
+            for (AbstractCard c : islands.getIslands().get(card.getPrice()[0] + card.getPrice()[1])) {
+                if (c != null && c.equals(c)) {
+
+                    if ((BuyDiceCard.getBought().size() > 0 || bought.size() > 0) && score.getSolar() >= c.getPrice()[0] + 2) {
+                        ScoreCounter.paySolar(score, c.getPrice()[0] + 2);
+                        ScoreCounter.payLunar(score, c.getPrice()[1]);
+                        ScoreCounter.addResource(score, Resource.VICTORY, c.getVictory());
+                        bought.add(c);
                         islands.removeCard(c);
 
-                        if(c.isTypeReinforcement()){
-                            CardAssignement.setCardAssignement(bot, c);
-                        }
-                        if(c.isTypeInstant()){
-                            c.doEffect(bot);
+                        if (c.getType().equals(AbstractCard.Type.INSTANT)) {
+                            c.getEffect(bot);
                         }
 
                         return true;
                     }
+                    else if ((BuyDiceCard.getBought().size() <= 0 && bought.size() <= 0)) {
 
-                    else if (!(BuyDiceCard.getBought().size() > 0 && bought.size() > 0)) {
-                        ScoreCounter.paySolar(botScore, c.getPrice()[0]);
-                        ScoreCounter.payLunar(botScore, c.getPrice()[1]);
-                        ScoreCounter.addResource(botScore, Resource.VICTORY, c.getVictory());
-                        BuyCard.bought.add(c);
+                        ScoreCounter.paySolar(score, c.getPrice()[0]);
+                        ScoreCounter.payLunar(score, c.getPrice()[1]);
+                        ScoreCounter.addResource(score, Resource.VICTORY, c.getVictory());
+                        bought.add(c);
                         islands.removeCard(c);
 
-                        if(c.isTypeReinforcement()){
-                            CardAssignement.setCardAssignement(bot, c);
+                        if (c.getType().equals(AbstractCard.Type.INSTANT)) {
+                            c.getEffect(bot);
                         }
 
                         return true;

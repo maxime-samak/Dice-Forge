@@ -1,4 +1,4 @@
-package game.card.newcard;
+package game.card;
 
 
 import bot.AbstractBot;
@@ -27,7 +27,7 @@ public abstract class AbstractCard implements Card {
         LE_CASQUE_D_INVISIBILITE,
 
         LA_MEDUSE,
-        LE_MIRROIR_ABYSSAL,
+        LE_MIROIR_ABYSSAL,
 
         LA_PINCE,
         L_ENIGME,
@@ -76,6 +76,36 @@ public abstract class AbstractCard implements Card {
 
     public String toString() {
         return name.toString();
+    }
+
+    public String effectToString(){
+        String noEffect = "Pas d’effet. Cette carte ne donne que des points de victoire.";
+        switch(getName()){
+            case LES_SABOTS_D_ARGENT:
+                return "Recevez les ressources d'un lancé de dé";
+            case L_ANCIEN:
+                return "Vous pouvez dépensez 3 gold pour gagner 4 point gloire";
+            case LES_AILES_DE_LA_GARDIENNES:
+                return "Recevez 1 gold et 1 lunar ou solar";
+            case LE_PASSEUR:
+                return noEffect;
+            case LA_MEDUSE:
+                return noEffect;
+            case L_HYDRE:
+                return noEffect;
+            case LES_HERBES_FOLLES:
+                return "Recevez 3 gold et 3 lunar.";
+            case LA_PINCE:
+                return "Recevez les faveurs des dieux deux fois de suite.";
+            case L_ENIGME:
+                return "Recevez une faveur mineur 4 fois de suite.";
+            case LE_CASQUE_D_INVISIBILITE:
+                return "Récupérez une face X3 et forgez la aussitôt sur l'un de vos dés.";
+            case LE_MIROIR_ABYSSAL:
+                return "Récupérez une face QUESTION et forgez la aussitôt sur l'un de vos dés.";
+            default:
+                return "La carte n'existe pas.";
+        }
     }
 
 
