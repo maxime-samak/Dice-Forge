@@ -54,12 +54,12 @@ Groupe DFG
 
 ### [Livraison 4](https://github.com/SamakM/Dice-Forge/milestone/4)
 #### Objectif de livraison
-- [ ] Ajout des cartes qui réalise une action en plus jusqu'à la fin et pour un seul tour.
-- [ ] Finalisation des dés(ajout des deux dernières face de dé apporté par les effets de carte).
-- [ ] Ajout de tous les effets de carte(gain de point, changement de face de dé).
-- [ ] Optimisation du bot(stratégie carte, face de dé).
-- [ ] Ajout de nouveaux tests.
-- [ ] Optimisation et améliorations du code.
+- [ ] ~~Ajout des cartes qui réalise une action en plus jusqu'à la fin et pour un seul tour.~~
+- [x] Finalisation des dés(ajout des deux dernières face de dé apporté par les effets de carte).
+- [ ] ~~Ajout de tous les effets de carte(gain de point, changement de face de dé).~~
+- [x] Optimisation du bot(stratégie carte, face de dé).
+- [x] Ajout de nouveaux tests.
+- [x] Optimisation et améliorations du code.
 
 #### Date prévu
 *30/11/2018*

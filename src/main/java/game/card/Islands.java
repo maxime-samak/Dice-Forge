@@ -22,7 +22,7 @@ public class Islands {
     }
 
     /**
-     *
+     *  Remplis la table de hachage islands des cartes achetables.
      * @param nbPLayers
      */
     public void initIslands(int nbPLayers) {
@@ -30,12 +30,16 @@ public class Islands {
         Card[] island2 = new Card[nbPLayers * 2];
 
         Card[] island4 = new Card[nbPLayers * 2];
+        Card[] island5 = new Card[nbPLayers * 2];
+
+        Card[] island6 = new Card[nbPLayers * 2];
 
 
         Card[] island10 = new Card[nbPLayers];
 
         for(int i = 0; i < nbPLayers; i++) {
             island1[i] = Card.L_ANCIEN;
+            island1[i + nbPLayers] = Card.LES_HERBES_FOLLES;
         }
         islands.put(1, island1);
 
@@ -53,6 +57,18 @@ public class Islands {
         islands.put(4, island4);
 
         for(int i = 0; i < nbPLayers; i++) {
+            island5[i] = Card.LE_CASQUE_D_INVISIBILITE;
+            island5[i + nbPLayers] = Card.LE_MIROIR_ABYSSAL;
+        }
+        islands.put(5, island5);
+
+        for(int i = 0; i < nbPLayers; i++) {
+            island6[i] = Card.LA_PINCE;
+            island6[i + nbPLayers] = Card.L_ENIGME;
+        }
+        islands.put(6, island6);
+
+        for(int i = 0; i < nbPLayers; i++) {
             island10[i] = Card.L_HYDRE;
         }
         islands.put(10, island10);
@@ -65,6 +81,9 @@ public class Islands {
 
     public void removeCard(Card card){
         int key = Math.max(card.getPrice()[0], card.getPrice()[1]);
+        if(card.getPrice()[0] + card.getPrice()[1] == 10){
+            key = 10;
+        }
         for(int i = 0; i < islands.get(key).length; i++){
             if (islands.get(key)[i] == card){
                 islands.get(key)[i] = null;
