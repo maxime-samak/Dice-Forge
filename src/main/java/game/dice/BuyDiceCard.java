@@ -49,7 +49,7 @@ public class BuyDiceCard {
             }
         }
 
-        if(BuyCard.getBought().size() > 0){
+        if(BuyCard.getBought().size() > 0) {
 
             if (bought.size() == 0) {
                 if (!(botscore.getSolar() >= 2)) {
@@ -77,6 +77,16 @@ public class BuyDiceCard {
             return true;
         }
         return false;
+    }
+
+    public static boolean setSpecial(Dice dice, int face, DiceCard newcard) {
+        if (!newcard.equals(new DiceCard(0,Resource.X3)) && !newcard.equals(new DiceCard(0,Resource.QUESTION))) {
+            return false;
+        }
+        else {
+            dice.setDiceCard(face, newcard);
+            return true;
+        }
     }
 
     /**

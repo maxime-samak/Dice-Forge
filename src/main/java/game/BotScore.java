@@ -9,7 +9,8 @@ public class BotScore {
     private int solar = 0;
     private int lunar = 0;
     private int victory = 0;
-    private int extended = 0; //on prévoit que le nb max de ressource puisse être etendu (v3).
+    private int extended = 0;
+    private int forge;
 
     public BotScore() {}
 
@@ -37,15 +38,6 @@ public class BotScore {
         else {this.gold += gold;}
     }
 
-    protected void removeGold(int gold)
-    {
-        gold = Math.abs(gold);
-        if(this.gold - gold < 0)
-            this.gold = 0;
-        else
-            this.gold = this.gold - gold;
-    }
-
     protected void addSolar(int solar) {
         solar = Math.abs(solar);
         if(this.solar + solar >= 6 + (2 * extended)) {
@@ -67,10 +59,13 @@ public class BotScore {
         this.victory += victory;
     }
 
-    public String getInfos() {
-        return "Gold : "+this.getGold()+", Solar : "+this.getSolar()+", Lunar : "+this.getLunar()+", Victory : "+getVictory();
+    protected void removeGold(int gold) {
+        gold = Math.abs(gold);
+        if(this.gold - gold < 0)
+            this.gold = 0;
+        else
+            this.gold = this.gold - gold;
     }
-
     protected void removeSolar(int solar) {
         solar = Math.abs(solar);
         if(this.solar - solar <= 0) {
@@ -89,5 +84,22 @@ public class BotScore {
         else{
             this.lunar -= lunar;
         }
+    }
+
+    protected void extend() {
+        extended++;
+    }
+
+    protected void initForge() {
+        forge = 0;
+    }
+
+    protected void addForge(int gold) {
+        gold = Math.abs(gold);
+        forge += gold;
+    }
+
+    public String getInfos() {
+        return "Gold : "+this.getGold()+", Solar : "+this.getSolar()+", Lunar : "+this.getLunar()+", Victory : "+getVictory();
     }
 }

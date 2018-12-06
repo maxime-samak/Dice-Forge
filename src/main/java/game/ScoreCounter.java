@@ -59,11 +59,21 @@ public class ScoreCounter {
         }
     }
 
-    public static void payGold(BotScore botScore, int price) { botScore.removeGold(price); }
+    public static void addForge(BotScore botscore, int gold) {
+        botscore.addForge(gold);
+    }
 
-    public static void paySolar(BotScore botScore, int price) { botScore.removeSolar(price); }
+    public static void initForge(BotScore botscore) {
+        botscore.initForge();
+    }
 
-    public static void payLunar(BotScore botScore, int price) { botScore.removeLunar(price); }
+    public static void payGold(BotScore botscore, int price) { botscore.removeGold(price); }
+
+    public static void paySolar(BotScore botscore, int price) { botscore.removeSolar(price); }
+
+    public static void payLunar(BotScore botscore, int price) { botscore.removeLunar(price); }
+
+    public static void extend(BotScore botscore) { botscore.extend(); }
 
     //public static void addVictory(BotScore botScore, int victory) { botScore.addVictory(victory); }
 

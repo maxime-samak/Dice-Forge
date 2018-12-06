@@ -50,7 +50,7 @@ public class Game {
     }
 
     /**
-     * la méthode fais passer les tours, a chaque tour de "jeu" il y'a un tour de chaque joueur,
+     * la méthode fais passer les tours, a chaque manche il y'a un tour de chaque joueur,
      * au tour d'un joueur tout le monde lance les dés et le dis joueur peut aplliquer sa stratégie.
      */
     public void turn() {
@@ -59,8 +59,8 @@ public class Game {
             for (int j = 0; j < nbPlayers; j++){
                 System.out.println("Lancer de dés " + botArray[j].getBotID() + ":");
                 DiceCard[] roll = new DiceCard[]{roll(botArray[j].getDice1()), roll(botArray[j].getDice2())};
-                DiceCard dc0=botArray[j].choose(roll[0]);
-                DiceCard dc1=botArray[j].choose(roll[1]);
+                DiceCard dc0 = botArray[j].choose(roll[0]);
+                DiceCard dc1 = botArray[j].choose(roll[1]);
                 if(roll[0].getResource()==Resource.CHOICE.resourceName()&&roll[1].getResource()==Resource.CHOICE.resourceName())
                     System.out.println(roll[0] +" ("+dc0+" choisi )"+ "\n" + roll[1]+" ("+dc1+" choisi )");
                 else if(roll[0].getResource()==Resource.CHOICE.resourceName())

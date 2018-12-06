@@ -7,16 +7,13 @@ import java.util.HashMap;
 public class Sanctuary {
 
     private HashMap<Integer, DiceCard[]> pools = new HashMap<>();
-    private HashMap<String, DiceCard[]> special = new HashMap<>();
-    private final int nbPlayers;
 
     public Sanctuary(int nbPlayers){
-        this.nbPlayers = nbPlayers;
-        this.initPool();
+        this.initPool(nbPlayers);
 
     }
 
-    public void initPool() {
+    public void initPool(int nbPlayers) {
 
         int[] random = {0,1,2,3};
 
@@ -101,18 +98,6 @@ public class Sanctuary {
             pool12[i] = randomPool12(random[i]);
         }
         pools.put(12,pool12);
-
-        //poolx3
-        for(int i = 0; i < nbPlayers; i++) {
-            poolx3[i] = new DiceCard(0, Resource.X3);
-        }
-        special.put("x3",pool8);
-
-        //poolQuestion
-        for(int i = 0; i < nbPlayers; i++) {
-            poolQuestion[i] = new DiceCard(0, Resource.QUESTION);
-        }
-        special.put("question",pool8);
     }
 
     /**
