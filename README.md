@@ -96,11 +96,16 @@ Groupe DFG
 ## Diagrammes UML
 
 * Livraison 1:
-  ![DiagrammeUMLL](src/javadoc/UML/iteration1/UML-V1.png)
+  ![DiagrammeUMLL](src/javadoc/UML/iteration1/fullUML1.png)
   ![DigrammeSequence](src/javadoc/UML/iteration1/Sequence_Partie_Iteration_1_DFG.jpg)
 * Livraison 2:
+  ![DiagrammeUMLL](src/javadoc/UML/iteration2/fullUML2.png)
   ![DiagrammeUML](src/javadoc/UML/iteration2/Sequence_Partie_Iteration_2_DFG.jpg)
 * Livraison 3:
+  ![DiagrammeUMLL](src/javadoc/UML/iteration3/fullUML3.png)
+* Livraison 3.5:
+  ![DiagrammeUMLL](src/javadoc/UML/iteration3.5/fullUML3.5.png)
 * Livraison 4:
+  ![DiagrammeUMLL](src/javadoc/UML/iteration4/fullUML4.png)
 * Livraison 5:
 * Livraison 6:
