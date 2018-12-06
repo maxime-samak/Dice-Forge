@@ -1,8 +1,6 @@
 package game.card;
 
 import bot.SimpleBot;
-import game.card.AbstractCard;
-import game.card.ResourceCard;
 import game.dice.Dice;
 import game.dice.Resource;
 import org.junit.Test;
@@ -21,9 +19,6 @@ public class ResourceCardTest {
         d2.lunarDiceInit();
         SimpleBot bot1 = new SimpleBot(d1,d2,"bot1");
 
-        //Ajout de ressources au SimpleBot
-        ScoreCounter.addResource(bot1.getBotScore(), Resource.GOLD,3);
-
         //Creation de la ressource
         ResourceCard r1 = new ResourceCard(AbstractCard.Name.LES_AILES_DE_LA_GARDIENNES, AbstractCard.Type.INSTANT, 2, 3, 4);
 
@@ -31,7 +26,7 @@ public class ResourceCardTest {
         r1.getEffect(bot1);
 
         //Test
-        Assert.assertEquals("Gold : 3, Solar : 1, Lunar : 0, Victory : 0", bot1.getBotScore().getInfos());
+        Assert.assertEquals("Gold : 1, Solar : 0, Lunar : 0, Victory : 0", bot1.getBotScore().getInfos());
         Assert.assertEquals("LES_AILES_DE_LA_GARDIENNES", r1.getName().toString());
         Assert.assertEquals("INSTANT", r1.getType().toString());
 

@@ -13,8 +13,22 @@ public class ScoreCounter {
         DiceCard rollD1 = roll[0];
         DiceCard rollD2 = roll[1];
 
-        evalueRoll(botscore,rollD1);
-        evalueRoll(botscore, rollD2);
+        if (isX3(rollD1)) {
+            evalueRoll(botscore, rollD2);
+            evalueRoll(botscore, rollD2);
+            evalueRoll(botscore, rollD2);
+        }
+
+        else if (isX3(rollD2)) {
+            evalueRoll(botscore,rollD1);
+            evalueRoll(botscore,rollD1);
+            evalueRoll(botscore,rollD1);
+        }
+
+        else {
+            evalueRoll(botscore,rollD1);
+            evalueRoll(botscore, rollD2);
+        }
     }
 
     public static void updateScore(BotScore botscore, DiceCard roll) {
@@ -40,6 +54,13 @@ public class ScoreCounter {
                 }
             }
         }
+    }
+
+    public static boolean isX3(DiceCard roll) {
+        if (roll.getResource().equals(Resource.X3)) {
+            return true;
+        }
+        return false;
     }
 
     public static void addResource(BotScore botscore, Resource resource, int value) {
