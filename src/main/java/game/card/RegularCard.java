@@ -8,7 +8,8 @@ public class RegularCard extends AbstractCard {
         super(name, type, victory, solarPrice, lunarPrice);
     }
 
-    public void getEffect(AbstractBot bot) {
+    public Object getEffect(AbstractBot bot) {
+        return null;
         //ne fait rien
     }
 

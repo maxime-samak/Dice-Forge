@@ -16,9 +16,14 @@ import java.util.ArrayList;
 public class BuyCard {
 
     private static ArrayList<AbstractCard> bought = new ArrayList<>();
+    private static ArrayList<Object> effects = new ArrayList<>();
 
     public static ArrayList<AbstractCard> getBought() {
         return bought;
+    }
+
+    public static ArrayList<Object> getEffects() {
+        return effects;
     }
 
     /**
@@ -47,8 +52,11 @@ public class BuyCard {
                         islands.removeCard(c);
 
                         if (c.getType().equals(AbstractCard.Type.INSTANT)) {
-                            c.getEffect(bot);
+                            Object effect = c.getEffect(bot);
+                            effects.add(effect);
                         }
+                        else
+                            effects.add(null);
 
                         return true;
                     }
@@ -62,8 +70,11 @@ public class BuyCard {
                         islands.removeCard(c);
 
                         if (c.getType().equals(AbstractCard.Type.INSTANT)) {
-                            c.getEffect(bot);
+                            Object effect = c.getEffect(bot);
+                            effects.add(effect);
                         }
+                        else
+                            effects.add(null);
 
                         return true;
                     }
@@ -76,5 +87,6 @@ public class BuyCard {
 
     public static void resetBotLog() {
         bought = new ArrayList<>();
+        effects= new ArrayList<>();
     }
 }

@@ -102,4 +102,5 @@ public class BotScore {
     public String getInfos() {
         return "Gold : "+this.getGold()+", Solar : "+this.getSolar()+", Lunar : "+this.getLunar()+", Victory : "+getVictory();
     }
+
 }

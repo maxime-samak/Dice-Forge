@@ -12,7 +12,7 @@ public class DivineFavorCard extends AbstractCard {
         super(name, type, victory, solarPrice, lunarPrice);
     }
 
-    public void getEffect(AbstractBot bot) {
+    public Object getEffect(AbstractBot bot) {
 
         Dice dice = bot.getDice1(); // getPreferedDice()
         DiceCard rollD1;
@@ -21,27 +21,30 @@ public class DivineFavorCard extends AbstractCard {
         switch (getName()) {
             case LES_SABOTS_D_ARGENT:
                 rollD1 = DiceRoll.roll(dice);
+                rollD1=bot.choose(rollD1);
                 ScoreCounter.updateScore(bot.getBotScore(), rollD1);
-                break;
+                return rollD1;
 
             case LA_PINCE:
-                rollD1 = DiceRoll.roll(bot.getDice1());
-                rollD2 = DiceRoll.roll(bot.getDice2());
+                DiceCard rollD3=rollD1 = DiceRoll.roll(bot.getDice1());
+                DiceCard rollD4=rollD2 = DiceRoll.roll(bot.getDice2());
                 ScoreCounter.updateScore(bot.getBotScore(), new DiceCard[]{rollD1,rollD2});
 
                 rollD1 = DiceRoll.roll(bot.getDice1());
                 rollD2 = DiceRoll.roll(bot.getDice2());
                 ScoreCounter.updateScore(bot.getBotScore(), new DiceCard[]{rollD1,rollD2});
-                break;
+                return "Reçu -> "+rollD3.toString()+","+rollD4.toString()+","+rollD1.toString()+","+rollD2.toString();
 
             case L_ENIGME:
+                String res = "Reçu -> ";
                 for (int i = 0; i < 4; i++) {
                     rollD1 = DiceRoll.roll(dice);
+                    res+=rollD1.toString();
                     ScoreCounter.updateScore(bot.getBotScore(), rollD1);
                 }
-                break;
-
+                return res;
 
         }
+        return null;
     }
 }

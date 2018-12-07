@@ -12,16 +12,18 @@ public class ForgeCard extends AbstractCard{
         super(name, type, victory, solarPrice, lunarPrice);
     }
 
-    public void getEffect(AbstractBot bot) {
+    public Object getEffect(AbstractBot bot) {
         switch (getName()) {
             case LE_MIROIR_ABYSSAL:
                 BuyDiceCard.setSpecial(bot.getDice2(), bot.getPreferedFace(), new DiceCard(0, Resource.QUESTION));
-                break;
+               return "Face spéciale QUESTION ajoutée";
 
             case LE_CASQUE_D_INVISIBILITE:
                 BuyDiceCard.setSpecial(bot.getDice2(), bot.getPreferedFace(), new DiceCard(0, Resource.X3));
-                break;
+                return "Face spéciale X3 ajoutée";
+
         }
+        return null;
     }
 
     private void setCard(Dice dice, int face, DiceCard card) {

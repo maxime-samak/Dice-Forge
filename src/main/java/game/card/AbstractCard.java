@@ -49,7 +49,7 @@ public abstract class AbstractCard implements Card {
         this.price[1] = lunarPrice;
     }
 
-    public abstract void getEffect(AbstractBot bot);
+    public abstract Object getEffect(AbstractBot bot);
 
     public boolean equals(AbstractCard card) {
         if (this.name == card.name) {

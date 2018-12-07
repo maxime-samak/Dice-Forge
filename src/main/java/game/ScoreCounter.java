@@ -104,5 +104,4 @@ public class ScoreCounter {
 
     //public static void gainGold(BotScore botScore, int gold) { botScore.addGold(gold); }
 
-    public static void incrementExtended(BotScore botScore){botScore.incrementExtended();}
 }

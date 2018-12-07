@@ -9,14 +9,16 @@ public class BlackSmithCard extends AbstractCard {
         super(name, type, victory, solarPrice, lunarPrice);
     }
 
-    public void getEffect(AbstractBot bot) {
+    public Object getEffect(AbstractBot bot) {
         switch (getName()) {
             case LE_COFFRE_DU_FORGERON:
                 ScoreCounter.extend(bot.getBotScore());
-                break;
+                return "Inventaire étendu";
 
             case LE_MARTEAU_DU_FORGERON:
                 ScoreCounter.initForge(bot.getBotScore());
+                return null;
         }
+        return null;
     }
 }

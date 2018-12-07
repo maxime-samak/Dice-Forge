@@ -46,7 +46,10 @@ public class Game {
                 botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1));
             else
                 botArray[i] = new SavingBot(d1, d2, "bot#" + (i + 1));
-            ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, this.nbPlayers - i);
+            if(nbPlayers==2)
+                ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, this.nbPlayers - i+1);
+            else
+                ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, this.nbPlayers - i);
         }
         this.inventory = new Inventory(botArray);
     }
@@ -78,14 +81,12 @@ public class Game {
             System.out.println("Phase d'action de " + botArray[i].getBotID()+" :");
             System.out.println(inventory.toString(botArray[i]));
             for(int k = 0;  k < inventory.getRecurrent(botArray[i]).size(); k++){
+                Object result = inventory.getRecurrent(botArray[i]).get(k).getEffect(botArray[i]);
                 System.out.println("Exécution carte renfort: " + inventory.getRecurrent(botArray[i]).get(k).getName());
-                System.out.println("--> "+inventory.getRecurrent(botArray[i]).get(k).effectToString());
-                inventory.getRecurrent(botArray[i]).get(k).getEffect(botArray[i]);
-
-                /*Object result=CardAssignement.getListCard(botArray[i]).get(k).doEffect(botArray[i]);
                 if(result!=null)
-                    System.out.println(botArray[i].getBotID()+" a reçu : "+result.toString());
-                System.out.println(botArray[i].getBotScore().getInfos() + "\n");*/
+                System.out.println("--> "+inventory.getRecurrent(botArray[i]).get(k).effectToString() + " : "+result.toString());
+                else
+                    System.out.println("--> "+inventory.getRecurrent(botArray[i]).get(k).effectToString());
             }
             botArray[i].play(sanctuary, islands,inventory);
             printChanges(botArray[i].getBotID());
@@ -164,7 +165,10 @@ public class Game {
         }
         else {
             for(int i = 0; i < BuyCard.getBought().size(); i++) {
-                System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).getName() + " pour " + BuyCard.getBought().get(i).getPrice()[0] + " SOLAR et "+ BuyCard.getBought().get(i).getPrice()[1] + " LUNAR et a gagné " + BuyCard.getBought().get(i).getVictory() + " VICTORY");
+                if(BuyCard.getEffects().get(i)!=null)
+                    System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).getName() + " pour " + BuyCard.getBought().get(i).getPrice()[0] + " SOLAR et "+ BuyCard.getBought().get(i).getPrice()[1] + " LUNAR et a gagné " + BuyCard.getBought().get(i).getVictory() + " VICTORY : "+BuyCard.getEffects().get(i).toString());
+                else
+                    System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).getName() + " pour " + BuyCard.getBought().get(i).getPrice()[0] + " SOLAR et "+ BuyCard.getBought().get(i).getPrice()[1] + " LUNAR et a gagné " + BuyCard.getBought().get(i).getVictory() + " VICTORY");
             }
         }
     }
