@@ -110,6 +110,10 @@ public class ScoreCounter {
 
     public static void payLunar(BotScore botscore, int price) { botscore.removeLunar(price); }
 
+    /**
+     * Etend l'inventaire après l'achat de la carte "Le coffre du Forgeron"
+     * @param botscore
+     */
     public static void extend(BotScore botscore) { botscore.extend(); }
 
 }

@@ -211,6 +211,12 @@ public class SimpleBot extends AbstractBot {
 
     }
 
+    /**
+     * Le bot vérifie si les Islands possède encore au moins une carte en commençant par la plus cher (6), si oui alors si il possède les ressources il tentera d'acheter sinon il passe à l'ïle suivante.
+     * @param islands
+     * @param inventory
+     * @return
+     */
     protected Boolean lunarShopping(Islands islands,Inventory inventory) {
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
@@ -229,6 +235,12 @@ public class SimpleBot extends AbstractBot {
         return false;
     }
 
+    /**
+     * Le bot vérifie si les Islands possède encore au moins une carte en commençant par la plus cher (6), si oui alors si il possède les ressources il tentera d'acheter sinon il passe à l'ïle suivante.
+     * @param islands
+     * @param inventory
+     * @return
+     */
     protected Boolean solarShopping(Islands islands,Inventory inventory)
     {
 
@@ -249,6 +261,7 @@ public class SimpleBot extends AbstractBot {
         return false;
     }
 
+
     protected Boolean shopIslandTen(Islands islands,Inventory inventory) {
         ArrayList<AbstractCard> cards = islands.getIslandAvailables(10);
         for(int cpt = 0; cpt < cards.size(); cpt++)
@@ -260,6 +273,7 @@ public class SimpleBot extends AbstractBot {
         return false;
     }
 
+
     private Boolean shopIslandSolar(Islands islands, int i,Inventory inventory) {
         ArrayList<AbstractCard> cards = islands.getIslandAvailables(i);
         for(int cpt = 0; cpt < cards.size(); cpt++) {
@@ -269,6 +283,7 @@ public class SimpleBot extends AbstractBot {
         }
         return false;
     }
+
 
     private Boolean shopIslandLunar(Islands islands,int i,Inventory inventory) {
         ArrayList<AbstractCard> cards = islands.getIslandAvailables(i);
@@ -290,6 +305,11 @@ public class SimpleBot extends AbstractBot {
             return Resource.LUNAR;
     }
 
+    /**
+     * Cette fonction permets au bot d'utiliser les faces de dès à choix, il choisira alors la ressource qu'il veut dans la liste disponible d'après la face de dè envoyée en paramètre.
+     * @param d
+     * @return
+     */
     public DiceCard choose(DiceCard d) {
         if(d.getResource()!=Resource.CHOICE.resourceName())
         {

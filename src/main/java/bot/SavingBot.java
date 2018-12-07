@@ -10,7 +10,7 @@ import static game.dice.Resource.LUNAR;
 import static game.dice.Resource.SOLAR;
 
 /**
- * Classe SimpleBot représente notre stratégie initiale
+ * Classe SavingBot utilise les mêmes fonctions que SimpleBot mais implémente une stratégie différente : Le bot garde ses ressources et n'achète que les objets(cartes, faces de dès) les plus chers encore disponibles dans la partie.
  */
 public class SavingBot extends AbstractBot {
 
@@ -59,6 +59,11 @@ public class SavingBot extends AbstractBot {
 
     }
 
+    /**
+     * Le bot vérifie quel pool de faces n'est pas vide en commençant par la plus cher, si il n'a pas assez pour acheter dans cete pool, il ne fait rien, sinon il tente d'acheter.
+     * @param sanctuary
+     * @return
+     */
     public Boolean diceShopping(Sanctuary sanctuary) {
         int gold = this.getBotScore().getGold();
         int[] pools = new int[]{12,8,6,5,4,3,2};
@@ -122,6 +127,11 @@ public class SavingBot extends AbstractBot {
     }
 
 
+    /**
+     * La fonction réarrange les faces disponibles à l'achat pour le bot, en lui présentant en priorité les faces SOLAR et LUNAR
+     * @param buyable
+     * @return
+     */
     private ArrayList<DiceCard> favoriseSolLun(ArrayList<DiceCard> buyable)
     {
         int i = 0;
@@ -204,6 +214,13 @@ public class SavingBot extends AbstractBot {
 
     }
 
+
+    /**
+     * Le bot vérifie si les Islands possède encore au moins une carte en commençant par la plus cher (6), si oui alors si il possède les ressources il tentera d'acheter sinon il ne fait rien.
+     * @param islands
+     * @param inventory
+     * @return
+     */
     private Boolean lunarShopping(Islands islands,Inventory inventory) {
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
@@ -223,6 +240,12 @@ public class SavingBot extends AbstractBot {
         return false;
     }
 
+    /**
+     * Le bot vérifie si les Islands possède encore au moins une carte en commençant par la plus cher (6), si oui alors si il possède les ressources il tentera d'acheter sinon il ne fait rien.
+     * @param islands
+     * @param inventory
+     * @return
+     */
     private Boolean solarShopping(Islands islands,Inventory inventory)
     {
         int solarFee = 0;
@@ -288,6 +311,11 @@ public class SavingBot extends AbstractBot {
             return GOLD; //choix par défaut arbitraire
     }
 
+    /**
+     * Cette fonction permets au bot d'utiliser les faces de dès à choix, il choisira alors la ressource qu'il veut dans la liste disponible d'après la face de dè envoyée en paramètre.
+     * @param d
+     * @return
+     */
     public DiceCard choose(DiceCard d)
     {
         if(d.getResource()!=Resource.CHOICE.resourceName())
@@ -318,6 +346,10 @@ public class SavingBot extends AbstractBot {
     }
 
 
+    /**
+     * Cette fonction permet au Bot de décider si oui ou non il veut utiliser la carte "L'ancien".
+     * @return
+     */
     @Override
     public boolean tradeGold()
     {

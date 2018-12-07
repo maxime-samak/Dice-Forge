@@ -138,6 +138,10 @@ public class Game {
 
     }
 
+    /**
+     * Cette méthode affiche les achats de faces de dès puis de cartes du bot passé en paramètre et vérifie si plus d'une action ont été réalisées par le bot pour afficher ou non l'amande de 2 SOLAR.
+     * @param bot
+     */
     public void printChanges(String bot) {
 
         printDiceCards(bot);
@@ -149,6 +153,10 @@ public class Game {
 
     }
 
+    /**
+     * Affiche la liste des faces de dès achetés et les faces de dés remplacées par le bot passé en paramètre, enregistrées dans BuyDiceCard.
+     * @param bot
+     */
     private void printDiceCards(String bot) {
         if(BuyDiceCard.getBought().isEmpty()) {
             System.out.println("Le bot " + bot + " n'a pas acheté de faces de dés.");
@@ -164,6 +172,10 @@ public class Game {
 
     }
 
+    /**
+     * Affiche les cartes achetées par le bot passé en paramètres avec leurs prix, la récompense en victoire, et si il y'en a un, l'effet immédiat de la carte.
+     * @param bot
+     */
     private void printCards(String bot) {
         if (BuyCard.getBought().isEmpty()) {
             System.out.println("Le bot " + bot + " n'a pas acheté de cartes.");
