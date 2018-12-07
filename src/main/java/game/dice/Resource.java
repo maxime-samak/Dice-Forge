@@ -29,7 +29,7 @@ public enum Resource {
     },
     X3{
         @Override
-        public String resourceName() { return "x3"; }
+        public String resourceName() { return "X3"; }
     },
     PLUS{
         @Override

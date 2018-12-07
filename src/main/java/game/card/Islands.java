@@ -52,12 +52,8 @@ public class Islands {
             island2[i] = new DivineFavorCard(AbstractCard.Name.LES_SABOTS_D_ARGENT, AbstractCard.Type.RECURRENT, 2, 0, 2);
             island2[i + nbPlayers] = new ResourceCard(AbstractCard.Name.LES_AILES_DE_LA_GARDIENNES, AbstractCard.Type.RECURRENT, 4, 2, 0);
 
-
-            island3[i] = new DivineFavorCard(AbstractCard.Name.LES_SABOTS_D_ARGENT, AbstractCard.Type.RECURRENT, 2, 0, 2);
-            island3[i + nbPlayers] = new ResourceCard(AbstractCard.Name.LES_AILES_DE_LA_GARDIENNES, AbstractCard.Type.RECURRENT, 4, 2, 0);
-
-
-
+            island3[i] = new RegularCard(AbstractCard.Name.LES_SATYRES, AbstractCard.Type.INSTANT, 6, 0, 3);
+            island3[i + nbPlayers] = new RegularCard(AbstractCard.Name.LE_MINOTAURE, AbstractCard.Type.INSTANT, 8, 3, 0);
 
             island4[i] = new RegularCard(AbstractCard.Name.LE_PASSEUR, AbstractCard.Type.INSTANT, 12, 0,4);
             island4[i + nbPlayers] = new RegularCard(AbstractCard.Name.LA_MEDUSE, AbstractCard.Type.INSTANT, 14, 4,0);

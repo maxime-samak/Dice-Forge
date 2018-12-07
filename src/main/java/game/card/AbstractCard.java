@@ -1,8 +1,10 @@
 package game.card;
 
-
 import bot.AbstractBot;
 
+/**
+ * Cette classe représentes la structure général d'un carte.
+ */
 public abstract class AbstractCard implements Card {
 
     private final Name name;

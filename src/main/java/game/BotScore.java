@@ -2,6 +2,7 @@ package game;
 
 /**
  * Classe BotScore permet au bot de connaitre ses ressources et également de déterminer le gagnant.
+ * Toutes les méthodes de cette classe permettent de manipuler les valeurs des ressources du score d'un bot.
  */
 public class BotScore {
 

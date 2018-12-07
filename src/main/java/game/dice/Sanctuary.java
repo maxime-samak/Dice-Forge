@@ -10,9 +10,12 @@ public class Sanctuary {
 
     public Sanctuary(int nbPlayers){
         this.initPool(nbPlayers);
-
     }
 
+    /**
+     * Cette méthode initialise toutes les cartes du jeu en fonction du nombre de joueurs.
+     * @param nbPlayers Nombre de joueurs présents dans cette partie.
+     */
     public void initPool(int nbPlayers) {
 
         int[] random = {0,1,2,3};
@@ -117,6 +120,12 @@ public class Sanctuary {
         return buyables;
     }
 
+    /**
+     * Cette méthode permet de retirer une carte du sanctuaire lors de son achat.
+     * @param pool
+     * @param cardToRemove
+     * @return true si la carte a bien pu être retiré, false dans le cas contraire.
+     */
     public boolean removeCard(int pool, DiceCard cardToRemove) {
         for(int i = 0; i < pools.get(pool).length; i++) {
             if(pools.get(pool)[i] != null && pools.get(pool)[i].equals(cardToRemove)) {

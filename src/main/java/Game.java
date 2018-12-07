@@ -46,10 +46,9 @@ public class Game {
                 botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1));
             else
                 botArray[i] = new SavingBot(d1, d2, "bot#" + (i + 1));
-            if(nbPlayers==2)
-                ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, this.nbPlayers - i+1);
-            else
-                ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, this.nbPlayers - i);
+
+            ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, 3 - i);
+
         }
         this.inventory = new Inventory(botArray);
     }
@@ -96,6 +95,9 @@ public class Game {
         }
     }
 
+    /**
+     * Cette méthode démarre la partie et et lance la méthode turn() * le nombre de tour prévu.
+     */
     public void begin() {
         System.out.println("\nEtat initial des scores:\n");
         for(int i = 0; i < nbPlayers; i++) {
@@ -110,6 +112,9 @@ public class Game {
         }
     }
 
+    /**
+     * Cette méthode terminé la partie, elle affiche les scores finaux des bots et séléctionne le gagnant de la partie.
+     */
     public void end() {
         String finalScore = "";
         String winner = botArray[0].getBotID();
