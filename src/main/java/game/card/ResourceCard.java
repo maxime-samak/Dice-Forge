@@ -26,7 +26,7 @@ public class ResourceCard extends AbstractCard {
                 return null;
 
             case LES_AILES_DE_LA_GARDIENNES:
-                switch (bot.getPreferedResource()) {
+                switch (bot.getPreferredResource()) {
                     case GOLD:
                         ScoreCounter.addResource(bot.getBotScore(), Resource.GOLD, 1);
                         return "Reçu -> 1 GOLD";

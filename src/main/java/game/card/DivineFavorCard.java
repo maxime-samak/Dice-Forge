@@ -14,7 +14,7 @@ public class DivineFavorCard extends AbstractCard {
 
     public Object getEffect(AbstractBot bot) {
 
-        Dice dice = bot.getDice1(); // getPreferedDice()
+        Dice dice = bot.getDice1(); // getPreferredDice()
         DiceCard rollD1;
         DiceCard rollD2;
 

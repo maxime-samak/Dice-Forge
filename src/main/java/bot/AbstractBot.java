@@ -55,15 +55,15 @@ public abstract class AbstractBot implements Bot {
         return false; //choix par défaut arbitraire
     }
 
-    public Resource getPreferedResource() {
+    public Resource getPreferredResource() {
         return Resource.SOLAR; //choix par défaut arbitraire
     }
 
-    public Dice getPreferedDice() {
+    public Dice getPreferredDice() {
         return dice1; //choix par défaut arbitraire
     }
 
-    public int getPreferedFace() {
+    public int getPreferredFace() {
         return 4; //choix par défaut arbitraire
     }
 

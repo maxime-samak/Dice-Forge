@@ -276,7 +276,7 @@ public class SavingBot extends AbstractBot {
 
 
     @Override
-    public Resource getPreferedResource() {
+    public Resource getPreferredResource() {
         int solar=this.getBotScore().getSolar();
         int gold=this.getBotScore().getGold();
         int lunar=this.getBotScore().getLunar();
@@ -304,11 +304,11 @@ public class SavingBot extends AbstractBot {
                 return new DiceCard(values[1],resources[1]);
             else
             {
-                if(getPreferedResource()==GOLD)
+                if(getPreferredResource()==GOLD)
                     i = 1;
-                else if(getPreferedResource()==SOLAR)
+                else if(getPreferredResource()==SOLAR)
                     i = 2;
-                else if(getPreferedResource()==LUNAR)
+                else if(getPreferredResource()==LUNAR)
                     i = 3;
                 else
                     i = 0;

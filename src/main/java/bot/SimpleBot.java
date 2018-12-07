@@ -281,7 +281,7 @@ public class SimpleBot extends AbstractBot {
     }
 
     @Override
-    public Resource getPreferedResource() {
+    public Resource getPreferredResource() {
         if(this.getBotScore().getGold()<=this.getBotScore().getSolar()&&this.getBotScore().getGold()<=this.getBotScore().getLunar())
             return Resource.GOLD;
         else if(this.getBotScore().getSolar()<this.getBotScore().getGold()&&this.getBotScore().getSolar()<=this.getBotScore().getLunar())
