@@ -27,7 +27,7 @@ public class BuyCardTest {
         d2.lunarDiceInit();
 
         Islands islands = new Islands(2);
-        SimpleBot bot =  new SimpleBot(d1, d2, "Bot1");
+        SimpleBot bot =  new SimpleBot(d1, d2, "Bot1","\033[0m");
         Inventory inventory = new Inventory(new AbstractBot[]{bot});
         AbstractCard card = new RegularCard(AbstractCard.Name.LE_PASSEUR, AbstractCard.Type.INSTANT, 12, 0,4);
 

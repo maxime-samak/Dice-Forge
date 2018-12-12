@@ -20,7 +20,7 @@ public class BuyDiceCardTest {
         d2.lunarDiceInit();
 
         Sanctuary sanctuary = new Sanctuary(2);
-        SimpleBot bot = new SimpleBot(d1,d2,"test");
+        SimpleBot bot = new SimpleBot(d1,d2,"test","\033[0m");
 
 
         DiceCard card = new DiceCard(3, Resource.GOLD);

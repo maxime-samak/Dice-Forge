@@ -13,8 +13,8 @@ public class SimpleBot extends AbstractBot {
     /**
      * Constructeur de SimpleBot
      */
-    public SimpleBot(Dice d1, Dice d2, String botID) {
-        super(d1,d2, botID);
+    public SimpleBot(Dice d1, Dice d2, String botID,String color) {
+        super(d1,d2, botID,color);
     }
 
     @Override

@@ -6,19 +6,19 @@ package game.dice;
 public enum Resource {
     GOLD{
         @Override
-       public String resourceName() { return "GOLD"; }
+       public String resourceName() { return "\033[0;33m"+"GOLD"+"\033[0m"; }
     },
     LUNAR{
         @Override
-        public String resourceName() { return "LUNAR"; }
+        public String resourceName() { return "\033[0;34m"+"LUNAR"+"\033[0m"; }
     },
     SOLAR{
         @Override
-        public String resourceName() { return "SOLAR"; }
+        public String resourceName() { return "\033[0;31m"+"SOLAR"+"\033[0m"; }
     },
     VICTORY{
         @Override
-        public String resourceName() { return "VICTORY"; }
+        public String resourceName() { return "\033[0;32m"+"VICTORY"+"\033[0m"; }
     },
     /* *********************** */
     /* -- DiceCard Complexe -- */

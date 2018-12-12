@@ -1,5 +1,7 @@
 package game;
 
+import game.dice.Resource;
+
 /**
  * Classe BotScore permet au bot de connaitre ses ressources et également de déterminer le gagnant.
  * Toutes les méthodes de cette classe permettent de manipuler les valeurs des ressources du score d'un bot.
@@ -101,7 +103,7 @@ public class BotScore {
     }
 
     public String getInfos() {
-        return "Gold : "+this.getGold()+", Solar : "+this.getSolar()+", Lunar : "+this.getLunar()+", Victory : "+getVictory();
+        return Resource.GOLD.resourceName()+" : "+this.getGold()+", "+Resource.SOLAR.resourceName()+" : "+this.getSolar()+", "+Resource.LUNAR.resourceName()+" : "+this.getLunar()+", "+Resource.VICTORY.resourceName()+" : "+getVictory();
     }
 
 }

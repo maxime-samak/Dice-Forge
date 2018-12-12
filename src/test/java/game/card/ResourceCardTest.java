@@ -17,7 +17,7 @@ public class ResourceCardTest {
         d1.solarDiceInit();
         Dice d2 = new Dice();
         d2.lunarDiceInit();
-        SimpleBot bot1 = new SimpleBot(d1,d2,"bot1");
+        SimpleBot bot1 = new SimpleBot(d1,d2,"bot1","\033[0m");
 
         //Creation de la ressource
         ResourceCard r1 = new ResourceCard(AbstractCard.Name.LES_AILES_DE_LA_GARDIENNES, AbstractCard.Type.INSTANT, 2, 3, 4);

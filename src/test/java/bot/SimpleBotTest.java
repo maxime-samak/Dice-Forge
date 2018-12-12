@@ -21,7 +21,7 @@ public class SimpleBotTest {
 
         Sanctuary sanctuary = new Sanctuary(2);
 
-        SimpleBot bot1 = new SimpleBot(d1,d2,"bot1");
+        SimpleBot bot1 = new SimpleBot(d1,d2,"bot1","\033[0m");
         Assert.assertNotNull(bot1);
 
         //Budget d'achat = 0.

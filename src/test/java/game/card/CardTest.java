@@ -33,7 +33,7 @@ public class CardTest {
         d1.solarDiceInit();
         Dice d2 = new Dice();
         d2.lunarDiceInit();
-        SimpleBot b = new SimpleBot(d1, d2, "Bot1");
+        SimpleBot b = new SimpleBot(d1, d2, "Bot1","\033[0m");
 
         //carte avec effet
         DivineFavorCard c4 = new DivineFavorCard(AbstractCard.Name.LES_SABOTS_D_ARGENT, AbstractCard.Type.RECURRENT, 2, 0, 2);

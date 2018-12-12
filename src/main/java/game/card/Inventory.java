@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class Inventory {
 
-    private static HashMap<AbstractBot, ArrayList<AbstractCard>> inventory = new HashMap<>();
+    private HashMap<AbstractBot, ArrayList<AbstractCard>> inventory = new HashMap<>();
 
     public Inventory(AbstractBot[] botArray) {
         for (AbstractBot bot : botArray) {

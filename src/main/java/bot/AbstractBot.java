@@ -18,15 +18,17 @@ public abstract class AbstractBot implements Bot {
     private final Dice dice1;
     private final Dice dice2;
     private final BotScore botscore;
+    private final String color;
 
     /**
      * Constructeur
      */
-    public AbstractBot(Dice d1, Dice d2, String botID) {
+    public AbstractBot(Dice d1, Dice d2, String botID,String color) {
         this.botID = botID;
         this.dice1 = d1;
         this.dice2 = d2;
         this.botscore = new BotScore();
+        this.color=color;
     }
 
     public BotScore getBotScore() {
@@ -42,6 +44,8 @@ public abstract class AbstractBot implements Bot {
     public Dice getDice2() {
         return dice2;
     }
+
+    public String getColor() { return color; }
 
     /**
      * Défini la méthode obligatoire play à implémenter qui permet d'instancier un Sanctuaire et une Islande

@@ -15,8 +15,8 @@ import static game.dice.Resource.SOLAR;
 public class SavingBot extends AbstractBot {
 
 
-    public SavingBot(Dice d1, Dice d2, String botID) {
-        super(d1,d2, botID);
+    public SavingBot(Dice d1, Dice d2, String botID,String color) {
+        super(d1,d2, botID,color);
     }
 
     @Override

@@ -7,6 +7,8 @@ import game.card.Islands;
 import game.card.Inventory;
 import game.dice.*;
 
+import java.io.Console;
+
 import static game.DiceRoll.roll;
 
 /**
@@ -20,9 +22,11 @@ public class Game {
     private final Sanctuary sanctuary;
     private final Islands islands;
     private Inventory inventory;
+    private final String[] colors;
 
     /**
      * Créer et lance un partie avec un nombre de joueur passé en paramètre.
+     * Les couleurs instanciées dans le tableau colors sont "Cyan,Vert,Violet,Jaune,Reset".
      * @param nbPlayers
      */
     public Game(int nbPlayers) {
@@ -31,6 +35,7 @@ public class Game {
         this.botArray = new AbstractBot[nbPlayers];
         this.sanctuary = new Sanctuary(nbPlayers);
         this.islands = new Islands(nbPlayers);
+        this.colors = new String[]{"\033[1;96m","\033[1;92m","\033[1;95m","\033[1;93m","\033[0m"};
 
 
         if(nbPlayers == 3) {this.nbTurn = 10;}
@@ -43,9 +48,9 @@ public class Game {
             d2.lunarDiceInit();
 
             if(i%2 == 0)
-                botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1));
+                botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1),colors[i]);
             else
-                botArray[i] = new SavingBot(d1, d2, "bot#" + (i + 1));
+                botArray[i] = new SavingBot(d1, d2, "bot#" + (i + 1),colors[i]);
 
             ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, 3 - i);
 
@@ -59,9 +64,9 @@ public class Game {
      */
     public void turn() {
         for (int i = 0; i < nbPlayers; i++){
-            System.out.println("Tour de: " + botArray[i].getBotID());
+            System.out.println(botArray[i].getColor()+"Tour de: " + botArray[i].getBotID()+ ":"+colors[4]);
             for (int j = 0; j < nbPlayers; j++){
-                System.out.println("Lancer de dés " + botArray[j].getBotID() + ":");
+                System.out.println(botArray[j].getColor()+"Lancer de dés " + botArray[j].getBotID() + ":"+colors[4]);
                 DiceCard[] roll = new DiceCard[]{roll(botArray[j].getDice1()), roll(botArray[j].getDice2())};
                 DiceCard dc0 = botArray[j].choose(roll[0]);
                 DiceCard dc1 = botArray[j].choose(roll[1]);
@@ -77,7 +82,7 @@ public class Game {
                 System.out.println(botArray[j].getBotScore().getInfos() + "\n");
             }
 
-            System.out.println("Phase d'action de " + botArray[i].getBotID()+" :");
+            System.out.println("Phase d'action de " +botArray[i].getColor()+ botArray[i].getBotID()+colors[4]+" :");
             System.out.println(inventory.toString(botArray[i]));
             for(int k = 0;  k < inventory.getRecurrent(botArray[i]).size(); k++){
                 Object result = inventory.getRecurrent(botArray[i]).get(k).getEffect(botArray[i]);
@@ -101,7 +106,7 @@ public class Game {
     public void begin() {
         System.out.println("\nEtat initial des scores:\n");
         for(int i = 0; i < nbPlayers; i++) {
-            System.out.println(botArray[i].getBotID() + ": " + botArray[i].getBotScore().getInfos());
+            System.out.println(botArray[i].getColor()+botArray[i].getBotID() +colors[4]+ ": " + botArray[i].getBotScore().getInfos());
         }
         System.out.println();
 
@@ -117,23 +122,23 @@ public class Game {
      */
     public void end() {
         String finalScore = "";
-        String winner = botArray[0].getBotID();
+        AbstractBot winner = botArray[0];
         int acc = botArray[0].getBotScore().getVictory();
         for(AbstractBot bot : botArray) {
             if(bot.getBotScore().getVictory() > acc) {
-                winner = bot.getBotID();
+                winner = bot;
                 acc = bot.getBotScore().getVictory();
             }
             else {
 
             }
-            finalScore += bot.getBotID() + ": " + bot.getBotScore().getInfos() + "\n";
+            finalScore += bot.getColor()+bot.getBotID() +colors[4]+ ": " + bot.getBotScore().getInfos() + "\n";
         }
         System.out.println();
         System.out.println("*************************************");
         System.out.println("Scores:");
         System.out.println(finalScore);
-        System.out.println(winner + " est le gagnant");
+        System.out.println(winner.getColor()+winner.getBotID() +colors[4]+ " est le gagnant");
         System.out.println("*************************************");
 
     }
@@ -146,7 +151,7 @@ public class Game {
 
         printDiceCards(bot);
         if ((BuyDiceCard.getBought().size() > 0 && BuyCard.getBought().size() > 0) || BuyCard.getBought().size() > 1) {
-            System.out.println("Le bot " + bot + " a payé 2 SOLAR pour jouer une action supplémentaire");
+            System.out.println("Le bot " + bot + " a payé 2 "+Resource.SOLAR.resourceName()+" pour jouer une action supplémentaire");
 
         }
         printCards(bot);
@@ -164,7 +169,7 @@ public class Game {
 
         else {
             for(int i = 0; i < BuyDiceCard.getBought().size(); i++) {
-                System.out.println("Le bot " + bot + " a acheté la face " + BuyDiceCard.getBought().get(i) + " pour "+ BuyDiceCard.getPrices().get(i) + " GOLD et a remplacé la face " + BuyDiceCard.getReplaced().get(i));
+                System.out.println("Le bot " + bot + " a acheté la face " + BuyDiceCard.getBought().get(i) + " pour "+ BuyDiceCard.getPrices().get(i)+" "+Resource.GOLD.resourceName()+" et a remplacé la face " + BuyDiceCard.getReplaced().get(i));
             }
 
             System.out.println("Le bot "+bot+" n'achète plus de faces.");
@@ -183,9 +188,9 @@ public class Game {
         else {
             for(int i = 0; i < BuyCard.getBought().size(); i++) {
                 if(BuyCard.getEffects().get(i)!=null)
-                    System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).getName() + " pour " + BuyCard.getBought().get(i).getPrice()[0] + " SOLAR et "+ BuyCard.getBought().get(i).getPrice()[1] + " LUNAR et a gagné " + BuyCard.getBought().get(i).getVictory() + " VICTORY : "+BuyCard.getEffects().get(i).toString());
+                    System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).getName() + " pour " + BuyCard.getBought().get(i).getPrice()[0] +" "+Resource.SOLAR.resourceName()+" et "+ BuyCard.getBought().get(i).getPrice()[1] +" "+Resource.LUNAR.resourceName()+" et a gagné " + BuyCard.getBought().get(i).getVictory() +" "+Resource.VICTORY.resourceName()+" : "+BuyCard.getEffects().get(i).toString());
                 else
-                    System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).getName() + " pour " + BuyCard.getBought().get(i).getPrice()[0] + " SOLAR et "+ BuyCard.getBought().get(i).getPrice()[1] + " LUNAR et a gagné " + BuyCard.getBought().get(i).getVictory() + " VICTORY");
+                    System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).getName() + " pour " + BuyCard.getBought().get(i).getPrice()[0] +" "+Resource.SOLAR.resourceName()+" et "+ BuyCard.getBought().get(i).getPrice()[1] +" "+Resource.LUNAR.resourceName()+" et a gagné " + BuyCard.getBought().get(i).getVictory() +" "+Resource.VICTORY.resourceName());
             }
         }
     }
