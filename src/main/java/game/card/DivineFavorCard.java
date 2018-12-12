@@ -33,7 +33,9 @@ public class DivineFavorCard extends AbstractCard {
                 ScoreCounter.updateScore(bot.getBotScore(), new DiceCard[]{rollD3,rollD4});
 
                 rollD1 = DiceRoll.roll(bot.getDice1());
+                rollD1=bot.choose(rollD1);
                 rollD2 = DiceRoll.roll(bot.getDice2());
+                rollD2=bot.choose(rollD2);
                 ScoreCounter.updateScore(bot.getBotScore(), new DiceCard[]{rollD1,rollD2});
                 return "Reçu -> "+rollD3.toString()+","+rollD4.toString()+","+rollD1.toString()+","+rollD2.toString();
 
@@ -41,6 +43,7 @@ public class DivineFavorCard extends AbstractCard {
                 String res = "Reçu -> ";
                 for (int i = 0; i < 4; i++) {
                     rollD1 = DiceRoll.roll(dice);
+                    rollD1=bot.choose(rollD1);
                     res+=rollD1.toString();
                     ScoreCounter.updateScore(bot.getBotScore(), rollD1);
                 }

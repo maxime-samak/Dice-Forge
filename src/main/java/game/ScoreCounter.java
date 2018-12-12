@@ -67,7 +67,7 @@ public class ScoreCounter {
     }
 
     public static boolean isX3(DiceCard roll) {
-        if (roll.getResource().equals(Resource.X3)) {
+        if (roll.getResource().equals(Resource.X3.resourceName())) {
             return true;
         }
         return false;
