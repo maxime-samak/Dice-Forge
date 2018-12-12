@@ -26,9 +26,11 @@ public class DivineFavorCard extends AbstractCard {
                 return rollD1;
 
             case LA_PINCE:
-                DiceCard rollD3=rollD1 = DiceRoll.roll(bot.getDice1());
-                DiceCard rollD4=rollD2 = DiceRoll.roll(bot.getDice2());
-                ScoreCounter.updateScore(bot.getBotScore(), new DiceCard[]{rollD1,rollD2});
+                DiceCard rollD3 = DiceRoll.roll(bot.getDice1());
+                rollD3=bot.choose(rollD3);
+                DiceCard rollD4 = DiceRoll.roll(bot.getDice2());
+                rollD4=bot.choose(rollD4);
+                ScoreCounter.updateScore(bot.getBotScore(), new DiceCard[]{rollD3,rollD4});
 
                 rollD1 = DiceRoll.roll(bot.getDice1());
                 rollD2 = DiceRoll.roll(bot.getDice2());

@@ -61,25 +61,20 @@ public class Game {
     /**
      * la méthode fais passer les tours, a chaque manche il y'a un tour de chaque joueur,
      * au tour d'un joueur tout le monde lance les dés et le dis joueur peut aplliquer sa stratégie.
+     * La méthode fais lancer les dès deux fois au bots si ils ne sont que deux.
      */
     public void turn() {
         for (int i = 0; i < nbPlayers; i++){
             System.out.println(botArray[i].getColor()+"Tour de: " + botArray[i].getBotID()+ ":"+colors[4]);
             for (int j = 0; j < nbPlayers; j++){
                 System.out.println(botArray[j].getColor()+"Lancer de dés " + botArray[j].getBotID() + ":"+colors[4]);
-                DiceCard[] roll = new DiceCard[]{roll(botArray[j].getDice1()), roll(botArray[j].getDice2())};
-                DiceCard dc0 = botArray[j].choose(roll[0]);
-                DiceCard dc1 = botArray[j].choose(roll[1]);
-                if(roll[0].getResource()==Resource.CHOICE.resourceName()&&roll[1].getResource()==Resource.CHOICE.resourceName())
-                    System.out.println(roll[0] +" ("+dc0+" choisi )"+ "\n" + roll[1]+" ("+dc1+" choisi )");
-                else if(roll[0].getResource()==Resource.CHOICE.resourceName())
-                    System.out.println(roll[0] +" ("+dc0+" choisi )"+ "\n" + roll[1]);
-                else if(roll[0].getResource()==Resource.CHOICE.resourceName())
-                    System.out.println(roll[0] + "\n" + roll[1]+" ("+dc1+" choisi )");
-                else
-                    System.out.println(roll[0] + "\n" + roll[1]);
-                ScoreCounter.updateScore(botArray[j].getBotScore(),new DiceCard[]{dc0,dc1});
-                System.out.println(botArray[j].getBotScore().getInfos() + "\n");
+                if(nbPlayers==2)
+                {
+                    rollDices(botArray[j]);
+                    System.out.println("---");
+                }
+                rollDices(botArray[j]);
+                System.out.println("\n"+botArray[j].getBotScore().getInfos() + "\n");
             }
 
             System.out.println("Phase d'action de " +botArray[i].getColor()+ botArray[i].getBotID()+colors[4]+" :");
@@ -99,6 +94,27 @@ public class Game {
             BuyCard.resetBotLog();
         }
     }
+
+    /**
+     * La méthode fais lancer ses deux dès au bot passé en paramètre, affiche les résultats et mets à jour les points.
+     * @param bot
+     */
+    private void rollDices(AbstractBot bot)
+    {
+        DiceCard[] roll = new DiceCard[]{roll(bot.getDice1()), roll(bot.getDice2())};
+        DiceCard dc0 = bot.choose(roll[0]);
+        DiceCard dc1 = bot.choose(roll[1]);
+        if (roll[0].getResource() == Resource.CHOICE.resourceName() && roll[1].getResource() == Resource.CHOICE.resourceName())
+            System.out.println(roll[0] + " (" + dc0 + " choisi )" + "\n" + roll[1] + " (" + dc1 + " choisi )");
+        else if (roll[0].getResource() == Resource.CHOICE.resourceName())
+            System.out.println(roll[0] + " (" + dc0 + " choisi )" + "\n" + roll[1]);
+        else if (roll[0].getResource() == Resource.CHOICE.resourceName())
+            System.out.println(roll[0] + "\n" + roll[1] + " (" + dc1 + " choisi )");
+        else
+            System.out.println(roll[0] + "\n" + roll[1]);
+        ScoreCounter.updateScore(bot.getBotScore(), new DiceCard[]{dc0, dc1});
+    }
+
 
     /**
      * Cette méthode démarre la partie et et lance la méthode turn() * le nombre de tour prévu.
@@ -149,13 +165,22 @@ public class Game {
      */
     public void printChanges(String bot) {
 
-        printDiceCards(bot);
-        if ((BuyDiceCard.getBought().size() > 0 && BuyCard.getBought().size() > 0) || BuyCard.getBought().size() > 1) {
-            System.out.println("Le bot " + bot + " a payé 2 "+Resource.SOLAR.resourceName()+" pour jouer une action supplémentaire");
 
+        if(BuyDiceCard.getFirst()==true)
+        {
+            printDiceCards(bot);
+            if(BuyCard.getBought().size()>0)
+                System.out.println("Le bot " + bot + " a payé 2 "+Resource.SOLAR.resourceName()+" pour jouer un action suplémentaire");
+            printCards(bot,false);
         }
-        printCards(bot);
-
+        else
+        {
+            if ((BuyDiceCard.getBought().size() > 0 && BuyCard.getBought().size() > 0) || BuyCard.getBought().size() > 1)
+                printCards(bot,true);
+            else
+                printCards(bot,false);
+            printDiceCards(bot);
+        }
     }
 
     /**
@@ -181,17 +206,20 @@ public class Game {
      * Affiche les cartes achetées par le bot passé en paramètres avec leurs prix, la récompense en victoire, et si il y'en a un, l'effet immédiat de la carte.
      * @param bot
      */
-    private void printCards(String bot) {
+    private void printCards(String bot,boolean mult) {
         if (BuyCard.getBought().isEmpty()) {
             System.out.println("Le bot " + bot + " n'a pas acheté de cartes.");
         }
         else {
             for(int i = 0; i < BuyCard.getBought().size(); i++) {
+                if (mult && i !=0)
+                    System.out.println("Le bot " + bot + " a payé 2 "+Resource.SOLAR.resourceName()+" pour jouer un action suplémentaire");
                 if(BuyCard.getEffects().get(i)!=null)
                     System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).getName() + " pour " + BuyCard.getBought().get(i).getPrice()[0] +" "+Resource.SOLAR.resourceName()+" et "+ BuyCard.getBought().get(i).getPrice()[1] +" "+Resource.LUNAR.resourceName()+" et a gagné " + BuyCard.getBought().get(i).getVictory() +" "+Resource.VICTORY.resourceName()+" : "+BuyCard.getEffects().get(i).toString());
                 else
                     System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).getName() + " pour " + BuyCard.getBought().get(i).getPrice()[0] +" "+Resource.SOLAR.resourceName()+" et "+ BuyCard.getBought().get(i).getPrice()[1] +" "+Resource.LUNAR.resourceName()+" et a gagné " + BuyCard.getBought().get(i).getVictory() +" "+Resource.VICTORY.resourceName());
             }
+
         }
     }
 

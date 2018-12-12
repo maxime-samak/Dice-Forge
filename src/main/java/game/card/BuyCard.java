@@ -29,13 +29,17 @@ public class BuyCard {
     /**
      * Cette méthode fait payer le cout de la carte au bot.
      * Elle ajoute également les points de victoire, éxécute l'effet de la carte, supprime la carte de l'ile.
-     *
+     * La méthode vérifie que le Bot n'a pas effectué le maximum d'actions pour ce tour.
      * @param bot
      * @param card
      * @param islands
      * @return
      */
     public static boolean buyCard(AbstractBot bot, Islands islands, AbstractCard card,Inventory inventory) {
+        if(bought.size()>=2 || (bought.size()==1 && BuyDiceCard.getBought().size()>=1))
+        {
+            return false;
+        }
 
         BotScore score = bot.getBotScore();
         if (card.getPrice()[0] <= score.getSolar() && card.getPrice()[1] <= score.getLunar()) {
@@ -75,6 +79,7 @@ public class BuyCard {
                         }
                         else
                             effects.add(null);
+                        BuyDiceCard.changeFirst();
 
                         return true;
                     }

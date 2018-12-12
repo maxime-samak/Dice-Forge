@@ -13,6 +13,7 @@ public class BuyDiceCard {
     private static ArrayList<DiceCard> bought = new ArrayList<>();
     private static ArrayList<DiceCard> replaced = new ArrayList<>();
     private static ArrayList<Integer> prices = new ArrayList<>();
+    private static Boolean first=true;
 
     public static ArrayList<DiceCard> getBought() {
         return bought;
@@ -24,11 +25,18 @@ public class BuyDiceCard {
         return prices;
     }
 
+    public static Boolean getFirst() { return first; }
+
+    public static void changeFirst() {
+        first = false;
+    }
+
     /**
      * La méthode vérifie dans la pool passée en paramètre si la face que le bot veut acheter est disponible,
      * c'est à dire si il possède assez d'argent et si il n'a pas acheter de face équivalente pendant ce tour.
      * Si les vérification sont fausse la carte n'est pas acheter et la méthode renvoie false.
-     * Si les vérifications passent alors la face est achettée, le gold retiré et le dé choisi changé, la méthode renvoie true.
+     * Si les vérifications passent alors la face est achetée, le gold retiré et le dé choisi changé, la méthode renvoie true.
+     * La méthode vérifie si le bot n'a pas d'abord effectué son maximum d'action possible
      *
      * @param sanctuary
      * @param pool pool où se trouve la face à acheter
@@ -39,7 +47,7 @@ public class BuyDiceCard {
      * @return
      */
     public static boolean setCard(Sanctuary sanctuary, int pool, DiceCard card, Dice dice, int cardToChange, BotScore botscore) {
-        if(botscore.getGold() < pool) {
+        if(botscore.getGold() < pool || BuyCard.getBought().size()>=2) {
             return false;
         }
 
@@ -95,6 +103,7 @@ public class BuyDiceCard {
     public static void resetBotLog() {
         bought = new ArrayList<>();
         prices = new ArrayList<>();
+        first=true;
     }
 
     /**
