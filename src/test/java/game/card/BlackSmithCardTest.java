@@ -34,5 +34,9 @@ public class BlackSmithCardTest {
         BlackSmithCard c2 = new BlackSmithCard(AbstractCard.Name.LE_MARTEAU_DU_FORGERON, AbstractCard.Type.INSTANT, 2, 0, 1);
         c2.getEffect(bot1); //effet non implémenté, il initialise juste la variable forge à 0.
 
+        Assert.assertEquals("Inventaire étendu", c1.getEffect(bot1));
+        Assert.assertEquals(null, c2.getEffect(bot1));
+
+
     }
 }
