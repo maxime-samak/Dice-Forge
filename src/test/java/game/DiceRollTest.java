@@ -17,11 +17,8 @@ public class DiceRollTest {
         d2.lunarDiceInit();
         DiceCard[] roll = new DiceCard[]{roll(d1), roll(d2)};
 
-        Assert.assertTrue((roll[0].equals(new DiceCard(1, Resource.SOLAR)))||
-                        (roll[0].equals(new DiceCard(1, Resource.GOLD))));
-        Assert.assertTrue((roll[1].equals(new DiceCard(1, Resource.LUNAR)))||
-                        (roll[1].equals(new DiceCard(1, Resource.GOLD)))||
-                        (roll[1].equals(new DiceCard(2, Resource.VICTORY))));
+        Assert.assertTrue((roll[0].equals(new DiceCard(1, Resource.SOLAR)))|| (roll[0].equals(new DiceCard(1, Resource.GOLD))));
+        Assert.assertTrue((roll[1].equals(new DiceCard(1, Resource.LUNAR)))|| (roll[1].equals(new DiceCard(1, Resource.GOLD)))|| (roll[1].equals(new DiceCard(2, Resource.VICTORY))));
 
     }
 }

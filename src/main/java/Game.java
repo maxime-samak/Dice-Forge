@@ -59,6 +59,24 @@ public class Game {
     }
 
     /**
+     * Cette méthode démarre la partie et et lance la méthode turn() * le nombre de tour prévu.
+     */
+    public void begin() {
+        System.out.println("\nEtat initial des scores:\n");
+        for(int i = 0; i < nbPlayers; i++) {
+            System.out.println(botArray[i].getColor()+botArray[i].getBotID() +colors[4]+ ": " + botArray[i].getBotScore().getInfos());
+        }
+        System.out.println();
+
+        for(int i = 0; i < nbTurn; i++) {
+            System.out.println("************ Manche: " + (i + 1) + " ************");
+            this.turn();
+            System.out.println("***********************************");
+            System.out.println("***********************************");
+        }
+    }
+
+    /**
      * la méthode fais passer les tours, a chaque manche il y'a un tour de chaque joueur,
      * au tour d'un joueur tout le monde lance les dés et le dis joueur peut aplliquer sa stratégie.
      * La méthode fais lancer les dès deux fois au bots si ils ne sont que deux.
@@ -119,49 +137,6 @@ public class Game {
         ScoreCounter.updateScore(bot.getBotScore(), new DiceCard[]{dc0, dc1});
     }
 
-
-    /**
-     * Cette méthode démarre la partie et et lance la méthode turn() * le nombre de tour prévu.
-     */
-    public void begin() {
-        System.out.println("\nEtat initial des scores:\n");
-        for(int i = 0; i < nbPlayers; i++) {
-            System.out.println(botArray[i].getColor()+botArray[i].getBotID() +colors[4]+ ": " + botArray[i].getBotScore().getInfos());
-        }
-        System.out.println();
-
-        for(int i = 0; i < nbTurn; i++) {
-            System.out.println("**** Manche: " + (i + 1) + " ****");
-            this.turn();
-            System.out.println("******************\n");
-        }
-    }
-
-    /**
-     * Cette méthode terminé la partie, elle affiche les scores finaux des bots et séléctionne le gagnant de la partie.
-     */
-    public void end() {
-        String finalScore = "";
-        AbstractBot winner = botArray[0];
-        int acc = botArray[0].getBotScore().getVictory();
-        for(AbstractBot bot : botArray) {
-            if(bot.getBotScore().getVictory() > acc) {
-                winner = bot;
-                acc = bot.getBotScore().getVictory();
-            }
-            else {
-
-            }
-            finalScore += bot.getColor()+bot.getBotID() +colors[4]+ ": " + bot.getBotScore().getInfos() + "\n";
-        }
-        System.out.println();
-        System.out.println("*************************************");
-        System.out.println("Scores:");
-        System.out.println(finalScore);
-        System.out.println(winner.getColor()+winner.getBotID() +colors[4]+ " est le gagnant");
-        System.out.println("*************************************");
-
-    }
 
     /**
      * Cette méthode affiche les achats de faces de dès puis de cartes du bot passé en paramètre et vérifie si plus d'une action ont été réalisées par le bot pour afficher ou non l'amande de 2 SOLAR.
@@ -227,6 +202,32 @@ public class Game {
             }
 
         }
+    }
+
+    /**
+     * Cette méthode terminé la partie, elle affiche les scores finaux des bots et séléctionne le gagnant de la partie.
+     */
+    public void end() {
+        String finalScore = "";
+        AbstractBot winner = botArray[0];
+        int acc = botArray[0].getBotScore().getVictory();
+        for(AbstractBot bot : botArray) {
+            if(bot.getBotScore().getVictory() > acc) {
+                winner = bot;
+                acc = bot.getBotScore().getVictory();
+            }
+            else {
+
+            }
+            finalScore += bot.getColor()+bot.getBotID() +colors[4]+ ": " + bot.getBotScore().getInfos() + "\n";
+        }
+        System.out.println();
+        System.out.println("***********************************");
+        System.out.println("Scores:");
+        System.out.println(finalScore);
+        System.out.println(winner.getColor()+winner.getBotID() +colors[4]+ " est le gagnant");
+        System.out.println("***********************************");
+
     }
 
 }
