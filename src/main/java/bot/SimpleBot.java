@@ -334,8 +334,8 @@ public class SimpleBot extends AbstractBot {
                 else
                     i=3;
 
-                return i;
             }
+            return i;
         }
     }
 

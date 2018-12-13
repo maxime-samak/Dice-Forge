@@ -112,7 +112,7 @@ public class Game {
             System.out.println(roll[0] + " (" + dc0 + " choisi )" + "\n" + roll[1] + " (" + dc1 + " choisi )");
         else if (roll[0].getResource() == Resource.CHOICE.resourceName())
             System.out.println(roll[0] + " (" + dc0 + " choisi )" + "\n" + roll[1]);
-        else if (roll[0].getResource() == Resource.CHOICE.resourceName())
+        else if (roll[1].getResource() == Resource.CHOICE.resourceName())
             System.out.println(roll[0] + "\n" + roll[1] + " (" + dc1 + " choisi )");
         else
             System.out.println(roll[0] + "\n" + roll[1]);
