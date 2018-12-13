@@ -7,9 +7,21 @@ public class Stat {
     //initialisation de la partie
     public static void main(String[] args) {
 
-        AbstractBot[] bots=new AbstractBot[Integer.parseInt(args[0])];
-        int[] scores=new int[Integer.parseInt(args[0])];
-        int[] wins= new int[Integer.parseInt(args[0])];
+        AbstractBot[] bots;
+        int[] scores;
+        int[] wins;
+        if(args.length==0)
+        {
+            bots = new AbstractBot[4];
+            scores = new int[4];
+            wins = new int[4];
+        }
+        else
+        {
+            bots=new AbstractBot[Integer.parseInt(args[0])];
+            scores=new int[Integer.parseInt(args[0])];
+            wins= new int[Integer.parseInt(args[0])];
+        }
         for(int i=0;i<500;i++) {
             GameStat game = new GameStat(Integer.parseInt(args[0]));
             game.begin();

@@ -60,6 +60,7 @@ public class SavingBotTest {
         //Cas 1 : faces achetées == 0 et carte achetées > 0
             //Cas 1.1 : Gold > Autres ressources
         BuyDiceCard.resetBotLog();
+        BuyCard.resetBotLog();
         int tmp = BuyCard.getBought().size();
         ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)});
         bot1.play(sanctuary, islands, inventory); //achète une face
