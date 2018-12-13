@@ -85,7 +85,7 @@ Groupe DFG
 - [ ] Ajout des ilots et des pions.
 
 #### Date prévu
-*14/12/2018*
+*16/12/2018*
 
 ## Note
 
