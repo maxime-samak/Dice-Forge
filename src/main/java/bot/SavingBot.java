@@ -139,7 +139,7 @@ public class SavingBot extends AbstractBot {
         ArrayList<DiceCard> newBuy= new ArrayList<>();
         for(int cpt=0;cpt<buyable.size();cpt++)
         {
-            if(buyable.get(cpt).getResource()== SOLAR.resourceName() || buyable.get(cpt).getResource()== SOLAR.resourceName() )
+            if(buyable.get(cpt).getResource()== SOLAR.resourceName() || buyable.get(cpt).getResource()== LUNAR.resourceName() )
             {
                 listSolLun.add(1);
                 i++;

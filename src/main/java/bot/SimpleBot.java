@@ -267,6 +267,7 @@ public class SimpleBot extends AbstractBot {
         ArrayList<AbstractCard> cards = islands.getIslandAvailables(10);
         for(int cpt = 0; cpt < cards.size(); cpt++)
         {
+
             if(BuyCard.buyCard(this, islands,cards.get(cpt),inventory)) {
                 return true;
             }
@@ -278,7 +279,7 @@ public class SimpleBot extends AbstractBot {
     private Boolean shopIslandSolar(Islands islands, int i,Inventory inventory) {
         ArrayList<AbstractCard> cards = islands.getIslandAvailables(i);
         for(int cpt = 0; cpt < cards.size(); cpt++) {
-            if(cards.get(cpt).getPrice()[0] == i) {
+            if(cards.get(cpt).getPrice()[0] == i && this.getBotScore().getSolar()>=i) {
                 if(BuyCard.buyCard(this, islands,cards.get(cpt),inventory)) { return true; }
             }
         }
@@ -289,7 +290,7 @@ public class SimpleBot extends AbstractBot {
     private Boolean shopIslandLunar(Islands islands,int i,Inventory inventory) {
         ArrayList<AbstractCard> cards = islands.getIslandAvailables(i);
         for(int cpt = 0; cpt < cards.size(); cpt++) {
-            if(cards.get(cpt).getPrice()[1] == i) {
+            if(cards.get(cpt).getPrice()[1] == i && this.getBotScore().getLunar()>=i) {
                 if(BuyCard.buyCard(this, islands,cards.get(cpt),inventory)) { return true; }
             }
         }

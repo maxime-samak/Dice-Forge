@@ -80,38 +80,38 @@
             </configuration>
         </plugin>
 
-        <plugin>
-            <groupId>org.codehaus.mojo</groupId>
-            <artifactId>exec-maven-plugin</artifactId>
-            <version>1.6.0</version>
-            <!--à ne pas changer : c'est la version du plugin (et pas de java)-->
-            <executions>
-                <execution>
-                    <goals>
-                        <goal>java</goal>
-                    </goals>
-                </execution>
-            </executions>
-            <configuration>
-                <mainClass>Partie</mainClass>
-                <!--à changer : classe avec point d'entrée pour votre projet-->
-                <!--argument de la commande java (en plus du nom de la classe et du classpath-->
-                <!-- arguments récupérés dans le main -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.6.0</version>
 
-                        <!--<arguments>
-                                <argument>argument1</argument>
-                        </arguments>-->
+                <executions>
+                    <execution>
+                        <id>Partie</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>Partie</mainClass>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>Stat</id>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>Stat</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
 
-                        <!-- arguments de configuration système -->
-                        <systemProperties>
-                                <systemProperty>
-                                    <key>myproperty</key>
-                                    <value>myvalue</value>
-                                </systemProperty>
-                        </systemProperties>
+                <configuration>
+                    <mainClass>Partie</mainClass>  <!-- exécution par défaut -->
+                </configuration>
 
-            </configuration>
-        </plugin>
+
+            </plugin>
     </plugins>
 </build>
 
