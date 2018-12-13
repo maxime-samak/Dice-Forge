@@ -21,7 +21,11 @@ public abstract class AbstractBot implements Bot {
     private final String color;
 
     /**
-     * Constructeur
+     * Constructeur d'AbstractBot
+     * @param d1 son premier dé
+     * @param d2 son second dé
+     * @param botID son identification
+     * @param color sa couleur d'écriture
      */
     public AbstractBot(Dice d1, Dice d2, String botID,String color) {
         this.botID = botID;

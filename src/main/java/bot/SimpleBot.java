@@ -11,7 +11,11 @@ import static game.dice.BuyDiceCard.setCard;
 public class SimpleBot extends AbstractBot {
 
     /**
-     * Constructeur de SimpleBot
+     * Constructeur SimpleBot
+     * @param d1 son premier dé
+     * @param d2 son second dé
+     * @param botID son identification
+     * @param color sa couleur d'écriture
      */
     public SimpleBot(Dice d1, Dice d2, String botID,String color) {
         super(d1,d2, botID,color);

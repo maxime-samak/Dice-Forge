@@ -14,7 +14,13 @@ import static game.dice.Resource.SOLAR;
  */
 public class SavingBot extends AbstractBot {
 
-
+    /**
+     * Constructeur SavingBot
+     * @param d1 son premier dé
+     * @param d2 son second dé
+     * @param botID son identification
+     * @param color sa couleur d'écriture
+     */
     public SavingBot(Dice d1, Dice d2, String botID,String color) {
         super(d1,d2, botID,color);
     }
@@ -24,6 +30,12 @@ public class SavingBot extends AbstractBot {
         buyInOrder(sanctuary,islands,inventory);
     }
 
+    /**
+     * Stratégie d'achat, en fonction de ses ressources et de ses achats prècèdents, il achète des cartes ou des faces de dé.
+     * @param sanctuary
+     * @param islands
+     * @param inventory
+     */
     public void buyInOrder(Sanctuary sanctuary,Islands islands,Inventory inventory) {
 
         if(BuyDiceCard.getBought().size()==0 && BuyCard.getBought().size()>0)
@@ -60,7 +72,7 @@ public class SavingBot extends AbstractBot {
     }
 
     /**
-     * Le bot vérifie quel pool de faces n'est pas vide en commençant par la plus cher, si il n'a pas assez pour acheter dans cete pool, il ne fait rien, sinon il tente d'acheter.
+     * Le bot vérifie quel pool de faces n'est pas vide en commençant par la plus cher, si il n'a pas assez pour acheter dans cette pool, il ne fait rien, sinon il tente d'acheter.
      * @param sanctuary
      * @return
      */

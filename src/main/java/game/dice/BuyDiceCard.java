@@ -47,7 +47,7 @@ public class BuyDiceCard {
      * @return
      */
     public static boolean setCard(Sanctuary sanctuary, int pool, DiceCard card, Dice dice, int cardToChange, BotScore botscore) {
-        if(botscore.getGold() < pool || BuyCard.getBought().size()>=2) {
+        if(botscore.getGold() < pool || BuyDiceCard.getBought().size()>=2) {
             return false;
         }
 
@@ -57,7 +57,7 @@ public class BuyDiceCard {
             }
         }
 
-        if(BuyCard.getBought().size() > 0) {
+        if(BuyDiceCard.getBought().size() > 0) {
 
             if (bought.size() == 0) {
                 if (!(botscore.getSolar() >= 2)) {
