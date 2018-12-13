@@ -87,7 +87,7 @@
 
                 <executions>
                     <execution>
-                        <id>Partie</id>
+                        <id>partie</id>
                         <goals>
                             <goal>java</goal>
                         </goals>
@@ -96,7 +96,7 @@
                         </configuration>
                     </execution>
                     <execution>
-                        <id>Stat</id>
+                        <id>stat</id>
                         <goals>
                             <goal>java</goal>
                         </goals>
