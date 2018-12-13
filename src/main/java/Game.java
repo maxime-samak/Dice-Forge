@@ -102,8 +102,12 @@ public class Game {
     private void rollDices(AbstractBot bot)
     {
         DiceCard[] roll = new DiceCard[]{roll(bot.getDice1()), roll(bot.getDice2())};
-        DiceCard dc0 = bot.choose(roll[0]);
-        DiceCard dc1 = bot.choose(roll[1]);
+        DiceCard dc0=roll[0];
+        DiceCard dc1 = roll[1];
+        if(bot.choose(dc0)!=0)
+            dc0=new DiceCard(dc0.getValueArray()[bot.choose(dc0)],dc0.getResourceArray()[bot.choose(dc0)]);
+        if(bot.choose(dc1)!=0)
+            dc1=new DiceCard(dc1.getValueArray()[bot.choose(dc1)],dc1.getResourceArray()[bot.choose(dc1)]);
         if (roll[0].getResource() == Resource.CHOICE.resourceName() && roll[1].getResource() == Resource.CHOICE.resourceName())
             System.out.println(roll[0] + " (" + dc0 + " choisi )" + "\n" + roll[1] + " (" + dc1 + " choisi )");
         else if (roll[0].getResource() == Resource.CHOICE.resourceName())
@@ -179,6 +183,8 @@ public class Game {
                 printCards(bot,true);
             else
                 printCards(bot,false);
+            if(BuyCard.getBought().size() == 1)
+                System.out.println("Le bot " + bot + " a payé 2 "+Resource.SOLAR.resourceName()+" pour jouer un action suplémentaire");
             printDiceCards(bot);
         }
     }
@@ -212,7 +218,7 @@ public class Game {
         }
         else {
             for(int i = 0; i < BuyCard.getBought().size(); i++) {
-                if (mult && i !=0)
+                if (mult && i ==1)
                     System.out.println("Le bot " + bot + " a payé 2 "+Resource.SOLAR.resourceName()+" pour jouer un action suplémentaire");
                 if(BuyCard.getEffects().get(i)!=null)
                     System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).getName() + " pour " + BuyCard.getBought().get(i).getPrice()[0] +" "+Resource.SOLAR.resourceName()+" et "+ BuyCard.getBought().get(i).getPrice()[1] +" "+Resource.LUNAR.resourceName()+" et a gagné " + BuyCard.getBought().get(i).getVictory() +" "+Resource.VICTORY.resourceName()+" : "+BuyCard.getEffects().get(i).toString());

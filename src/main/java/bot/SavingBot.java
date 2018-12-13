@@ -316,11 +316,11 @@ public class SavingBot extends AbstractBot {
      * @param d
      * @return
      */
-    public DiceCard choose(DiceCard d)
+    public int choose(DiceCard d)
     {
         if(d.getResource()!=Resource.CHOICE.resourceName())
         {
-            return d;
+            return 0;
         }
         else
         {
@@ -329,7 +329,7 @@ public class SavingBot extends AbstractBot {
             int[] values = d.getValueArray();
 
             if(resources[1].resourceName()==Resource.VICTORY.resourceName())
-                return new DiceCard(values[1],resources[1]);
+                return 1;
             else
             {
                 if(getPreferredResource()==GOLD)
@@ -341,7 +341,7 @@ public class SavingBot extends AbstractBot {
                 else
                     i = 0;
             }
-                return new DiceCard(values[i],resources[i]);
+                return i;
         }
     }
 

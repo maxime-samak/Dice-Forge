@@ -52,7 +52,7 @@ public abstract class AbstractBot implements Bot {
      */
     public void play(Sanctuary sanctuary, Islands islands, Inventory invetory){}
 
-    public abstract DiceCard choose(DiceCard d);
+    public abstract int choose(DiceCard d);
     //public abstract void play(Sanctuary sanctuary, Islands islands);
 
     public boolean tradeGold() {

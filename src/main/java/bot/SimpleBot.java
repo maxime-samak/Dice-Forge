@@ -184,7 +184,7 @@ public class SimpleBot extends AbstractBot {
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
         if(!(islands.getIslandAvailables(10).isEmpty()) && this.getBotScore().getLunar() >= 5 && this.getBotScore().getSolar() >= 5 + solarFee) { if(shopIslandTen(islands,inventory)){nbBuy++;}}
         if(nbBuy == 0) {
-            if(this.getBotScore().getLunar() <= this.getBotScore().getSolar()) {
+            if(this.getBotScore().getLunar() < this.getBotScore().getSolar()) {
                 if (solarShopping(islands,inventory)) {
                     return true;
                 }
@@ -223,11 +223,11 @@ public class SimpleBot extends AbstractBot {
 
         for(int i=6;i>0;i--)
         {
-            if(!(islands.getIslandAvailables(i).isEmpty())) {
-                if (this.getBotScore().getLunar() >= i && this.getBotScore().getSolar() >= solarFee) {
-                    if (shopIslandLunar(islands, i,inventory)) {
-                        return true;
-                    }
+            if (this.getBotScore().getLunar() >= i && this.getBotScore().getSolar() >= solarFee && !(islands.getIslandAvailables(i).isEmpty()))
+            {
+                if (shopIslandLunar(islands, i,inventory))
+                {
+                    return true;
                 }
             }
         }
@@ -249,13 +249,14 @@ public class SimpleBot extends AbstractBot {
 
         for(int i=6;i>0;i--)
         {
-            if(!(islands.getIslandAvailables(i).isEmpty())) {
-                if (this.getBotScore().getSolar() >= i + solarFee && !(islands.getIslandAvailables(i).isEmpty())) {
-                    if (shopIslandSolar(islands, i,inventory)) {
-                        return true;
-                    }
+            if (this.getBotScore().getSolar() >= i + solarFee && !(islands.getIslandAvailables(i).isEmpty()))
+            {
+                if (shopIslandSolar(islands, i,inventory))
+                {
+                    return true;
                 }
             }
+
         }
 
         return false;
@@ -310,10 +311,10 @@ public class SimpleBot extends AbstractBot {
      * @param d
      * @return
      */
-    public DiceCard choose(DiceCard d) {
+    public int choose(DiceCard d) {
         if(d.getResource()!=Resource.CHOICE.resourceName())
         {
-            return d;
+            return 0;
         }
         else
         {
@@ -322,17 +323,17 @@ public class SimpleBot extends AbstractBot {
             int[] values = d.getValueArray();
 
             if(resources[1].resourceName()==Resource.VICTORY.resourceName())
-                return new DiceCard(values[1],resources[1]);
+                return 1;
             else
             {
-                if(this.getBotScore().getGold()<=this.getBotScore().getSolar()&&this.getBotScore().getGold()<=this.getBotScore().getLunar())
+                if(this.getPreferredResource()==Resource.GOLD)
                     i=1;
-                else if(this.getBotScore().getSolar()<this.getBotScore().getGold()&&this.getBotScore().getSolar()<=this.getBotScore().getLunar())
+                else if(this.getPreferredResource()==Resource.SOLAR)
                     i=2;
                 else
                     i=3;
 
-                return new DiceCard(values[i],resources[i]);
+                return i;
             }
         }
     }

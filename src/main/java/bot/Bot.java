@@ -13,7 +13,7 @@ public interface Bot {
     Dice getDice1();
     Dice getDice2();
 
-    DiceCard choose(DiceCard d);
+    int choose(DiceCard d);
 
     //void play(Sanctuary sanctuary, Islands islands);
 
