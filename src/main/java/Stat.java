@@ -6,19 +6,47 @@ public class Stat {
 
     //initialisation de la partie
     public static void main(String[] args) {
-        HashMap<String,Integer> nbVictory=new HashMap<>();
+
+        AbstractBot[] bots=new AbstractBot[Integer.parseInt(args[0])];
+        int[] scores=new int[Integer.parseInt(args[0])];
+        int[] wins= new int[Integer.parseInt(args[0])];
         for(int i=0;i<500;i++) {
-            GameStat game = new GameStat(4);
+            GameStat game = new GameStat(Integer.parseInt(args[0]));
             game.begin();
-            String winner = game.end();
-            if (nbVictory.containsKey(winner))
-                nbVictory.replace(winner, nbVictory.get(winner) + 1);
-            else {
-                nbVictory.put(winner, 1);
+            GameStat.Combo winner = game.end();
+            bots=winner.getBots().clone();
+            if(i==0)
+            {
+                scores=winner.getScore().clone();
+                wins=winner.getScore().clone();
+                for(int j=0;j<bots.length;j++)
+                {
+                    if(bots[j].equals(winner.getWinner()))
+                        wins[j]=1;
+                    else
+                        wins[j]=0;
+                }
             }
+            else
+            {
+                int[] newScore=winner.getScore().clone();
+                for(int j=0;j<bots.length;j++)
+                {
+                    scores[j]+=newScore[j];
+                    if(bots[j].equals(winner.getWinner()))
+                        wins[j]+=1;
+                }
+            }
+
         }
 
-        System.out.println(nbVictory.toString());
+
+        for(int j=0;j<bots.length;j++)
+        {
+            System.out.println("Resumer de "+bots[j].getBotID()+"@"+bots[j].getClass().getSimpleName()+" : ");
+            System.out.println("Nombres de Victoires : "+wins[j]+" ; Moyenne de points :"+scores[j]/500+"\n");
+        }
+
     }
 
 }

@@ -7,6 +7,8 @@ import game.card.Inventory;
 import game.card.Islands;
 import game.dice.*;
 
+import java.util.HashMap;
+
 import static game.DiceRoll.roll;
 
 public class GameStat {
@@ -108,16 +110,47 @@ public class GameStat {
     /**
      * Cette méthode terminé la partie, elle affiche les scores finaux des bots et séléctionne le gagnant de la partie.
      */
-    public String end() {
+    public Combo end() {
         AbstractBot winner = botArray[0];
+        int[] scores=new int[nbPlayers];
+        int i=0;
         int acc = botArray[0].getBotScore().getVictory();
         for (AbstractBot bot : botArray) {
-            if (bot.getBotScore().getVictory() > acc) {
+            scores[i]=bot.getBotScore().getVictory();
+            if (scores[i] > acc) {
                 winner = bot;
                 acc = bot.getBotScore().getVictory();
             }
+            i++;
         }
-        return winner.getBotID()+";"+winner.getClass().getName();
+
+        return new Combo(botArray,scores,winner);
+    }
+
+    class Combo
+    {
+        private AbstractBot[] bots;
+        private int[] scores;
+        private AbstractBot winner;
+
+        public Combo(AbstractBot[] bot, int[] score,AbstractBot winner)
+        {
+            this.bots=bot;
+            this.scores=score;
+            this.winner=winner;
+        }
+
+        public int[] getScore() {
+            return scores;
+        }
+
+        public AbstractBot[] getBots() {
+            return bots;
+        }
+
+        public AbstractBot getWinner() {
+            return winner;
+        }
     }
 
 }
