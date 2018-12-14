@@ -144,21 +144,18 @@ public class Game {
      */
     public void printChanges(String bot) {
 
-
-        if(BuyDiceCard.getFirst()==true)
-        {
+        if(BuyDiceCard.getFirst() == true) {
             printDiceCards(bot);
-            if(BuyCard.getBought().size()>0)
+            if(BuyCard.getBought().size() > 0)
                 System.out.println("Le bot " + bot + " a payé 2 "+Resource.SOLAR.resourceName()+" pour jouer un action suplémentaire");
             printCards(bot,false);
         }
-        else
-        {
+        else {
             if ((BuyDiceCard.getBought().size() > 0 && BuyCard.getBought().size() > 0) || BuyCard.getBought().size() > 1)
                 printCards(bot,true);
             else
                 printCards(bot,false);
-            if(BuyCard.getBought().size() == 1)
+            if(BuyCard.getBought().size() > 1)
                 System.out.println("Le bot " + bot + " a payé 2 "+Resource.SOLAR.resourceName()+" pour jouer un action suplémentaire");
             printDiceCards(bot);
         }

@@ -103,7 +103,7 @@ public class BuyDiceCard {
     public static void resetBotLog() {
         bought = new ArrayList<>();
         prices = new ArrayList<>();
-        first=true;
+        first = true;
     }
 
     /**

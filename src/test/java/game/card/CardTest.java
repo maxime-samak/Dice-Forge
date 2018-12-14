@@ -31,9 +31,6 @@ public class CardTest {
         Assert.assertEquals("L_HYDRE", c3.getName().toString());
         Assert.assertEquals("INSTANT", c3.getType().toString());
 
-
-
-
     }
 }
 

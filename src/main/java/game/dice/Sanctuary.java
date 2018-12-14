@@ -24,9 +24,6 @@ public class Sanctuary {
 
         DiceCard[] pool3 = new DiceCard[nbPlayers * 2]; //1solar and 4 gold
 
-        /* *********************** */
-        /* -- DiceCard Complexe -- */
-        /* *********************** */
         DiceCard[] pool4 = new DiceCard[nbPlayers]; //Complexe
 
         DiceCard[] pool5 = new DiceCard[nbPlayers]; //Complexe
@@ -36,10 +33,6 @@ public class Sanctuary {
         DiceCard[] pool8 = new DiceCard[nbPlayers * 2]; //3solar and 3 victory
 
         DiceCard[] pool12 = new DiceCard[nbPlayers]; //Complexe
-
-        DiceCard[] poolx3 = new DiceCard[nbPlayers]; //Complexe
-
-        DiceCard[] poolQuestion = new DiceCard[nbPlayers]; //Complexe
 
 
         // pool2
@@ -59,10 +52,6 @@ public class Sanctuary {
         pools.put(3,pool3);
 
         //pool4
-        /* *********************** */
-        /* -- DiceCard Complexe -- */
-        /* *********************** */
-
         shuffle(random);
         for (int i = 0; i < nbPlayers; i++){
             pool4[i] = randomPool4(random[i]);
@@ -70,9 +59,6 @@ public class Sanctuary {
         pools.put(4,pool4);
 
         //pool5
-        /* *********************** */
-        /* -- DiceCard Complexe -- */
-        /* *********************** */
         for (int i = 0; i < nbPlayers; i++){
             pool5[i] = new DiceCard(new int[]{0, 3, 2}, new Resource[]{Resource.CHOICE, Resource.VICTORY, Resource.GOLD});
         }
@@ -93,9 +79,6 @@ public class Sanctuary {
         pools.put(8,pool8);
 
         //pool12
-        /* *********************** */
-        /* -- DiceCard Complexe -- */
-        /* *********************** */
         shuffle(random);
         for (int i = 0; i < nbPlayers; i++){
             pool12[i] = randomPool12(random[i]);
@@ -136,9 +119,6 @@ public class Sanctuary {
         return false;
     }
 
-    /* *********************** */
-    /* -- DiceCard Complexe -- */
-    /* *********************** */
     private DiceCard randomPool4(int e){
         e = e % 4;
         switch (e) {
@@ -171,9 +151,7 @@ public class Sanctuary {
         }
     }
 
-    /* *********************** */
-    /* -- DiceCard Complexe -- */
-    /* *********************** */
+
     private int[] shuffle(int[] e){
         Random r = new Random();
         for (int x = 0; x < 500; x++){
