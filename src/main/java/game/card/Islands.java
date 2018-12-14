@@ -62,7 +62,7 @@ public class Islands {
             island5[i + nbPlayers] = new ForgeCard(AbstractCard.Name.LE_MIROIR_ABYSSAL, AbstractCard.Type.INSTANT, 10, 5, 0);
 
             island6[i] = new DivineFavorCard(AbstractCard.Name.LA_PINCE, AbstractCard.Type.INSTANT, 8, 0, 6);
-            island6[i + nbPlayers] = new DivineFavorCard(AbstractCard.Name.LA_PINCE, AbstractCard.Type.INSTANT, 10, 0, 6);
+            island6[i + nbPlayers] = new DivineFavorCard(AbstractCard.Name.L_ENIGME, AbstractCard.Type.INSTANT, 10, 6, 0);
 
             island10[i] = new RegularCard(AbstractCard.Name.L_HYDRE, AbstractCard.Type.INSTANT, 26, 5, 5);
         }

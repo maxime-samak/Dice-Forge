@@ -1,12 +1,5 @@
 package game.card;
 
-import bot.SavingBot;
-import bot.SimpleBot;
-import game.BotScore;
-import game.ScoreCounter;
-import game.dice.Dice;
-import game.dice.DiceCard;
-import game.dice.Resource;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -39,16 +32,6 @@ public class CardTest {
         Assert.assertEquals("INSTANT", c3.getType().toString());
 
 
-        Dice d1 = new Dice();
-        d1.solarDiceInit();
-        Dice d2 = new Dice();
-        d2.lunarDiceInit();
-        SimpleBot b = new SimpleBot(d1, d2, "Bot1","\033[0m");
-
-        //carte avec effet
-        DivineFavorCard c4 = new DivineFavorCard(AbstractCard.Name.LES_SABOTS_D_ARGENT, AbstractCard.Type.RECURRENT, 2, 0, 2);
-        c4.getEffect(b);
-        Assert.assertTrue(b.getBotScore().getGold() == 1 || b.getBotScore().getSolar() == 1 || b.getBotScore().getVictory() == 2 || b.getBotScore().getLunar() == 1);
 
 
     }
