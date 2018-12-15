@@ -88,7 +88,7 @@ public abstract class AbstractCard implements Card {
             case L_ANCIEN:
                 return "Vous pouvez dépensez 3 gold pour gagner 4 point gloire";
             case LES_AILES_DE_LA_GARDIENNES:
-                return "Recevez 1 gold et 1 lunar ou solar";
+                return "Recevez 1 gold, 1 lunar ou 1 solar";
             case LE_PASSEUR:
                 return noEffect;
             case LA_MEDUSE:
