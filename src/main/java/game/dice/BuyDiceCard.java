@@ -13,7 +13,8 @@ public class BuyDiceCard {
     private static ArrayList<DiceCard> bought = new ArrayList<>();
     private static ArrayList<DiceCard> replaced = new ArrayList<>();
     private static ArrayList<Integer> prices = new ArrayList<>();
-    private static Boolean first=true;
+    private static Boolean first = true;
+    private static ScoreCounter score = new ScoreCounter();
 
     public static ArrayList<DiceCard> getBought() {
         return bought;
@@ -65,12 +66,12 @@ public class BuyDiceCard {
                 }
 
                 else if(sanctuary.removeCard(pool, card)) {
-                    ScoreCounter.paySolar(botscore,2);
+                    score.paySolar(botscore,2);
                     replaced.add(dice.getFi(cardToChange));
                     dice.setDiceCard(cardToChange, card);
                     bought.add(card);
                     prices.add(pool);
-                    ScoreCounter.payGold(botscore,pool);
+                    score.payGold(botscore,pool);
                     return true;
                 }
             }
@@ -81,7 +82,7 @@ public class BuyDiceCard {
             dice.setDiceCard(cardToChange, card);
             bought.add(card);
             prices.add(pool);
-            ScoreCounter.payGold(botscore,pool);
+            score.payGold(botscore,pool);
             return true;
         }
         return false;

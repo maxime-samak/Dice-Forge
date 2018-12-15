@@ -17,6 +17,7 @@ public class BuyCard {
 
     private static ArrayList<AbstractCard> bought = new ArrayList<>();
     private static ArrayList<Object> effects = new ArrayList<>();
+    private static ScoreCounter scoreCounter = new ScoreCounter();
 
     public static ArrayList<AbstractCard> getBought() {
         return bought;
@@ -48,9 +49,9 @@ public class BuyCard {
                 if (c != null && c.equals(c)) {
 
                     if ((BuyDiceCard.getBought().size() > 0 || bought.size() > 0) && score.getSolar() >= c.getPrice()[0] + 2) {
-                        ScoreCounter.paySolar(score, c.getPrice()[0] + 2);
-                        ScoreCounter.payLunar(score, c.getPrice()[1]);
-                        ScoreCounter.addResource(score, Resource.VICTORY, c.getVictory());
+                        scoreCounter.paySolar(score, c.getPrice()[0] + 2);
+                        scoreCounter.payLunar(score, c.getPrice()[1]);
+                        scoreCounter.addResource(score, Resource.VICTORY, c.getVictory());
                         bought.add(c);
                         inventory.affectCard(bot,c);
                         islands.removeCard(c);
@@ -66,9 +67,9 @@ public class BuyCard {
                     }
                     else if ((BuyDiceCard.getBought().size() <= 0 && bought.size() <= 0)) {
 
-                        ScoreCounter.paySolar(score, c.getPrice()[0]);
-                        ScoreCounter.payLunar(score, c.getPrice()[1]);
-                        ScoreCounter.addResource(score, Resource.VICTORY, c.getVictory());
+                        scoreCounter.paySolar(score, c.getPrice()[0]);
+                        scoreCounter.payLunar(score, c.getPrice()[1]);
+                        scoreCounter.addResource(score, Resource.VICTORY, c.getVictory());
                         bought.add(c);
                         inventory.affectCard(bot,c);
                         islands.removeCard(c);

@@ -19,6 +19,7 @@ public class ResourceCardTest {
         d1.solarDiceInit();
         Dice d2 = new Dice();
         d2.lunarDiceInit();
+        ScoreCounter score = new ScoreCounter();
         SimpleBot bot1 = new SimpleBot(d1,d2,"bot1","\033[0m");
 
         //Creation de la ressource
@@ -34,14 +35,14 @@ public class ResourceCardTest {
 
         ResourceCard c1 = new ResourceCard(AbstractCard.Name.L_ANCIEN, AbstractCard.Type.RECURRENT, 0, 1, 0);
 
-        ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(2, Resource.GOLD), new DiceCard(1, Resource.GOLD)});
+        score.updateScore(bot1, new DiceCard[]{new DiceCard(2, Resource.GOLD), new DiceCard(1, Resource.GOLD)});
         int tmp = bot1.getBotScore().getGold();
         c1.getEffect(bot1); //Offre rejetée car la stratégie d'un SimpleBot est de ne pas dépenser son or.
         Assert.assertEquals(0, bot1.getBotScore().getVictory());
         Assert.assertEquals(tmp, bot1.getBotScore().getGold());
 
         SavingBot savingBot = new SavingBot(d1, d2, "Bot2","\033[0m");
-        ScoreCounter.updateScore(savingBot.getBotScore(), new DiceCard[]{new DiceCard(5, Resource.GOLD), new DiceCard(5, Resource.GOLD)});
+        score.updateScore(savingBot, new DiceCard[]{new DiceCard(5, Resource.GOLD), new DiceCard(5, Resource.GOLD)});
         c1.getEffect(savingBot); //Offre acceptée car la stratégie d'un SavingBot au dessus ou égal à 10 d'or, c'est de les dépenser.
         Assert.assertEquals(4, savingBot.getBotScore().getVictory());
         Assert.assertEquals(7, savingBot.getBotScore().getGold());

@@ -1,6 +1,7 @@
 package game.card;
 
 import bot.AbstractBot;
+import game.ScoreCounter;
 
 /**
  * Cette classe représentes la structure général d'un carte.
@@ -11,6 +12,7 @@ public abstract class AbstractCard implements Card {
     private final Type type;
     private final int victory;
     private final int[] price;
+    private final ScoreCounter score = new ScoreCounter();
 
     protected enum Name {
         LE_MARTEAU_DU_FORGERON,
@@ -49,6 +51,7 @@ public abstract class AbstractCard implements Card {
         this.price = new int[2];
         this.price[0] = solarPrice;
         this.price[1] = lunarPrice;
+
     }
 
     public abstract Object getEffect(AbstractBot bot);
@@ -79,6 +82,8 @@ public abstract class AbstractCard implements Card {
     public String toString() {
         return name.toString();
     }
+
+    public ScoreCounter getScore() {return score; }
 
     public String effectToString(){
         String noEffect = "Pas d’effet. Cette carte ne donne que des points de victoire.";

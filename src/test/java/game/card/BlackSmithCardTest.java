@@ -15,6 +15,7 @@ public class BlackSmithCardTest {
     private Dice d1;
     private Dice d2;
     private BlackSmithCard card;
+    ScoreCounter score;
 
     @Before
     public void setup() {
@@ -23,6 +24,8 @@ public class BlackSmithCardTest {
         d2 = new Dice();
         d2.lunarDiceInit();
         bot1 = new SimpleBot(d2,d2,"bot1","\033[0m");
+        score = new ScoreCounter();
+
     }
 
     @Test
@@ -30,14 +33,14 @@ public class BlackSmithCardTest {
         //Test effet LE_COFFRE_DU_FORGERON
         card = new BlackSmithCard(AbstractCard.Name.LE_COFFRE_DU_FORGERON, AbstractCard.Type.INSTANT, 2, 0, 1);
         Assert.assertEquals("Inventaire étendu", card.getEffect(bot1)); //+4 slot Gold(12 de base), +2 slot Lunar(6 de base), slot +2 Solar(6 de base)
-        ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(20, Resource.GOLD), new DiceCard(20, Resource.LUNAR)});
-        ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(20, Resource.SOLAR), new DiceCard(20, Resource.LUNAR)});
+        score.updateScore(bot1, new DiceCard[]{new DiceCard(20, Resource.GOLD), new DiceCard(20, Resource.LUNAR)});
+        score.updateScore(bot1, new DiceCard[]{new DiceCard(20, Resource.SOLAR), new DiceCard(20, Resource.LUNAR)});
         Assert.assertTrue(bot1.getBotScore().getGold() == 12+4 && bot1.getBotScore().getLunar() == 6+2 && bot1.getBotScore().getSolar() == 6+2);
 
         card.getEffect(bot1); //12+4+4 6+2+2 6+2+2
-        ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(1, Resource.LUNAR), new DiceCard(2, Resource.SOLAR)});
+        score.updateScore(bot1, new DiceCard[]{new DiceCard(1, Resource.LUNAR), new DiceCard(2, Resource.SOLAR)});
         Assert.assertTrue(bot1.getBotScore().getGold() == 12+4 && bot1.getBotScore().getLunar() == 6+2+1 && bot1.getBotScore().getSolar() == 6+2+2);
-        ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(20, Resource.GOLD), new DiceCard(20, Resource.LUNAR)});
+        score.updateScore(bot1, new DiceCard[]{new DiceCard(20, Resource.GOLD), new DiceCard(20, Resource.LUNAR)});
         Assert.assertTrue(bot1.getBotScore().getGold() == 12+4+4 && bot1.getBotScore().getLunar() == 6+2+2 && bot1.getBotScore().getSolar() == 6+2+2);
 
         //Test effet LE_MARTEAU_DU_FORGERON

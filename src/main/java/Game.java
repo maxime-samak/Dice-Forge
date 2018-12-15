@@ -8,6 +8,7 @@ import game.card.Inventory;
 import game.dice.*;
 
 import java.io.Console;
+import java.util.ArrayList;
 
 import static game.DiceRoll.roll;
 
@@ -23,6 +24,8 @@ public class Game {
     private final Islands islands;
     private Inventory inventory;
     private final String[] colors;
+    private ArrayList<DiceCard> rolls =  new ArrayList<>();
+    private ScoreCounter score;
 
     /**
      * Créer et lance un partie avec un nombre de joueur passé en paramètre.
@@ -36,7 +39,7 @@ public class Game {
         this.sanctuary = new Sanctuary(nbPlayers);
         this.islands = new Islands(nbPlayers);
         this.colors = new String[]{"\033[1;96m","\033[1;92m","\033[1;95m","\033[1;93m","\033[0m"};
-
+        this.score = new ScoreCounter(nbPlayers, rolls);
 
         if(nbPlayers == 3) {this.nbTurn = 10;}
         else {this.nbTurn = 9;}
@@ -52,7 +55,7 @@ public class Game {
             else
                 botArray[i] = new SavingBot(d1, d2, "bot#" + (i + 1),colors[i]);
 
-            ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, 3 - i);
+            score.addResource(botArray[i].getBotScore(), Resource.GOLD, 3 - i);
 
         }
         this.inventory = new Inventory(botArray);
@@ -86,30 +89,47 @@ public class Game {
             System.out.println(botArray[i].getColor()+"Tour de: " + botArray[i].getBotID()+ ":"+colors[4]);
             for (int j = 0; j < nbPlayers; j++){
                 System.out.println(botArray[j].getColor()+"Lancer de dés " + botArray[j].getBotID() + ":"+colors[4]);
-                if(nbPlayers==2)
-                {
+                if(nbPlayers == 2) {
                     rollDices(botArray[j]);
                     System.out.println("---");
                 }
                 rollDices(botArray[j]);
-                System.out.println("\n"+botArray[j].getBotScore().getInfos() + "\n");
+                System.out.println();
             }
 
+            int tmp = -1;
+            for (int j = 0; j < nbPlayers; j++) {
+
+                if (nbPlayers == 2) {
+                    score.updateScore(botArray[j], new DiceCard[]{rolls.get(++tmp), rolls.get(++tmp)});
+                    score.updateScore(botArray[j], new DiceCard[]{rolls.get(++tmp), rolls.get(++tmp)});
+                    System.out.println("Score de "+ botArray[j].getColor()+ botArray[j].getBotID()+colors[4]+" :" + botArray[j].getBotScore().getInfos());
+                }
+                else {
+                    score.updateScore(botArray[j], new DiceCard[]{rolls.get(++tmp), rolls.get(++tmp)});
+                    System.out.println(botArray[j].getBotScore().getInfos());
+                }
+            }
+
+            System.out.println();
             System.out.println("Phase d'action de " +botArray[i].getColor()+ botArray[i].getBotID()+colors[4]+" :");
             System.out.println(inventory.toString(botArray[i]));
+
             for(int k = 0;  k < inventory.getRecurrent(botArray[i]).size(); k++){
                 Object result = inventory.getRecurrent(botArray[i]).get(k).getEffect(botArray[i]);
                 System.out.println("Exécution carte renfort: " + inventory.getRecurrent(botArray[i]).get(k).getName());
-                if(result!=null)
+                if(result != null)
                 System.out.println("--> "+inventory.getRecurrent(botArray[i]).get(k).effectToString() + " : "+result.toString());
                 else
                     System.out.println("--> "+inventory.getRecurrent(botArray[i]).get(k).effectToString());
             }
+
             botArray[i].play(sanctuary, islands,inventory);
             printChanges(botArray[i].getBotID());
             System.out.println("____\n");
             BuyDiceCard.resetBotLog();
             BuyCard.resetBotLog();
+            rolls.clear();
         }
     }
 
@@ -117,11 +137,12 @@ public class Game {
      * La méthode fais lancer ses deux dès au bot passé en paramètre, affiche les résultats et mets à jour les points.
      * @param bot
      */
-    private void rollDices(AbstractBot bot)
-    {
+    private void rollDices(AbstractBot bot) {
         DiceCard[] roll = new DiceCard[]{roll(bot.getDice1()), roll(bot.getDice2())};
-        DiceCard dc0=roll[0];
+        DiceCard dc0 = roll[0];
         DiceCard dc1 = roll[1];
+        rolls.add(dc0);
+        rolls.add(dc1);
         if(bot.choose(dc0)!=0)
             dc0=new DiceCard(dc0.getValueArray()[bot.choose(dc0)],dc0.getResourceArray()[bot.choose(dc0)]);
         if(bot.choose(dc1)!=0)
@@ -134,7 +155,6 @@ public class Game {
             System.out.println(roll[0] + "\n" + roll[1] + " (" + dc1 + " choisi )");
         else
             System.out.println(roll[0] + "\n" + roll[1]);
-        ScoreCounter.updateScore(bot.getBotScore(), new DiceCard[]{dc0, dc1});
     }
 
 
@@ -190,9 +210,9 @@ public class Game {
         }
         else {
             for(int i = 0; i < BuyCard.getBought().size(); i++) {
-                if (mult && i ==1)
+                if (mult && i == 1)
                     System.out.println("Le bot " + bot + " a payé 2 "+Resource.SOLAR.resourceName()+" pour jouer un action suplémentaire");
-                if(BuyCard.getEffects().get(i)!=null)
+                if(BuyCard.getEffects().get(i) != null)
                     System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).getName() + " pour " + BuyCard.getBought().get(i).getPrice()[0] +" "+Resource.SOLAR.resourceName()+" et "+ BuyCard.getBought().get(i).getPrice()[1] +" "+Resource.LUNAR.resourceName()+" et a gagné " + BuyCard.getBought().get(i).getVictory() +" "+Resource.VICTORY.resourceName()+" : "+BuyCard.getEffects().get(i).toString());
                 else
                     System.out.println("Le bot " + bot + " a acheté la carte " + BuyCard.getBought().get(i).getName() + " pour " + BuyCard.getBought().get(i).getPrice()[0] +" "+Resource.SOLAR.resourceName()+" et "+ BuyCard.getBought().get(i).getPrice()[1] +" "+Resource.LUNAR.resourceName()+" et a gagné " + BuyCard.getBought().get(i).getVictory() +" "+Resource.VICTORY.resourceName());

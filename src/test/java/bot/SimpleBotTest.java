@@ -18,7 +18,7 @@ public class SimpleBotTest {
         d1.solarDiceInit();
         Dice d2 = new Dice();
         d2.lunarDiceInit();
-
+        ScoreCounter score = new ScoreCounter();
         Sanctuary sanctuary = new Sanctuary(2);
 
         SimpleBot bot1 = new SimpleBot(d1,d2,"bot1","\033[0m");
@@ -34,13 +34,13 @@ public class SimpleBotTest {
         Assert.assertFalse(bot1.diceShopping(sanctuary,2));
 
 
-        ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
+        score.updateScore(bot1, new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
 
         Assert.assertTrue(bot1.diceShopping(sanctuary,8));
         Assert.assertTrue(bot1.diceShopping(sanctuary,2));
         Assert.assertTrue(bot1.diceShopping(sanctuary,2));
 
-        ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
+        score.updateScore(bot1, new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
 
         Assert.assertTrue(bot1.diceShopping(sanctuary,6));
         Assert.assertTrue(bot1.diceShopping(sanctuary,3));
@@ -49,7 +49,7 @@ public class SimpleBotTest {
 
         BuyDiceCard.resetBotLog();
         sanctuary = new Sanctuary(2);
-        ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
+        score.updateScore(bot1, new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
 
         //pool 3 = {A,A,B,B}
         Assert.assertTrue(bot1.diceShopping(sanctuary,3)); //Achat carte A
@@ -59,7 +59,7 @@ public class SimpleBotTest {
 
         BuyDiceCard.resetBotLog();
         sanctuary = new Sanctuary(2);
-        ScoreCounter.updateScore(bot1.getBotScore(), new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
+        score.updateScore(bot1, new DiceCard[]{new DiceCard(6, Resource.GOLD), new DiceCard(6, Resource.GOLD)}); //Budget d'achat = 12.
 
         //pool 3 = {A,A,B,B}
         Assert.assertTrue(bot1.diceShopping(sanctuary,3)); //Achat carte A

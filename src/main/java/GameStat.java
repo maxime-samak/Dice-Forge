@@ -21,6 +21,7 @@ public class GameStat {
     private final Islands islands;
     private Inventory inventory;
     private final String[] colors;
+    private final ScoreCounter score = new ScoreCounter();
 
     /**
      * Créer et lance un partie avec un nombre de joueur passé en paramètre.
@@ -50,7 +51,7 @@ public class GameStat {
             else
                 botArray[i] = new SavingBot(d1, d2, "bot#" + (i + 1),colors[i]);
 
-            ScoreCounter.addResource(botArray[i].getBotScore(), Resource.GOLD, 3 - i);
+            score.addResource(botArray[i].getBotScore(), Resource.GOLD, 3 - i);
 
         }
         this.inventory = new Inventory(botArray);
@@ -93,7 +94,7 @@ public class GameStat {
             dc0=new DiceCard(dc0.getValueArray()[bot.choose(dc0)],dc0.getResourceArray()[bot.choose(dc0)]);
         if(bot.choose(dc1)!=0)
             dc1=new DiceCard(dc1.getValueArray()[bot.choose(dc1)],dc1.getResourceArray()[bot.choose(dc1)]);
-        ScoreCounter.updateScore(bot.getBotScore(), new DiceCard[]{dc0, dc1});
+        score.updateScore(bot, new DiceCard[]{dc0, dc1});
     }
 
 

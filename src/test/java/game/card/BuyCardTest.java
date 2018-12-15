@@ -2,7 +2,6 @@ package game.card;
 
 import bot.AbstractBot;
 import bot.SimpleBot;
-import game.BotScore;
 import game.ScoreCounter;
 import game.dice.BuyDiceCard;
 import game.dice.Dice;
@@ -25,13 +24,14 @@ public class BuyCardTest {
         d1.solarDiceInit();
         Dice d2 = new Dice();
         d2.lunarDiceInit();
+        ScoreCounter score = new ScoreCounter();
 
         Islands islands = new Islands(2);
         SimpleBot bot =  new SimpleBot(d1, d2, "Bot1","\033[0m");
         Inventory inventory = new Inventory(new AbstractBot[]{bot});
         AbstractCard card = new RegularCard(AbstractCard.Name.LE_PASSEUR, AbstractCard.Type.INSTANT, 12, 0,4);
 
-        ScoreCounter.updateScore(bot.getBotScore(), new DiceCard[]{new DiceCard(2, Resource.LUNAR), new DiceCard(2, Resource.LUNAR)});
+        score.updateScore(bot, new DiceCard[]{new DiceCard(2, Resource.LUNAR), new DiceCard(2, Resource.LUNAR)});
         Assert.assertEquals(true, buyCard(bot, islands, card,inventory));
         Assert.assertEquals(0, bot.getBotScore().getSolar());
         Assert.assertEquals(12, bot.getBotScore().getVictory());

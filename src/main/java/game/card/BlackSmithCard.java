@@ -12,11 +12,11 @@ public class BlackSmithCard extends AbstractCard {
     public Object getEffect(AbstractBot bot) {
         switch (getName()) {
             case LE_COFFRE_DU_FORGERON:
-                ScoreCounter.extend(bot.getBotScore());
+                getScore().extend(bot.getBotScore());
                 return "Inventaire étendu";
 
             case LE_MARTEAU_DU_FORGERON:
-                ScoreCounter.initForge(bot.getBotScore());
+                getScore().initForge(bot.getBotScore());
                 return null;
         }
         return null;
