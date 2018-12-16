@@ -1,4 +1,5 @@
 import bot.AbstractBot;
+import bot.OneBuyBot;
 import bot.SavingBot;
 import bot.SimpleBot;
 import game.ScoreCounter;
@@ -83,6 +84,8 @@ public class Game {
                 botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1),colors[i]);
             else if(args[i+1].equals("Saving"))
                 botArray[i] = new SavingBot(d1, d2, "bot#" + (i + 1),colors[i]);
+            else if(args[i+1].equals("OneBuy"))
+                botArray[i] = new OneBuyBot(d1, d2, "bot#" + (i + 1),colors[i]);
             else
                 botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1),colors[i]);
 
@@ -138,7 +141,7 @@ public class Game {
                 }
                 else {
                     score.updateScore(botArray[j], new DiceCard[]{rolls.get(++tmp), rolls.get(++tmp)});
-                    System.out.println(botArray[j].getBotScore().getInfos());
+                    System.out.println("Score de "+botArray[j].getColor()+botArray[j].getBotID()+" : "+colors[4]+botArray[j].getBotScore().getInfos());
                 }
             }
 

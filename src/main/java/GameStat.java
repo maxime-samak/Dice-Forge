@@ -1,4 +1,5 @@
 import bot.AbstractBot;
+import bot.OneBuyBot;
 import bot.SavingBot;
 import bot.SimpleBot;
 import game.ScoreCounter;
@@ -82,6 +83,8 @@ public class GameStat {
                 botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1),colors[i]);
             else if(args[i+1].equals("Saving"))
                 botArray[i] = new SavingBot(d1, d2, "bot#" + (i + 1),colors[i]);
+            else if(args[i+1].equals("OneBuy"))
+                botArray[i] = new OneBuyBot(d1, d2, "bot#" + (i + 1),colors[i]);
             else
                 botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1),colors[i]);
 

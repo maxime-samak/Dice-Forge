@@ -40,6 +40,7 @@ public class SavingBot extends AbstractBot {
      * @param islands
      * @param inventory
      */
+
     public void buyInOrder(Sanctuary sanctuary,Islands islands,Inventory inventory) {
 
         if(BuyDiceCard.getBought().size()==0 && BuyCard.getBought().size()>0)
@@ -120,17 +121,13 @@ public class SavingBot extends AbstractBot {
                 for (int face = 1; face <= 6; face++) {
                     DiceCard fd1;
                     fd1 = this.getDice1().getFi(face);
-
                     if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()-1) || fd1.getResource() == GOLD.resourceName() && fd1.getValue() == 1) {
-
                         d = this.getDice1();
                         f = face;
                         break;
-
                     }
                     fd1 = this.getDice2().getFi(face);
                     if ((fd1.getResource() == buy.getResource() && fd1.getValue() < buy.getValue()-1) || fd1.getResource() == GOLD.resourceName() && fd1.getValue() == 1) {
-
                         d = this.getDice2();
                         f = face;
                         break;
@@ -198,7 +195,7 @@ public class SavingBot extends AbstractBot {
 
      }**/
 
-    private Boolean cardShopping(Islands islands,Inventory inventory) {
+    protected Boolean cardShopping(Islands islands, Inventory inventory) {
         int nbBuy = 0;
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
@@ -238,7 +235,7 @@ public class SavingBot extends AbstractBot {
      * @param inventory
      * @return
      */
-    private Boolean lunarShopping(Islands islands,Inventory inventory) {
+    protected Boolean lunarShopping(Islands islands, Inventory inventory) {
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
 
@@ -264,7 +261,7 @@ public class SavingBot extends AbstractBot {
      * @param inventory
      * @return
      */
-    private Boolean solarShopping(Islands islands,Inventory inventory)
+    protected Boolean solarShopping(Islands islands, Inventory inventory)
     {
         int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ solarFee = 2;}
@@ -284,7 +281,7 @@ public class SavingBot extends AbstractBot {
         return false;
     }
 
-    private Boolean shopIslandTen(Islands islands, Inventory inventory) {
+    protected Boolean shopIslandTen(Islands islands, Inventory inventory) {
         ArrayList<AbstractCard> cards = islands.getIslandAvailables(10);
         for(int cpt=0;cpt<cards.size();cpt++) {
             if(BuyCard.buyCard(this, islands,cards.get(cpt),inventory)) {
