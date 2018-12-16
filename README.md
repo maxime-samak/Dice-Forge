@@ -78,11 +78,11 @@ Groupe DFG
 
 ### [Livraison 6](https://github.com/SamakM/Dice-Forge/milestone/6)
 #### Objectif de livraison
-- [ ] Correction d'éventuels bugs.
-- [ ] Il possible de sélectionner la stratégie qu'applique un bot donné.
-- [ ] Ajout d'une nouvelle stratégie de jeu pour les bots.
-- [ ] Finalisation de la documentation.
-- [ ] Ajout des ilots et des pions.
+- [x] Correction d'éventuels bugs.
+- [x] Il possible de sélectionner la stratégie qu'applique un bot donné.
+- [x] Ajout d'une nouvelle stratégie de jeu pour les bots.
+- [x] Finalisation de la documentation.
+- [x] Ajout des ilots et des pions.
 
 #### Date prévu
 *16/12/2018*
