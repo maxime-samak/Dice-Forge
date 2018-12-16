@@ -60,6 +60,37 @@ public class GameStat {
         this.inventory = new Inventory(botArray);
     }
 
+    public GameStat(int nbPlayers,String args[]) {
+
+        this.nbPlayers = nbPlayers;
+        this.botArray = new AbstractBot[nbPlayers];
+        this.sanctuary = new Sanctuary(nbPlayers);
+        this.islands = new Islands(nbPlayers);
+        this.colors = new String[]{"\033[1;96m","\033[1;92m","\033[1;95m","\033[1;93m","\033[0m"};
+        this.score = new ScoreCounter(nbPlayers, rolls);
+
+        if(nbPlayers == 3) {this.nbTurn = 10;}
+        else {this.nbTurn = 9;}
+
+        for(int i = 0; i < nbPlayers; i++) {
+            Dice d1 = new Dice();
+            Dice d2 = new Dice();
+            d1.solarDiceInit();
+            d2.lunarDiceInit();
+
+            if(args[i+1].equals("Simple"))
+                botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1),colors[i]);
+            else if(args[i+1].equals("Saving"))
+                botArray[i] = new SavingBot(d1, d2, "bot#" + (i + 1),colors[i]);
+            else
+                botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1),colors[i]);
+
+            score.addResource(botArray[i].getBotScore(), Resource.GOLD, 3 - i);
+
+        }
+        this.inventory = new Inventory(botArray);
+    }
+
     /**
      * la méthode fais passer les tours, a chaque manche il y'a un tour de chaque joueur,
      * au tour d'un joueur tout le monde lance les dés et le dis joueur peut aplliquer sa stratégie.

@@ -10,20 +10,34 @@ public class Stat {
         AbstractBot[] bots;
         int[] scores;
         int[] wins;
+        GameStat game;
         if(args.length==0)
         {
             bots = new AbstractBot[4];
             scores = new int[4];
             wins = new int[4];
+            game = new GameStat(bots.length);
         }
         else
         {
             bots=new AbstractBot[Integer.parseInt(args[0])];
             scores=new int[Integer.parseInt(args[0])];
             wins= new int[Integer.parseInt(args[0])];
+            if (args.length - 1 == Integer.parseInt(args[0]))
+                game = new GameStat(bots.length,args);
+            else
+                game = new GameStat(bots.length);
         }
         for(int i=0;i<500;i++) {
-            GameStat game = new GameStat(bots.length);
+            if(args.length==0){
+                game = new GameStat(bots.length);
+            }
+            else {
+                if (args.length - 1 == Integer.parseInt(args[0]))
+                    game = new GameStat(bots.length, args);
+                else
+                    game = new GameStat(bots.length);
+            }
             game.begin();
             GameStat.Combo winner = game.end();
             bots=winner.getBots().clone();

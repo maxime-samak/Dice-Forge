@@ -61,6 +61,37 @@ public class Game {
         this.inventory = new Inventory(botArray);
     }
 
+    public Game(int nbPlayers,String args[]) {
+
+        this.nbPlayers = nbPlayers;
+        this.botArray = new AbstractBot[nbPlayers];
+        this.sanctuary = new Sanctuary(nbPlayers);
+        this.islands = new Islands(nbPlayers);
+        this.colors = new String[]{"\033[1;96m","\033[1;92m","\033[1;95m","\033[1;93m","\033[0m"};
+        this.score = new ScoreCounter(nbPlayers, rolls);
+
+        if(nbPlayers == 3) {this.nbTurn = 10;}
+        else {this.nbTurn = 9;}
+
+        for(int i = 0; i < nbPlayers; i++) {
+            Dice d1 = new Dice();
+            Dice d2 = new Dice();
+            d1.solarDiceInit();
+            d2.lunarDiceInit();
+
+            if(args[i+1].equals("Simple"))
+                botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1),colors[i]);
+            else if(args[i+1].equals("Saving"))
+                botArray[i] = new SavingBot(d1, d2, "bot#" + (i + 1),colors[i]);
+            else
+                botArray[i] = new SimpleBot(d1, d2, "bot#" + (i + 1),colors[i]);
+
+            score.addResource(botArray[i].getBotScore(), Resource.GOLD, 3 - i);
+
+        }
+        this.inventory = new Inventory(botArray);
+    }
+
     /**
      * Cette méthode démarre la partie et et lance la méthode turn() * le nombre de tour prévu.
      */
@@ -236,7 +267,7 @@ public class Game {
             else {
 
             }
-            finalScore += bot.getColor()+bot.getBotID() +colors[4]+ ": " + bot.getBotScore().getInfos() + "\n";
+            finalScore += bot.getColor()+bot.getBotID()+colors[4]+ ": " + bot.getBotScore().getInfos() + "\n";
         }
         System.out.println();
         System.out.println("***********************************");
