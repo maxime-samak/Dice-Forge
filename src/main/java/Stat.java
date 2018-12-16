@@ -23,7 +23,7 @@ public class Stat {
             wins= new int[Integer.parseInt(args[0])];
         }
         for(int i=0;i<500;i++) {
-            GameStat game = new GameStat(Integer.parseInt(args[0]));
+            GameStat game = new GameStat(bots.length);
             game.begin();
             GameStat.Combo winner = game.end();
             bots=winner.getBots().clone();

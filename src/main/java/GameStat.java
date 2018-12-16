@@ -7,6 +7,7 @@ import game.card.Inventory;
 import game.card.Islands;
 import game.dice.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import static game.DiceRoll.roll;
@@ -22,6 +23,7 @@ public class GameStat {
     private Inventory inventory;
     private final String[] colors;
     private final ScoreCounter score = new ScoreCounter();
+    private ArrayList<DiceCard> rolls =  new ArrayList<>();
 
     /**
      * Créer et lance un partie avec un nombre de joueur passé en paramètre.
@@ -65,19 +67,29 @@ public class GameStat {
     public void turn() {
         for (int i = 0; i < nbPlayers; i++){
             for (int j = 0; j < nbPlayers; j++){
-                if(nbPlayers==2)
-                {
+                if(nbPlayers == 2) {
                     rollDices(botArray[j]);
                 }
                 rollDices(botArray[j]);
+                System.out.println();
             }
 
-            for(int k = 0;  k < inventory.getRecurrent(botArray[i]).size(); k++){
-                Object result = inventory.getRecurrent(botArray[i]).get(k).getEffect(botArray[i]);
+            int tmp = -1;
+            for (int j = 0; j < nbPlayers; j++) {
+
+                if (nbPlayers == 2) {
+                    score.updateScore(botArray[j], new DiceCard[]{rolls.get(++tmp), rolls.get(++tmp)});
+                    score.updateScore(botArray[j], new DiceCard[]{rolls.get(++tmp), rolls.get(++tmp)});
+                }
+                else {
+                    score.updateScore(botArray[j], new DiceCard[]{rolls.get(++tmp), rolls.get(++tmp)});
+                }
             }
+            for(int k = 0;  k < inventory.getRecurrent(botArray[i]).size(); k++){ inventory.getRecurrent(botArray[i]).get(k).getEffect(botArray[i]); }
             botArray[i].play(sanctuary, islands,inventory);
             BuyDiceCard.resetBotLog();
             BuyCard.resetBotLog();
+            rolls.clear();
         }
     }
 
@@ -88,13 +100,15 @@ public class GameStat {
     private void rollDices(AbstractBot bot)
     {
         DiceCard[] roll = new DiceCard[]{roll(bot.getDice1()), roll(bot.getDice2())};
-        DiceCard dc0=roll[0];
+        DiceCard dc0 = roll[0];
         DiceCard dc1 = roll[1];
+        rolls.add(dc0);
+        rolls.add(dc1);
         if(bot.choose(dc0)!=0)
             dc0=new DiceCard(dc0.getValueArray()[bot.choose(dc0)],dc0.getResourceArray()[bot.choose(dc0)]);
         if(bot.choose(dc1)!=0)
             dc1=new DiceCard(dc1.getValueArray()[bot.choose(dc1)],dc1.getResourceArray()[bot.choose(dc1)]);
-        score.updateScore(bot, new DiceCard[]{dc0, dc1});
+
     }
 
 

@@ -14,6 +14,8 @@ import static game.dice.Resource.SOLAR;
  */
 public class SavingBot extends AbstractBot {
 
+    private int turn;
+
     /**
      * Constructeur SavingBot
      * @param d1 son premier dé
@@ -23,11 +25,13 @@ public class SavingBot extends AbstractBot {
      */
     public SavingBot(Dice d1, Dice d2, String botID,String color) {
         super(d1,d2, botID,color);
+        this.turn=0;
     }
 
     @Override
     public void play(Sanctuary sanctuary,Islands islands,Inventory inventory) {
         buyInOrder(sanctuary,islands,inventory);
+        turn++;
     }
 
     /**
@@ -88,7 +92,8 @@ public class SavingBot extends AbstractBot {
                     if (diceShopping(sanctuary, pools[i]))
                         return true;
                 }
-                break;
+                if(this.turn<8)
+                    break;
             }
         }
         return false;
@@ -245,7 +250,8 @@ public class SavingBot extends AbstractBot {
                     if (shopIslandLunar(islands, i,inventory))
                         return true;
                 }
-                break;
+                if(this.turn<8)
+                    break;
             }
         }
 
@@ -271,7 +277,8 @@ public class SavingBot extends AbstractBot {
                     if (shopIslandSolar(islands, i,inventory))
                         return true;
                 }
-                break;
+                if(this.turn<7)
+                    break;
             }
         }
         return false;
