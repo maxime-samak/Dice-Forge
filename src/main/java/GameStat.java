@@ -22,7 +22,7 @@ public class GameStat {
     private final Islands islands;
     private Inventory inventory;
     private final String[] colors;
-    private final ScoreCounter score = new ScoreCounter();
+    private final ScoreCounter score;
     private ArrayList<DiceCard> rolls =  new ArrayList<>();
 
     /**
@@ -37,6 +37,7 @@ public class GameStat {
         this.sanctuary = new Sanctuary(nbPlayers);
         this.islands = new Islands(nbPlayers);
         this.colors = new String[]{"\033[1;96m","\033[1;92m","\033[1;95m","\033[1;93m","\033[0m"};
+        this.score = new ScoreCounter(nbPlayers, rolls);
 
 
         if(nbPlayers == 3) {this.nbTurn = 10;}
@@ -71,7 +72,6 @@ public class GameStat {
                     rollDices(botArray[j]);
                 }
                 rollDices(botArray[j]);
-                System.out.println();
             }
 
             int tmp = -1;
