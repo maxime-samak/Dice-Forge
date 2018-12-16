@@ -48,7 +48,7 @@ public class BuyCard {
             for (AbstractCard c : islands.getIslands().get(card.getPrice()[0] + card.getPrice()[1])) {
                 if (c != null && c.equals(c)) {
 
-                    if ((BuyDiceCard.getBought().size() > 0 || bought.size() > 0) && score.getSolar() >= c.getPrice()[0] + 2) {
+                    if ((BuyDiceCard.getBought().size() > 0 || bought.size() > 0) && bot.getBotScore().getSolar() >= (c.getPrice()[0] + 2) && bot.getBotScore().getLunar()>=c.getPrice()[1]) {
                         scoreCounter.paySolar(score, c.getPrice()[0] + 2);
                         scoreCounter.payLunar(score, c.getPrice()[1]);
                         scoreCounter.addResource(score, Resource.VICTORY, c.getVictory());
@@ -65,7 +65,7 @@ public class BuyCard {
 
                         return true;
                     }
-                    else if ((BuyDiceCard.getBought().size() <= 0 && bought.size() <= 0)) {
+                    else if ((BuyDiceCard.getBought().size() <= 0 && bought.size() <= 0)&& bot.getBotScore().getSolar() >= (c.getPrice()[0] + 2) && bot.getBotScore().getLunar()>=c.getPrice()[1]) {
 
                         scoreCounter.paySolar(score, c.getPrice()[0]);
                         scoreCounter.payLunar(score, c.getPrice()[1]);

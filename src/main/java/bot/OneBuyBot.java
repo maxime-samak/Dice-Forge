@@ -1,5 +1,6 @@
 package bot;
 
+import game.card.AbstractCard;
 import game.card.BuyCard;
 import game.card.Inventory;
 import game.card.Islands;
@@ -8,7 +9,6 @@ import game.dice.*;
 import java.util.ArrayList;
 
 import static game.dice.BuyDiceCard.setCard;
-
 
 public class OneBuyBot extends AbstractBot {
 
@@ -58,6 +58,15 @@ public class OneBuyBot extends AbstractBot {
         else{return true;}
     }
 
+    /**
+     * Le bot va vérifier les faces disponibles dans la pool passée en paramètre, il va ensuite vérifier, pour chaque face qu'il peut acheter,
+     * si il possède un emplacement sur un de ses deux dés où il est intéréssant de placer cette nouvelle face. Si oui il achète la face et la remplace,
+     * si non alors il n'achète rien et la méthode renvois false.
+     *
+     * @param sanctuary
+     * @param pool
+     * @return
+     */
     public boolean diceShopping(Sanctuary sanctuary, int pool) {
         ArrayList<DiceCard> buyable = sanctuary.getPoolAvailables(pool);
         buyable = this.favoriseVictory(buyable);
@@ -100,11 +109,20 @@ public class OneBuyBot extends AbstractBot {
         return false;
     }
 
+
+
+    /**public void cheat() {
+     getBotScore().addSolar(9);
+
+     ScoreCounter.updateScore(getBotScore(), "12@GOLD%12@GOLD");
+
+
+     }**/
+
     protected Boolean cardShopping(Islands islands,Inventory inventory) {
         int nbBuy = 0;
-        int solarFee = 0;
         if(BuyDiceCard.getBought().size() > 0 || BuyCard.getBought().size() > 0){ return false;}
-        if(!(islands.getIslandAvailables(10).isEmpty()) && this.getBotScore().getLunar() >= 5 && this.getBotScore().getSolar() >= 5 + solarFee) { if(shopIslandTen(islands,inventory)){nbBuy++;}}
+        if(!(islands.getIslandAvailables(10).isEmpty()) && this.getBotScore().getLunar() >= 5 && this.getBotScore().getSolar() >= 5) { if(shopIslandTen(islands,inventory)){nbBuy++;}}
         if(nbBuy == 0) {
             if(this.getBotScore().getLunar() < this.getBotScore().getSolar()) {
                 if (solarShopping(islands,inventory)) {
@@ -134,14 +152,47 @@ public class OneBuyBot extends AbstractBot {
     }
 
 
-    /**public void cheat() {
-     getBotScore().addSolar(9);
 
-     ScoreCounter.updateScore(getBotScore(), "12@GOLD%12@GOLD");
+    @Override
+    public Resource getPreferredResource() {
+        if(this.getBotScore().getGold()<=this.getBotScore().getSolar()&&this.getBotScore().getGold()<=this.getBotScore().getLunar())
+            return Resource.GOLD;
+        else if(this.getBotScore().getSolar()<this.getBotScore().getGold()&&this.getBotScore().getSolar()<=this.getBotScore().getLunar())
+            return Resource.SOLAR;
+        else
+            return Resource.LUNAR;
+    }
 
+    /**
+     * Cette fonction permets au bot d'utiliser les faces de dès à choix, il choisira alors la ressource qu'il veut dans la liste disponible d'après la face de dè envoyée en paramètre.
+     * @param d
+     * @return
+     */
+    public int choose(DiceCard d) {
+        if(d.getResource()!=Resource.CHOICE.resourceName())
+        {
+            return 0;
+        }
+        else
+        {
+            int i;
+            Resource[] resources = d.getResourceArray();
+            int[] values = d.getValueArray();
 
-     }**/
+            if(resources[1].resourceName()==Resource.VICTORY.resourceName())
+                return 1;
+            else
+            {
+                if(this.getPreferredResource()==Resource.GOLD)
+                    i=1;
+                else if(this.getPreferredResource()==Resource.SOLAR)
+                    i=2;
+                else
+                    i=3;
 
-
+            }
+            return i;
+        }
+    }
 
 }

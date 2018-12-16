@@ -208,9 +208,11 @@ public class Game {
             if ((BuyDiceCard.getBought().size() > 0 && BuyCard.getBought().size() > 0) || BuyCard.getBought().size() > 1)
                 printCards(bot,true);
             else
+            {
                 printCards(bot,false);
-            if(BuyCard.getBought().size() > 1)
-                System.out.println("Le bot " + bot + " a payé 2 "+Resource.SOLAR.resourceName()+" pour jouer un action suplémentaire");
+                if(BuyCard.getBought().size() > 1)
+                    System.out.println("Le bot " + bot + " a payé 2 "+Resource.SOLAR.resourceName()+" pour jouer un action suplémentaire");
+            }
             printDiceCards(bot);
         }
     }
